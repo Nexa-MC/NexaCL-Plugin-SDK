@@ -1,6 +1,6 @@
 {
   "description": "NexaCL development main integration; no new launcher Alpha is implied.",
-  "hostCommit": "c1a285287462eb8e0d9ab6c411bf042e61214edc",
+  "hostCommit": "3cefcbaa360e105cee949f181f90285fe118994e",
   "implemented": [
     [
       "Accounts",
@@ -40,6 +40,10 @@
     ],
     [
       "Accounts",
+      "RegisterProvider"
+    ],
+    [
+      "Accounts",
       "Remove"
     ],
     [
@@ -53,6 +57,10 @@
     [
       "Accounts",
       "SetCape"
+    ],
+    [
+      "Accounts",
+      "SignOut"
     ],
     [
       "Accounts",
@@ -84,6 +92,14 @@
     ],
     [
       "Backups",
+      "Import"
+    ],
+    [
+      "Backups",
+      "ImportInto"
+    ],
+    [
+      "Backups",
       "List"
     ],
     [
@@ -92,7 +108,15 @@
     ],
     [
       "Backups",
+      "PrepareRestoreDestination"
+    ],
+    [
+      "Backups",
       "PreviewPrune"
+    ],
+    [
+      "Backups",
+      "PreviewRestore"
     ],
     [
       "Backups",
@@ -105,6 +129,10 @@
     [
       "Backups",
       "ReadRetention"
+    ],
+    [
+      "Backups",
+      "Restore"
     ],
     [
       "Backups",
@@ -125,6 +153,10 @@
     [
       "Catalog",
       "ExecutePlan"
+    ],
+    [
+      "Catalog",
+      "ListCollections"
     ],
     [
       "Catalog",
@@ -152,7 +184,15 @@
     ],
     [
       "Catalog",
+      "ReadCollection"
+    ],
+    [
+      "Catalog",
       "ReadProject"
+    ],
+    [
+      "Catalog",
+      "ReadTranslatedProject"
     ],
     [
       "Catalog",
@@ -160,7 +200,15 @@
     ],
     [
       "Catalog",
+      "RegisterCollection"
+    ],
+    [
+      "Catalog",
       "RegisterProvider"
+    ],
+    [
+      "Catalog",
+      "RegisterTranslationProvider"
     ],
     [
       "Catalog",
@@ -316,6 +364,14 @@
     ],
     [
       "Downloads",
+      "RegisterSourceResolver"
+    ],
+    [
+      "Downloads",
+      "RegisterTransferProvider"
+    ],
+    [
+      "Downloads",
       "Resolve"
     ],
     [
@@ -408,6 +464,10 @@
     ],
     [
       "Minecraft.Content",
+      "ClearTrash"
+    ],
+    [
+      "Minecraft.Content",
       "Execute"
     ],
     [
@@ -421,6 +481,10 @@
     [
       "Minecraft.Content",
       "Inspect"
+    ],
+    [
+      "Minecraft.Content",
+      "InspectWithProvider"
     ],
     [
       "Minecraft.Content",
@@ -460,11 +524,19 @@
     ],
     [
       "Minecraft.Content",
+      "PreviewClearTrash"
+    ],
+    [
+      "Minecraft.Content",
       "ReadDependencyGraph"
     ],
     [
       "Minecraft.Content",
       "ReadIntegrity"
+    ],
+    [
+      "Minecraft.Content",
+      "RegisterFormatProvider"
     ],
     [
       "Minecraft.Content",
@@ -488,6 +560,10 @@
     ],
     [
       "Minecraft.Diagnostics",
+      "AnalyzeWithProvider"
+    ],
+    [
+      "Minecraft.Diagnostics",
       "ExecuteRepair"
     ],
     [
@@ -495,8 +571,16 @@
       "PreviewRepair"
     ],
     [
+      "Minecraft.Diagnostics",
+      "RegisterRuleProvider"
+    ],
+    [
       "Minecraft.Install",
       "Cancel"
+    ],
+    [
+      "Minecraft.Install",
+      "DiscardRecovery"
     ],
     [
       "Minecraft.Install",
@@ -516,6 +600,10 @@
     ],
     [
       "Minecraft.Install",
+      "ListRecoveries"
+    ],
+    [
+      "Minecraft.Install",
       "PreviewPlan"
     ],
     [
@@ -524,7 +612,19 @@
     ],
     [
       "Minecraft.Install",
+      "RegisterLoaderProvider"
+    ],
+    [
+      "Minecraft.Install",
+      "RegisterTemplate"
+    ],
+    [
+      "Minecraft.Install",
       "ResolvePlan"
+    ],
+    [
+      "Minecraft.Install",
+      "ResumeRecovery"
     ],
     [
       "Minecraft.Install",
@@ -540,7 +640,15 @@
     ],
     [
       "Minecraft.Instances",
+      "CommitClone"
+    ],
+    [
+      "Minecraft.Instances",
       "CommitCreate"
+    ],
+    [
+      "Minecraft.Instances",
+      "CommitDelete"
     ],
     [
       "Minecraft.Instances",
@@ -560,7 +668,15 @@
     ],
     [
       "Minecraft.Instances",
+      "PrepareClone"
+    ],
+    [
+      "Minecraft.Instances",
       "PrepareCreate"
+    ],
+    [
+      "Minecraft.Instances",
+      "PrepareDelete"
     ],
     [
       "Minecraft.Instances",
@@ -608,7 +724,15 @@
     ],
     [
       "Minecraft.Java",
+      "ListDistributions"
+    ],
+    [
+      "Minecraft.Java",
       "ListManagedDistributions"
+    ],
+    [
+      "Minecraft.Java",
+      "PrepareInstall"
     ],
     [
       "Minecraft.Java",
@@ -617,6 +741,10 @@
     [
       "Minecraft.Java",
       "ReadRequirements"
+    ],
+    [
+      "Minecraft.Java",
+      "RegisterDistributionProvider"
     ],
     [
       "Minecraft.Java",
@@ -640,6 +768,10 @@
     ],
     [
       "Minecraft.Launch",
+      "ExplainContribution"
+    ],
+    [
+      "Minecraft.Launch",
       "ListProfiles"
     ],
     [
@@ -657,6 +789,14 @@
     [
       "Minecraft.Launch",
       "ReadPlan"
+    ],
+    [
+      "Minecraft.Launch",
+      "RegisterContribution"
+    ],
+    [
+      "Minecraft.Launch",
+      "RegisterPreflight"
     ],
     [
       "Minecraft.Launch",
@@ -748,7 +888,15 @@
     ],
     [
       "Minecraft.Worlds",
+      "Delete"
+    ],
+    [
+      "Minecraft.Worlds",
       "List"
+    ],
+    [
+      "Minecraft.Worlds",
+      "ListBackups"
     ],
     [
       "Minecraft.Worlds",
@@ -756,7 +904,19 @@
     ],
     [
       "Minecraft.Worlds",
+      "PlanDelete"
+    ],
+    [
+      "Minecraft.Worlds",
       "PlanSetDataPack"
+    ],
+    [
+      "Minecraft.Worlds",
+      "PrepareRestoreDestination"
+    ],
+    [
+      "Minecraft.Worlds",
+      "PreviewRestore"
     ],
     [
       "Minecraft.Worlds",
@@ -773,6 +933,10 @@
     [
       "Minecraft.Worlds",
       "Rename"
+    ],
+    [
+      "Minecraft.Worlds",
+      "Restore"
     ],
     [
       "Network",
@@ -956,7 +1120,23 @@
     ],
     [
       "Settings",
+      "Migrate"
+    ],
+    [
+      "Settings",
       "PreviewChange"
+    ],
+    [
+      "Settings",
+      "RegisterPage"
+    ],
+    [
+      "Settings",
+      "RegisterSchema"
+    ],
+    [
+      "Settings",
+      "RegisterVersionedSchema"
     ],
     [
       "Settings",
@@ -1064,6 +1244,10 @@
     ],
     [
       "Tasks",
+      "Retry"
+    ],
+    [
+      "Tasks",
       "Watch"
     ],
     [
@@ -1084,6 +1268,14 @@
     ],
     [
       "Themes",
+      "ListResources"
+    ],
+    [
+      "Themes",
+      "MigrateOptions"
+    ],
+    [
+      "Themes",
       "Prepare"
     ],
     [
@@ -1097,6 +1289,14 @@
     [
       "Themes",
       "ReadOptions"
+    ],
+    [
+      "Themes",
+      "ReadResource"
+    ],
+    [
+      "Themes",
+      "ReleaseResource"
     ],
     [
       "Themes",

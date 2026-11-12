@@ -13,5 +13,6 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 ## Used directly by
 
 - [Minecraft.Diagnostics.Analyze](../minecraft-diagnostics.md#analyze)
+- [Minecraft.Diagnostics.AnalyzeWithProvider](../minecraft-diagnostics.md#analyzewithprovider)
 
 For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

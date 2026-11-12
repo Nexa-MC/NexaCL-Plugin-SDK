@@ -28,5 +28,6 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 - [State.Describe](../state.md#describe)
 - [UI.DescribeViewContract](../ui.md#describeviewcontract)
 - [Catalog.DescribeProvider](../catalog.md#describeprovider)
+- [Catalog.ReadCollection](../catalog.md#readcollection)
 
 For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

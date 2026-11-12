@@ -15,5 +15,6 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 ## Used directly by
 
 - [Catalog.ReadProject](../catalog.md#readproject)
+- [Catalog.ReadTranslatedProject](../catalog.md#readtranslatedproject)
 
 For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

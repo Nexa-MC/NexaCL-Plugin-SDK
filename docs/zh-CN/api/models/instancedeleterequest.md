@@ -10,7 +10,7 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 | --- | --- | --- |
 | `Instance` | `EntityId` | Identity or revision in this model’s domain; preserve ownership and exact spelling. |
 | `ExpectedRevision` | `Revision` | Revision observed before this change. Preserve it exactly; a mismatch requires re-reading and reconciling the target. |
-| `RetainUserData` | `bool` | Domain value named by this field; additional accepted values and bounds are determined by the operation and Host policy. |
+| `RetainUserData` | `bool` | For instance deletion, true moves the version directory into .recycle; false permanently deletes that directory. Shared root files remain. |
 
 ## Used directly by
 

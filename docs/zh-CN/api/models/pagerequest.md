@@ -29,6 +29,7 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 - [Minecraft.Processes.ListSessions](../minecraft-processes.md#listsessions)
 - [Catalog.ListProviders](../catalog.md#listproviders)
 - [Catalog.ListFavorites](../catalog.md#listfavorites)
+- [Catalog.ListCollections](../catalog.md#listcollections)
 - [Accounts.List](../accounts.md#list)
 - [Settings.ListProfiles](../settings.md#listprofiles)
 - [Themes.List](../themes.md#list)

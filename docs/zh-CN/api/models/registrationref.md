@@ -53,6 +53,7 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 - [Settings.RegisterSchema](../settings.md#registerschema)
 - [Settings.RegisterPage](../settings.md#registerpage)
 - [Settings.BeginTemporaryOverlay](../settings.md#begintemporaryoverlay)
+- [Settings.RegisterVersionedSchema](../settings.md#registerversionedschema)
 - [Themes.Preview](../themes.md#preview)
 - [Downloads.RegisterSourceResolver](../downloads.md#registersourceresolver)
 - [Downloads.RegisterTransferProvider](../downloads.md#registertransferprovider)

@@ -4340,6 +4340,190 @@
         "name": "Inputs",
         "type": "AbiValue"
       }
+    ],
+    "BackupImportRequest": [
+      {
+        "name": "Instance",
+        "type": "EntityId"
+      },
+      {
+        "name": "File",
+        "type": "FileRef"
+      }
+    ],
+    "WorldRestoreDestination": [
+      {
+        "name": "World",
+        "type": "EntityId"
+      },
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "ExpectedRevision",
+        "type": "Revision"
+      }
+    ],
+    "VersionedSettingSchema": [
+      {
+        "name": "Schema",
+        "type": "SettingSchema"
+      },
+      {
+        "name": "Version",
+        "type": "ulong"
+      }
+    ],
+    "StoredPluginSetting": [
+      {
+        "name": "Version",
+        "type": "ulong"
+      },
+      {
+        "name": "Value",
+        "type": "AbiValue"
+      }
+    ],
+    "SettingMigrationInput": [
+      {
+        "name": "FromVersion",
+        "type": "ulong"
+      },
+      {
+        "name": "ToVersion",
+        "type": "ulong"
+      },
+      {
+        "name": "Value",
+        "type": "AbiValue"
+      }
+    ],
+    "ProviderInstanceQuery": [
+      {
+        "name": "Provider",
+        "type": "QualifiedId"
+      },
+      {
+        "name": "Instance",
+        "type": "EntityId"
+      }
+    ],
+    "CatalogTranslationRequest": [
+      {
+        "name": "Provider",
+        "type": "QualifiedId"
+      },
+      {
+        "name": "Resource",
+        "type": "ResourceRef"
+      },
+      {
+        "name": "Locale",
+        "type": "string"
+      }
+    ],
+    "CatalogTranslationInput": [
+      {
+        "name": "Project",
+        "type": "CatalogProject"
+      },
+      {
+        "name": "Locale",
+        "type": "string"
+      }
+    ],
+    "CatalogTranslation": [
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "Summary",
+        "type": "string"
+      }
+    ],
+    "ContentInspectionRequest": [
+      {
+        "name": "Provider",
+        "type": "QualifiedId"
+      },
+      {
+        "name": "File",
+        "type": "FileRef"
+      }
+    ],
+    "ContentInspectionInput": [
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "Bytes",
+        "type": "AbiValue"
+      }
+    ],
+    "ContentInspection": [
+      {
+        "name": "Format",
+        "type": "QualifiedId"
+      },
+      {
+        "name": "Properties",
+        "type": "NamedValue[]"
+      },
+      {
+        "name": "Issues",
+        "type": "ValidationIssue[]"
+      }
+    ],
+    "AccountProviderConfiguration": [
+      {
+        "name": "Protocol",
+        "type": "string"
+      },
+      {
+        "name": "AuthServer",
+        "type": "UriRef"
+      }
+    ],
+    "InstallTemplateInvocation": [
+      {
+        "name": "Template",
+        "type": "InstallTemplate"
+      },
+      {
+        "name": "Request",
+        "type": "InstanceCreateRequest"
+      }
+    ],
+    "DownloadChunkRequest": [
+      {
+        "name": "Source",
+        "type": "UriRef"
+      },
+      {
+        "name": "Offset",
+        "type": "long"
+      },
+      {
+        "name": "Length",
+        "type": "long"
+      }
+    ],
+    "DownloadChunk": [
+      {
+        "name": "Offset",
+        "type": "long"
+      },
+      {
+        "name": "Bytes",
+        "type": "AbiValue"
+      },
+      {
+        "name": "End",
+        "type": "bool"
+      }
     ]
   },
   "groups": [
@@ -7145,6 +7329,38 @@
           ],
           "permission": "nexa.minecraft.content.write",
           "idempotency": "RequiredKey"
+        },
+        {
+          "name": "PreviewClearTrash",
+          "methodId": 22,
+          "input": "EntityRequest",
+          "output": "MutationPlan",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.minecraft.content.read",
+          "idempotency": "ReadOnly"
+        },
+        {
+          "name": "InspectWithProvider",
+          "methodId": 23,
+          "input": "ContentInspectionRequest",
+          "output": "ContentInspection",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.minecraft.content.read",
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -7340,6 +7556,50 @@
           ],
           "permission": "nexa.minecraft.worlds.read",
           "idempotency": "ReadOnly"
+        },
+        {
+          "name": "ListBackups",
+          "methodId": 14,
+          "input": "EntityRequest",
+          "output": "Page<BackupSummary>",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.minecraft.worlds.read",
+          "idempotency": "ReadOnly"
+        },
+        {
+          "name": "PrepareRestoreDestination",
+          "methodId": 15,
+          "input": "WorldRestoreDestination",
+          "output": "EntityId",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.minecraft.worlds.read",
+          "idempotency": "ReadOnly"
+        },
+        {
+          "name": "Delete",
+          "methodId": 16,
+          "input": "PlanRequest",
+          "output": "OperationRef",
+          "kind": "Operation",
+          "phases": [
+            "Active"
+          ],
+          "permission": "nexa.minecraft.worlds.write",
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -7678,6 +7938,54 @@
           ],
           "permission": "nexa.catalog.write",
           "idempotency": "RequiredKey"
+        },
+        {
+          "name": "ReadTranslatedProject",
+          "methodId": 18,
+          "input": "CatalogTranslationRequest",
+          "output": "CatalogProject",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.catalog.read",
+          "idempotency": "ReadOnly"
+        },
+        {
+          "name": "ListCollections",
+          "methodId": 19,
+          "input": "PageRequest",
+          "output": "Page<ResourceCollection>",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.catalog.read",
+          "idempotency": "ReadOnly"
+        },
+        {
+          "name": "ReadCollection",
+          "methodId": 20,
+          "input": "QualifiedRequest",
+          "output": "ResourceCollection",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.catalog.read",
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -8108,6 +8416,18 @@
           ],
           "permission": "nexa.settings.write",
           "idempotency": "RequiredKey"
+        },
+        {
+          "name": "RegisterVersionedSchema",
+          "methodId": 15,
+          "input": "VersionedSettingSchema",
+          "output": "RegistrationRef",
+          "kind": "Registration",
+          "phases": [
+            "Initialize"
+          ],
+          "permission": "nexa.settings.write",
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -8521,6 +8841,34 @@
           "input": "BackupRetention",
           "output": "RetentionPolicy",
           "kind": "Mutation",
+          "phases": [
+            "Active"
+          ],
+          "permission": "nexa.backups.write",
+          "idempotency": "RequiredKey"
+        },
+        {
+          "name": "PrepareRestoreDestination",
+          "methodId": 15,
+          "input": "FileRef",
+          "output": "EntityId",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.backups.read",
+          "idempotency": "ReadOnly"
+        },
+        {
+          "name": "ImportInto",
+          "methodId": 16,
+          "input": "BackupImportRequest",
+          "output": "OperationRef",
+          "kind": "Operation",
           "phases": [
             "Active"
           ],
@@ -9403,6 +9751,22 @@
           ],
           "permission": "nexa.minecraft.diagnostics.write",
           "idempotency": "RequiredKey"
+        },
+        {
+          "name": "AnalyzeWithProvider",
+          "methodId": 5,
+          "input": "ProviderInstanceQuery",
+          "output": "DiagnosticAnalysis",
+          "kind": "Query",
+          "phases": [
+            "Initialize",
+            "PostInitialize",
+            "Checkup",
+            "Finalize",
+            "Active"
+          ],
+          "permission": "nexa.minecraft.diagnostics.read",
+          "idempotency": "ReadOnly"
         }
       ]
     }

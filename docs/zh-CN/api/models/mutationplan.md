@@ -24,6 +24,7 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 - [Minecraft.Instances.PrepareDelete](../minecraft-instances.md#preparedelete)
 - [Minecraft.Java.PrepareInstall](../minecraft-java.md#prepareinstall)
 - [Minecraft.Java.PrepareManagedInstall](../minecraft-java.md#preparemanagedinstall)
+- [Minecraft.Content.PreviewClearTrash](../minecraft-content.md#previewcleartrash)
 - [Minecraft.Worlds.PlanDelete](../minecraft-worlds.md#plandelete)
 - [Minecraft.Worlds.PlanSetDataPack](../minecraft-worlds.md#plansetdatapack)
 - [Minecraft.Worlds.PreviewRestore](../minecraft-worlds.md#previewrestore)

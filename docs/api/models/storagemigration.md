@@ -7,8 +7,8 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 | Field | Type | Meaning |
 | --- | --- | --- |
 | `Namespace` | [`StorageNamespace`](../models/storagenamespace.md) | Private storage namespace identity or handle. It remains subject to current-load ownership. |
-| `FromVersion` | `ulong` | Domain value named by this field; additional accepted values and bounds are determined by the operation and Host policy. |
-| `ToVersion` | `ulong` | Domain value named by this field; additional accepted values and bounds are determined by the operation and Host policy. |
+| `FromVersion` | `ulong` | Exact stored setting version to transform. A mismatch rejects migration before committing. |
+| `ToVersion` | `ulong` | Currently registered positive setting version. Migrations must move forward. |
 | `Action` | `QualifiedId` | Identity or revision in this model’s domain; preserve ownership and exact spelling. |
 
 ## Used directly by

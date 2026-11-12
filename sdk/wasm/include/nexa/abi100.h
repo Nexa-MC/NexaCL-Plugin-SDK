@@ -4,6 +4,7 @@
 #include "guest.h"
 #include "abi100_ids.h"
 typedef struct { nx_value value; } nx_AbiValueArray;
+typedef struct { nx_value value; } nx_AccountProviderConfiguration;
 typedef struct { nx_value value; } nx_AccountPublic;
 typedef struct { nx_value value; } nx_AccountPublicArray;
 typedef struct { nx_value value; } nx_ActionDescriptor;
@@ -12,6 +13,7 @@ typedef struct { nx_value value; } nx_ActionRequest;
 typedef enum { nx_ActivationPolicy_GroupCommit = 0 } nx_ActivationPolicy;
 typedef struct { nx_value value; } nx_ArchitectureInfo;
 typedef struct { nx_value value; } nx_BackupCapture;
+typedef struct { nx_value value; } nx_BackupImportRequest;
 typedef struct { nx_value value; } nx_BackupPrune;
 typedef struct { nx_value value; } nx_BackupRestore;
 typedef struct { nx_value value; } nx_BackupRetention;
@@ -37,6 +39,9 @@ typedef struct { nx_value value; } nx_CatalogInstallRequest;
 typedef struct { nx_value value; } nx_CatalogProject;
 typedef struct { nx_value value; } nx_CatalogProjectArray;
 typedef struct { nx_value value; } nx_CatalogSearch;
+typedef struct { nx_value value; } nx_CatalogTranslation;
+typedef struct { nx_value value; } nx_CatalogTranslationInput;
+typedef struct { nx_value value; } nx_CatalogTranslationRequest;
 typedef struct { nx_value value; } nx_CatalogVersion;
 typedef struct { nx_value value; } nx_CatalogVersionQuery;
 typedef struct { nx_value value; } nx_CatalogVersionArray;
@@ -50,6 +55,9 @@ typedef struct { nx_value value; } nx_ContentChangeRequest;
 typedef struct { nx_value value; } nx_ContentDependency;
 typedef struct { nx_value value; } nx_ContentDependencyGraph;
 typedef struct { nx_value value; } nx_ContentDependencyArray;
+typedef struct { nx_value value; } nx_ContentInspection;
+typedef struct { nx_value value; } nx_ContentInspectionInput;
+typedef struct { nx_value value; } nx_ContentInspectionRequest;
 typedef struct { nx_value value; } nx_ContentItem;
 typedef struct { nx_value value; } nx_ContentItemArray;
 typedef struct { nx_value value; } nx_ContentPlan;
@@ -79,6 +87,8 @@ typedef enum { nx_DiagnosticSeverity_Trace = 0, nx_DiagnosticSeverity_Info = 1, 
 typedef struct { nx_value value; } nx_DiagnosticSpan;
 typedef struct { nx_value value; } nx_DisplayInfo;
 typedef struct { nx_value value; } nx_DisplayInfoArray;
+typedef struct { nx_value value; } nx_DownloadChunk;
+typedef struct { nx_value value; } nx_DownloadChunkRequest;
 typedef struct { nx_value value; } nx_DownloadPlan;
 typedef struct { nx_value value; } nx_DownloadSource;
 typedef struct { nx_value value; } nx_DownloadSourceArray;
@@ -130,6 +140,7 @@ typedef struct { nx_value value; } nx_InstallPlan;
 typedef struct { nx_value value; } nx_InstallStep;
 typedef struct { nx_value value; } nx_InstallStepArray;
 typedef struct { nx_value value; } nx_InstallTemplate;
+typedef struct { nx_value value; } nx_InstallTemplateInvocation;
 typedef struct { nx_value value; } nx_InstallerInspection;
 typedef struct { nx_value value; } nx_InstanceCloneRequest;
 typedef struct { nx_value value; } nx_InstanceCreateRequest;
@@ -245,6 +256,7 @@ typedef struct { nx_value value; } nx_Page_PublicContract;
 typedef struct { nx_value value; } nx_Page_RecoveryRecord;
 typedef struct { nx_value value; } nx_Page_RegistrationRef;
 typedef struct { nx_value value; } nx_Page_RegistryDescriptor;
+typedef struct { nx_value value; } nx_Page_ResourceCollection;
 typedef struct { nx_value value; } nx_Page_RootRegistration;
 typedef struct { nx_value value; } nx_Page_ScheduleState;
 typedef struct { nx_value value; } nx_Page_SettingsProfile;
@@ -265,6 +277,7 @@ typedef struct { nx_value value; } nx_PredicateResult;
 typedef struct { nx_value value; } nx_ProviderDescriptor;
 typedef struct { nx_value value; } nx_ProviderDescriptorArray;
 typedef enum { nx_ProviderFailurePolicy_Unavailable = 0, nx_ProviderFailurePolicy_RetryBounded = 1, nx_ProviderFailurePolicy_FailOperation = 2 } nx_ProviderFailurePolicy;
+typedef struct { nx_value value; } nx_ProviderInstanceQuery;
 typedef struct { nx_value value; } nx_ProviderKindDefinition;
 typedef struct { nx_value value; } nx_PublicContract;
 typedef struct { nx_value value; } nx_PublicContractArray;
@@ -285,6 +298,7 @@ typedef struct { nx_value value; } nx_RegistryDescriptorArray;
 typedef struct { nx_value value; } nx_RepairRequest;
 typedef struct { nx_value value; } nx_ResolutionReport;
 typedef struct { nx_value value; } nx_ResourceCollection;
+typedef struct { nx_value value; } nx_ResourceCollectionArray;
 typedef struct { nx_value value; } nx_ResourceRef;
 typedef struct { nx_value value; } nx_ResourceRefArray;
 typedef struct { nx_value value; } nx_ResourceVersionRef;
@@ -321,6 +335,7 @@ typedef struct { nx_value value; } nx_ServiceProbe;
 typedef struct { nx_value value; } nx_SessionMetrics;
 typedef struct { nx_value value; } nx_SettingChange;
 typedef struct { nx_value value; } nx_SettingMigration;
+typedef struct { nx_value value; } nx_SettingMigrationInput;
 typedef struct { nx_value value; } nx_SettingQuery;
 typedef struct { nx_value value; } nx_SettingSchema;
 typedef struct { nx_value value; } nx_SettingsOverlay;
@@ -350,6 +365,7 @@ typedef struct { nx_value value; } nx_StorageTransaction;
 typedef struct { nx_value value; } nx_StorageValue;
 typedef struct { nx_value value; } nx_StorageWrite;
 typedef struct { nx_value value; } nx_StorageWriteArray;
+typedef struct { nx_value value; } nx_StoredPluginSetting;
 typedef struct { nx_value value; } nx_SubscriptionBatch;
 typedef enum { nx_SubscriptionLifetime_Transient = 0, nx_SubscriptionLifetime_Resumable = 1 } nx_SubscriptionLifetime;
 typedef struct { nx_value value; } nx_SubscriptionRead;
@@ -390,6 +406,7 @@ typedef struct { nx_value value; } nx_UriRefArray;
 typedef struct { nx_value value; } nx_ValidationIssue;
 typedef struct { nx_value value; } nx_ValidationIssueArray;
 typedef struct { nx_value value; } nx_ValidationReport;
+typedef struct { nx_value value; } nx_VersionedSettingSchema;
 typedef struct { nx_value value; } nx_Wardrobe;
 typedef struct { nx_value value; } nx_WatchRequest;
 typedef struct { nx_value value; } nx_WorkflowDefinition;
@@ -405,6 +422,7 @@ typedef struct { nx_value value; } nx_WorkflowTrace;
 typedef struct { nx_value value; } nx_WorldCopyRequest;
 typedef struct { nx_value value; } nx_WorldMetadata;
 typedef struct { nx_value value; } nx_WorldRenameRequest;
+typedef struct { nx_value value; } nx_WorldRestoreDestination;
 typedef struct { nx_value value; } nx_WorldSummary;
 typedef struct { nx_value value; } nx_WorldSummaryArray;
 typedef struct { nx_value value; } nx_doubleOptional;
@@ -419,6 +437,9 @@ static inline void nx_AbiValue_encode(nx_writer *w, nx_value value);
 static inline void nx_AbiValueArray_validate(nx_value v, nx_u32 depth);
 static inline nx_AbiValueArray nx_AbiValueArray_read(nx_value v);
 static inline void nx_AbiValueArray_encode(nx_writer *w, nx_AbiValueArray value);
+static inline void nx_AccountProviderConfiguration_validate(nx_value v, nx_u32 depth);
+static inline nx_AccountProviderConfiguration nx_AccountProviderConfiguration_read(nx_value v);
+static inline void nx_AccountProviderConfiguration_encode(nx_writer *w, nx_AccountProviderConfiguration value);
 static inline void nx_AccountPublic_validate(nx_value v, nx_u32 depth);
 static inline nx_AccountPublic nx_AccountPublic_read(nx_value v);
 static inline void nx_AccountPublic_encode(nx_writer *w, nx_AccountPublic value);
@@ -443,6 +464,9 @@ static inline void nx_ArchitectureInfo_encode(nx_writer *w, nx_ArchitectureInfo 
 static inline void nx_BackupCapture_validate(nx_value v, nx_u32 depth);
 static inline nx_BackupCapture nx_BackupCapture_read(nx_value v);
 static inline void nx_BackupCapture_encode(nx_writer *w, nx_BackupCapture value);
+static inline void nx_BackupImportRequest_validate(nx_value v, nx_u32 depth);
+static inline nx_BackupImportRequest nx_BackupImportRequest_read(nx_value v);
+static inline void nx_BackupImportRequest_encode(nx_writer *w, nx_BackupImportRequest value);
 static inline void nx_BackupPrune_validate(nx_value v, nx_u32 depth);
 static inline nx_BackupPrune nx_BackupPrune_read(nx_value v);
 static inline void nx_BackupPrune_encode(nx_writer *w, nx_BackupPrune value);
@@ -518,6 +542,15 @@ static inline void nx_CatalogProjectArray_encode(nx_writer *w, nx_CatalogProject
 static inline void nx_CatalogSearch_validate(nx_value v, nx_u32 depth);
 static inline nx_CatalogSearch nx_CatalogSearch_read(nx_value v);
 static inline void nx_CatalogSearch_encode(nx_writer *w, nx_CatalogSearch value);
+static inline void nx_CatalogTranslation_validate(nx_value v, nx_u32 depth);
+static inline nx_CatalogTranslation nx_CatalogTranslation_read(nx_value v);
+static inline void nx_CatalogTranslation_encode(nx_writer *w, nx_CatalogTranslation value);
+static inline void nx_CatalogTranslationInput_validate(nx_value v, nx_u32 depth);
+static inline nx_CatalogTranslationInput nx_CatalogTranslationInput_read(nx_value v);
+static inline void nx_CatalogTranslationInput_encode(nx_writer *w, nx_CatalogTranslationInput value);
+static inline void nx_CatalogTranslationRequest_validate(nx_value v, nx_u32 depth);
+static inline nx_CatalogTranslationRequest nx_CatalogTranslationRequest_read(nx_value v);
+static inline void nx_CatalogTranslationRequest_encode(nx_writer *w, nx_CatalogTranslationRequest value);
 static inline void nx_CatalogVersion_validate(nx_value v, nx_u32 depth);
 static inline nx_CatalogVersion nx_CatalogVersion_read(nx_value v);
 static inline void nx_CatalogVersion_encode(nx_writer *w, nx_CatalogVersion value);
@@ -557,6 +590,15 @@ static inline void nx_ContentDependencyGraph_encode(nx_writer *w, nx_ContentDepe
 static inline void nx_ContentDependencyArray_validate(nx_value v, nx_u32 depth);
 static inline nx_ContentDependencyArray nx_ContentDependencyArray_read(nx_value v);
 static inline void nx_ContentDependencyArray_encode(nx_writer *w, nx_ContentDependencyArray value);
+static inline void nx_ContentInspection_validate(nx_value v, nx_u32 depth);
+static inline nx_ContentInspection nx_ContentInspection_read(nx_value v);
+static inline void nx_ContentInspection_encode(nx_writer *w, nx_ContentInspection value);
+static inline void nx_ContentInspectionInput_validate(nx_value v, nx_u32 depth);
+static inline nx_ContentInspectionInput nx_ContentInspectionInput_read(nx_value v);
+static inline void nx_ContentInspectionInput_encode(nx_writer *w, nx_ContentInspectionInput value);
+static inline void nx_ContentInspectionRequest_validate(nx_value v, nx_u32 depth);
+static inline nx_ContentInspectionRequest nx_ContentInspectionRequest_read(nx_value v);
+static inline void nx_ContentInspectionRequest_encode(nx_writer *w, nx_ContentInspectionRequest value);
 static inline void nx_ContentItem_validate(nx_value v, nx_u32 depth);
 static inline nx_ContentItem nx_ContentItem_read(nx_value v);
 static inline void nx_ContentItem_encode(nx_writer *w, nx_ContentItem value);
@@ -647,6 +689,12 @@ static inline void nx_DisplayInfo_encode(nx_writer *w, nx_DisplayInfo value);
 static inline void nx_DisplayInfoArray_validate(nx_value v, nx_u32 depth);
 static inline nx_DisplayInfoArray nx_DisplayInfoArray_read(nx_value v);
 static inline void nx_DisplayInfoArray_encode(nx_writer *w, nx_DisplayInfoArray value);
+static inline void nx_DownloadChunk_validate(nx_value v, nx_u32 depth);
+static inline nx_DownloadChunk nx_DownloadChunk_read(nx_value v);
+static inline void nx_DownloadChunk_encode(nx_writer *w, nx_DownloadChunk value);
+static inline void nx_DownloadChunkRequest_validate(nx_value v, nx_u32 depth);
+static inline nx_DownloadChunkRequest nx_DownloadChunkRequest_read(nx_value v);
+static inline void nx_DownloadChunkRequest_encode(nx_writer *w, nx_DownloadChunkRequest value);
 static inline void nx_DownloadPlan_validate(nx_value v, nx_u32 depth);
 static inline nx_DownloadPlan nx_DownloadPlan_read(nx_value v);
 static inline void nx_DownloadPlan_encode(nx_writer *w, nx_DownloadPlan value);
@@ -806,6 +854,9 @@ static inline void nx_InstallStepArray_encode(nx_writer *w, nx_InstallStepArray 
 static inline void nx_InstallTemplate_validate(nx_value v, nx_u32 depth);
 static inline nx_InstallTemplate nx_InstallTemplate_read(nx_value v);
 static inline void nx_InstallTemplate_encode(nx_writer *w, nx_InstallTemplate value);
+static inline void nx_InstallTemplateInvocation_validate(nx_value v, nx_u32 depth);
+static inline nx_InstallTemplateInvocation nx_InstallTemplateInvocation_read(nx_value v);
+static inline void nx_InstallTemplateInvocation_encode(nx_writer *w, nx_InstallTemplateInvocation value);
 static inline void nx_InstallerInspection_validate(nx_value v, nx_u32 depth);
 static inline nx_InstallerInspection nx_InstallerInspection_read(nx_value v);
 static inline void nx_InstallerInspection_encode(nx_writer *w, nx_InstallerInspection value);
@@ -1151,6 +1202,9 @@ static inline void nx_Page_RegistrationRef_encode(nx_writer *w, nx_Page_Registra
 static inline void nx_Page_RegistryDescriptor_validate(nx_value v, nx_u32 depth);
 static inline nx_Page_RegistryDescriptor nx_Page_RegistryDescriptor_read(nx_value v);
 static inline void nx_Page_RegistryDescriptor_encode(nx_writer *w, nx_Page_RegistryDescriptor value);
+static inline void nx_Page_ResourceCollection_validate(nx_value v, nx_u32 depth);
+static inline nx_Page_ResourceCollection nx_Page_ResourceCollection_read(nx_value v);
+static inline void nx_Page_ResourceCollection_encode(nx_writer *w, nx_Page_ResourceCollection value);
 static inline void nx_Page_RootRegistration_validate(nx_value v, nx_u32 depth);
 static inline nx_Page_RootRegistration nx_Page_RootRegistration_read(nx_value v);
 static inline void nx_Page_RootRegistration_encode(nx_writer *w, nx_Page_RootRegistration value);
@@ -1211,6 +1265,9 @@ static inline void nx_ProviderDescriptorArray_encode(nx_writer *w, nx_ProviderDe
 static inline void nx_ProviderFailurePolicy_validate(nx_value v, nx_u32 depth);
 static inline nx_ProviderFailurePolicy nx_ProviderFailurePolicy_read(nx_value v);
 static inline void nx_ProviderFailurePolicy_encode(nx_writer *w, nx_ProviderFailurePolicy value);
+static inline void nx_ProviderInstanceQuery_validate(nx_value v, nx_u32 depth);
+static inline nx_ProviderInstanceQuery nx_ProviderInstanceQuery_read(nx_value v);
+static inline void nx_ProviderInstanceQuery_encode(nx_writer *w, nx_ProviderInstanceQuery value);
 static inline void nx_ProviderKindDefinition_validate(nx_value v, nx_u32 depth);
 static inline nx_ProviderKindDefinition nx_ProviderKindDefinition_read(nx_value v);
 static inline void nx_ProviderKindDefinition_encode(nx_writer *w, nx_ProviderKindDefinition value);
@@ -1274,6 +1331,9 @@ static inline void nx_ResolutionReport_encode(nx_writer *w, nx_ResolutionReport 
 static inline void nx_ResourceCollection_validate(nx_value v, nx_u32 depth);
 static inline nx_ResourceCollection nx_ResourceCollection_read(nx_value v);
 static inline void nx_ResourceCollection_encode(nx_writer *w, nx_ResourceCollection value);
+static inline void nx_ResourceCollectionArray_validate(nx_value v, nx_u32 depth);
+static inline nx_ResourceCollectionArray nx_ResourceCollectionArray_read(nx_value v);
+static inline void nx_ResourceCollectionArray_encode(nx_writer *w, nx_ResourceCollectionArray value);
 static inline void nx_ResourceRef_validate(nx_value v, nx_u32 depth);
 static inline nx_ResourceRef nx_ResourceRef_read(nx_value v);
 static inline void nx_ResourceRef_encode(nx_writer *w, nx_ResourceRef value);
@@ -1385,6 +1445,9 @@ static inline void nx_SettingChange_encode(nx_writer *w, nx_SettingChange value)
 static inline void nx_SettingMigration_validate(nx_value v, nx_u32 depth);
 static inline nx_SettingMigration nx_SettingMigration_read(nx_value v);
 static inline void nx_SettingMigration_encode(nx_writer *w, nx_SettingMigration value);
+static inline void nx_SettingMigrationInput_validate(nx_value v, nx_u32 depth);
+static inline nx_SettingMigrationInput nx_SettingMigrationInput_read(nx_value v);
+static inline void nx_SettingMigrationInput_encode(nx_writer *w, nx_SettingMigrationInput value);
 static inline void nx_SettingQuery_validate(nx_value v, nx_u32 depth);
 static inline nx_SettingQuery nx_SettingQuery_read(nx_value v);
 static inline void nx_SettingQuery_encode(nx_writer *w, nx_SettingQuery value);
@@ -1472,6 +1535,9 @@ static inline void nx_StorageWrite_encode(nx_writer *w, nx_StorageWrite value);
 static inline void nx_StorageWriteArray_validate(nx_value v, nx_u32 depth);
 static inline nx_StorageWriteArray nx_StorageWriteArray_read(nx_value v);
 static inline void nx_StorageWriteArray_encode(nx_writer *w, nx_StorageWriteArray value);
+static inline void nx_StoredPluginSetting_validate(nx_value v, nx_u32 depth);
+static inline nx_StoredPluginSetting nx_StoredPluginSetting_read(nx_value v);
+static inline void nx_StoredPluginSetting_encode(nx_writer *w, nx_StoredPluginSetting value);
 static inline void nx_SubscriptionBatch_validate(nx_value v, nx_u32 depth);
 static inline nx_SubscriptionBatch nx_SubscriptionBatch_read(nx_value v);
 static inline void nx_SubscriptionBatch_encode(nx_writer *w, nx_SubscriptionBatch value);
@@ -1595,6 +1661,9 @@ static inline void nx_ValidationIssueArray_encode(nx_writer *w, nx_ValidationIss
 static inline void nx_ValidationReport_validate(nx_value v, nx_u32 depth);
 static inline nx_ValidationReport nx_ValidationReport_read(nx_value v);
 static inline void nx_ValidationReport_encode(nx_writer *w, nx_ValidationReport value);
+static inline void nx_VersionedSettingSchema_validate(nx_value v, nx_u32 depth);
+static inline nx_VersionedSettingSchema nx_VersionedSettingSchema_read(nx_value v);
+static inline void nx_VersionedSettingSchema_encode(nx_writer *w, nx_VersionedSettingSchema value);
 static inline void nx_Wardrobe_validate(nx_value v, nx_u32 depth);
 static inline nx_Wardrobe nx_Wardrobe_read(nx_value v);
 static inline void nx_Wardrobe_encode(nx_writer *w, nx_Wardrobe value);
@@ -1640,6 +1709,9 @@ static inline void nx_WorldMetadata_encode(nx_writer *w, nx_WorldMetadata value)
 static inline void nx_WorldRenameRequest_validate(nx_value v, nx_u32 depth);
 static inline nx_WorldRenameRequest nx_WorldRenameRequest_read(nx_value v);
 static inline void nx_WorldRenameRequest_encode(nx_writer *w, nx_WorldRenameRequest value);
+static inline void nx_WorldRestoreDestination_validate(nx_value v, nx_u32 depth);
+static inline nx_WorldRestoreDestination nx_WorldRestoreDestination_read(nx_value v);
+static inline void nx_WorldRestoreDestination_encode(nx_writer *w, nx_WorldRestoreDestination value);
 static inline void nx_WorldSummary_validate(nx_value v, nx_u32 depth);
 static inline nx_WorldSummary nx_WorldSummary_read(nx_value v);
 static inline void nx_WorldSummary_encode(nx_writer *w, nx_WorldSummary value);
@@ -1691,6 +1763,9 @@ static inline void nx_AbiValue_encode(nx_writer *w,nx_value value) { nx_raw(w,va
 static inline void nx_AbiValueArray_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_u32 count=nx_count(v); for(nx_u32 i=0;i<count;i++) nx_AbiValue_validate(nx_at(v,i),depth+1); }
 static inline nx_AbiValueArray nx_AbiValueArray_read(nx_value v) { nx_AbiValueArray_validate(v,0); nx_AbiValueArray result={v}; return result; }
 static inline void nx_AbiValueArray_encode(nx_writer *w,nx_AbiValueArray value) { nx_raw(w,value.value); }
+static inline void nx_AccountProviderConfiguration_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_string_validate(nx_field(v,"protocol"),depth+1); nx_UriRef_validate(nx_field(v,"authServer"),depth+1);  }
+static inline nx_AccountProviderConfiguration nx_AccountProviderConfiguration_read(nx_value v) { nx_AccountProviderConfiguration_validate(v,0); nx_AccountProviderConfiguration result={v}; return result; }
+static inline void nx_AccountProviderConfiguration_encode(nx_writer *w,nx_AccountProviderConfiguration value) { nx_raw(w,value.value); }
 static inline void nx_AccountPublic_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"id"),depth+1); nx_QualifiedId_validate(nx_field(v,"provider"),depth+1); nx_string_validate(nx_field(v,"displayName"),depth+1); nx_UriRefOptional_validate(nx_field(v,"avatar"),depth+1); nx_Revision_validate(nx_field(v,"revision"),depth+1);  }
 static inline nx_AccountPublic nx_AccountPublic_read(nx_value v) { nx_AccountPublic_validate(v,0); nx_AccountPublic result={v}; return result; }
 static inline void nx_AccountPublic_encode(nx_writer *w,nx_AccountPublic value) { nx_raw(w,value.value); }
@@ -1715,6 +1790,9 @@ static inline void nx_ArchitectureInfo_encode(nx_writer *w,nx_ArchitectureInfo v
 static inline void nx_BackupCapture_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"instance"),depth+1); nx_FileRefOptional_validate(nx_field(v,"target"),depth+1); nx_QualifiedIdArray_validate(nx_field(v,"include"),depth+1); nx_QualifiedIdArray_validate(nx_field(v,"exclude"),depth+1);  }
 static inline nx_BackupCapture nx_BackupCapture_read(nx_value v) { nx_BackupCapture_validate(v,0); nx_BackupCapture result={v}; return result; }
 static inline void nx_BackupCapture_encode(nx_writer *w,nx_BackupCapture value) { nx_raw(w,value.value); }
+static inline void nx_BackupImportRequest_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"instance"),depth+1); nx_FileRef_validate(nx_field(v,"file"),depth+1);  }
+static inline nx_BackupImportRequest nx_BackupImportRequest_read(nx_value v) { nx_BackupImportRequest_validate(v,0); nx_BackupImportRequest result={v}; return result; }
+static inline void nx_BackupImportRequest_encode(nx_writer *w,nx_BackupImportRequest value) { nx_raw(w,value.value); }
 static inline void nx_BackupPrune_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"instance"),depth+1); nx_RetentionPolicy_validate(nx_field(v,"retention"),depth+1); nx_Revision_validate(nx_field(v,"expectedRevision"),depth+1);  }
 static inline nx_BackupPrune nx_BackupPrune_read(nx_value v) { nx_BackupPrune_validate(v,0); nx_BackupPrune result={v}; return result; }
 static inline void nx_BackupPrune_encode(nx_writer *w,nx_BackupPrune value) { nx_raw(w,value.value); }
@@ -1790,6 +1868,15 @@ static inline void nx_CatalogProjectArray_encode(nx_writer *w,nx_CatalogProjectA
 static inline void nx_CatalogSearch_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedIdArray_validate(nx_field(v,"providers"),depth+1); nx_string_validate(nx_field(v,"query"),depth+1); nx_QualifiedIdOptional_validate(nx_field(v,"kind"),depth+1); nx_stringOptional_validate(nx_field(v,"gameVersion"),depth+1); nx_QualifiedIdOptional_validate(nx_field(v,"loader"),depth+1); nx_PageRequest_validate(nx_field(v,"page"),depth+1);  }
 static inline nx_CatalogSearch nx_CatalogSearch_read(nx_value v) { nx_CatalogSearch_validate(v,0); nx_CatalogSearch result={v}; return result; }
 static inline void nx_CatalogSearch_encode(nx_writer *w,nx_CatalogSearch value) { nx_raw(w,value.value); }
+static inline void nx_CatalogTranslation_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_string_validate(nx_field(v,"name"),depth+1); nx_string_validate(nx_field(v,"summary"),depth+1);  }
+static inline nx_CatalogTranslation nx_CatalogTranslation_read(nx_value v) { nx_CatalogTranslation_validate(v,0); nx_CatalogTranslation result={v}; return result; }
+static inline void nx_CatalogTranslation_encode(nx_writer *w,nx_CatalogTranslation value) { nx_raw(w,value.value); }
+static inline void nx_CatalogTranslationInput_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_CatalogProject_validate(nx_field(v,"project"),depth+1); nx_string_validate(nx_field(v,"locale"),depth+1);  }
+static inline nx_CatalogTranslationInput nx_CatalogTranslationInput_read(nx_value v) { nx_CatalogTranslationInput_validate(v,0); nx_CatalogTranslationInput result={v}; return result; }
+static inline void nx_CatalogTranslationInput_encode(nx_writer *w,nx_CatalogTranslationInput value) { nx_raw(w,value.value); }
+static inline void nx_CatalogTranslationRequest_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"provider"),depth+1); nx_ResourceRef_validate(nx_field(v,"resource"),depth+1); nx_string_validate(nx_field(v,"locale"),depth+1);  }
+static inline nx_CatalogTranslationRequest nx_CatalogTranslationRequest_read(nx_value v) { nx_CatalogTranslationRequest_validate(v,0); nx_CatalogTranslationRequest result={v}; return result; }
+static inline void nx_CatalogTranslationRequest_encode(nx_writer *w,nx_CatalogTranslationRequest value) { nx_raw(w,value.value); }
 static inline void nx_CatalogVersion_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_ResourceVersionRef_validate(nx_field(v,"version"),depth+1); nx_string_validate(nx_field(v,"name"),depth+1); nx_stringArray_validate(nx_field(v,"gameVersions"),depth+1); nx_QualifiedIdArray_validate(nx_field(v,"loaders"),depth+1); nx_CatalogFileArray_validate(nx_field(v,"files"),depth+1);  }
 static inline nx_CatalogVersion nx_CatalogVersion_read(nx_value v) { nx_CatalogVersion_validate(v,0); nx_CatalogVersion result={v}; return result; }
 static inline void nx_CatalogVersion_encode(nx_writer *w,nx_CatalogVersion value) { nx_raw(w,value.value); }
@@ -1829,6 +1916,15 @@ static inline void nx_ContentDependencyGraph_encode(nx_writer *w,nx_ContentDepen
 static inline void nx_ContentDependencyArray_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_u32 count=nx_count(v); for(nx_u32 i=0;i<count;i++) nx_ContentDependency_validate(nx_at(v,i),depth+1); }
 static inline nx_ContentDependencyArray nx_ContentDependencyArray_read(nx_value v) { nx_ContentDependencyArray_validate(v,0); nx_ContentDependencyArray result={v}; return result; }
 static inline void nx_ContentDependencyArray_encode(nx_writer *w,nx_ContentDependencyArray value) { nx_raw(w,value.value); }
+static inline void nx_ContentInspection_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"format"),depth+1); nx_NamedValueArray_validate(nx_field(v,"properties"),depth+1); nx_ValidationIssueArray_validate(nx_field(v,"issues"),depth+1);  }
+static inline nx_ContentInspection nx_ContentInspection_read(nx_value v) { nx_ContentInspection_validate(v,0); nx_ContentInspection result={v}; return result; }
+static inline void nx_ContentInspection_encode(nx_writer *w,nx_ContentInspection value) { nx_raw(w,value.value); }
+static inline void nx_ContentInspectionInput_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_string_validate(nx_field(v,"name"),depth+1); nx_AbiValue_validate(nx_field(v,"bytes"),depth+1);  }
+static inline nx_ContentInspectionInput nx_ContentInspectionInput_read(nx_value v) { nx_ContentInspectionInput_validate(v,0); nx_ContentInspectionInput result={v}; return result; }
+static inline void nx_ContentInspectionInput_encode(nx_writer *w,nx_ContentInspectionInput value) { nx_raw(w,value.value); }
+static inline void nx_ContentInspectionRequest_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"provider"),depth+1); nx_FileRef_validate(nx_field(v,"file"),depth+1);  }
+static inline nx_ContentInspectionRequest nx_ContentInspectionRequest_read(nx_value v) { nx_ContentInspectionRequest_validate(v,0); nx_ContentInspectionRequest result={v}; return result; }
+static inline void nx_ContentInspectionRequest_encode(nx_writer *w,nx_ContentInspectionRequest value) { nx_raw(w,value.value); }
 static inline void nx_ContentItem_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"id"),depth+1); nx_EntityId_validate(nx_field(v,"instance"),depth+1); nx_QualifiedId_validate(nx_field(v,"kind"),depth+1); nx_string_validate(nx_field(v,"name"),depth+1); nx_ResourceVersionRefOptional_validate(nx_field(v,"version"),depth+1); nx_bool_validate(nx_field(v,"enabled"),depth+1); nx_Revision_validate(nx_field(v,"revision"),depth+1);  }
 static inline nx_ContentItem nx_ContentItem_read(nx_value v) { nx_ContentItem_validate(v,0); nx_ContentItem result={v}; return result; }
 static inline void nx_ContentItem_encode(nx_writer *w,nx_ContentItem value) { nx_raw(w,value.value); }
@@ -1919,6 +2015,12 @@ static inline void nx_DisplayInfo_encode(nx_writer *w,nx_DisplayInfo value) { nx
 static inline void nx_DisplayInfoArray_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_u32 count=nx_count(v); for(nx_u32 i=0;i<count;i++) nx_DisplayInfo_validate(nx_at(v,i),depth+1); }
 static inline nx_DisplayInfoArray nx_DisplayInfoArray_read(nx_value v) { nx_DisplayInfoArray_validate(v,0); nx_DisplayInfoArray result={v}; return result; }
 static inline void nx_DisplayInfoArray_encode(nx_writer *w,nx_DisplayInfoArray value) { nx_raw(w,value.value); }
+static inline void nx_DownloadChunk_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_long_validate(nx_field(v,"offset"),depth+1); nx_AbiValue_validate(nx_field(v,"bytes"),depth+1); nx_bool_validate(nx_field(v,"end"),depth+1);  }
+static inline nx_DownloadChunk nx_DownloadChunk_read(nx_value v) { nx_DownloadChunk_validate(v,0); nx_DownloadChunk result={v}; return result; }
+static inline void nx_DownloadChunk_encode(nx_writer *w,nx_DownloadChunk value) { nx_raw(w,value.value); }
+static inline void nx_DownloadChunkRequest_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_UriRef_validate(nx_field(v,"source"),depth+1); nx_long_validate(nx_field(v,"offset"),depth+1); nx_long_validate(nx_field(v,"length"),depth+1);  }
+static inline nx_DownloadChunkRequest nx_DownloadChunkRequest_read(nx_value v) { nx_DownloadChunkRequest_validate(v,0); nx_DownloadChunkRequest result={v}; return result; }
+static inline void nx_DownloadChunkRequest_encode(nx_writer *w,nx_DownloadChunkRequest value) { nx_raw(w,value.value); }
 static inline void nx_DownloadPlan_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_DownloadSourceArray_validate(nx_field(v,"sources"),depth+1); nx_FileRef_validate(nx_field(v,"target"),depth+1); nx_longOptional_validate(nx_field(v,"size"),depth+1); nx_stringOptional_validate(nx_field(v,"sha256"),depth+1);  }
 static inline nx_DownloadPlan nx_DownloadPlan_read(nx_value v) { nx_DownloadPlan_validate(v,0); nx_DownloadPlan result={v}; return result; }
 static inline void nx_DownloadPlan_encode(nx_writer *w,nx_DownloadPlan value) { nx_raw(w,value.value); }
@@ -2078,6 +2180,9 @@ static inline void nx_InstallStepArray_encode(nx_writer *w,nx_InstallStepArray v
 static inline void nx_InstallTemplate_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"id"),depth+1); nx_string_validate(nx_field(v,"gameVersion"),depth+1); nx_QualifiedIdArray_validate(nx_field(v,"loaders"),depth+1); nx_ResourceVersionRefArray_validate(nx_field(v,"content"),depth+1); nx_QualifiedId_validate(nx_field(v,"workflow"),depth+1);  }
 static inline nx_InstallTemplate nx_InstallTemplate_read(nx_value v) { nx_InstallTemplate_validate(v,0); nx_InstallTemplate result={v}; return result; }
 static inline void nx_InstallTemplate_encode(nx_writer *w,nx_InstallTemplate value) { nx_raw(w,value.value); }
+static inline void nx_InstallTemplateInvocation_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_InstallTemplate_validate(nx_field(v,"template"),depth+1); nx_InstanceCreateRequest_validate(nx_field(v,"request"),depth+1);  }
+static inline nx_InstallTemplateInvocation nx_InstallTemplateInvocation_read(nx_value v) { nx_InstallTemplateInvocation_validate(v,0); nx_InstallTemplateInvocation result={v}; return result; }
+static inline void nx_InstallTemplateInvocation_encode(nx_writer *w,nx_InstallTemplateInvocation value) { nx_raw(w,value.value); }
 static inline void nx_InstallerInspection_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_FileRef_validate(nx_field(v,"file"),depth+1); nx_QualifiedIdOptional_validate(nx_field(v,"loader"),depth+1); nx_stringOptional_validate(nx_field(v,"version"),depth+1); nx_ValidationIssueArray_validate(nx_field(v,"issues"),depth+1);  }
 static inline nx_InstallerInspection nx_InstallerInspection_read(nx_value v) { nx_InstallerInspection_validate(v,0); nx_InstallerInspection result={v}; return result; }
 static inline void nx_InstallerInspection_encode(nx_writer *w,nx_InstallerInspection value) { nx_raw(w,value.value); }
@@ -2423,6 +2528,9 @@ static inline void nx_Page_RegistrationRef_encode(nx_writer *w,nx_Page_Registrat
 static inline void nx_Page_RegistryDescriptor_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_RegistryDescriptorArray_validate(nx_field(v,"items"),depth+1); nx_stringOptional_validate(nx_field(v,"nextCursor"),depth+1); nx_Revision_validate(nx_field(v,"revision"),depth+1);  }
 static inline nx_Page_RegistryDescriptor nx_Page_RegistryDescriptor_read(nx_value v) { nx_Page_RegistryDescriptor_validate(v,0); nx_Page_RegistryDescriptor result={v}; return result; }
 static inline void nx_Page_RegistryDescriptor_encode(nx_writer *w,nx_Page_RegistryDescriptor value) { nx_raw(w,value.value); }
+static inline void nx_Page_ResourceCollection_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_ResourceCollectionArray_validate(nx_field(v,"items"),depth+1); nx_stringOptional_validate(nx_field(v,"nextCursor"),depth+1); nx_Revision_validate(nx_field(v,"revision"),depth+1);  }
+static inline nx_Page_ResourceCollection nx_Page_ResourceCollection_read(nx_value v) { nx_Page_ResourceCollection_validate(v,0); nx_Page_ResourceCollection result={v}; return result; }
+static inline void nx_Page_ResourceCollection_encode(nx_writer *w,nx_Page_ResourceCollection value) { nx_raw(w,value.value); }
 static inline void nx_Page_RootRegistration_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_RootRegistrationArray_validate(nx_field(v,"items"),depth+1); nx_stringOptional_validate(nx_field(v,"nextCursor"),depth+1); nx_Revision_validate(nx_field(v,"revision"),depth+1);  }
 static inline nx_Page_RootRegistration nx_Page_RootRegistration_read(nx_value v) { nx_Page_RootRegistration_validate(v,0); nx_Page_RootRegistration result={v}; return result; }
 static inline void nx_Page_RootRegistration_encode(nx_writer *w,nx_Page_RootRegistration value) { nx_raw(w,value.value); }
@@ -2483,6 +2591,9 @@ static inline void nx_ProviderDescriptorArray_encode(nx_writer *w,nx_ProviderDes
 static inline void nx_ProviderFailurePolicy_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(nx_is_string(v,"Unavailable") || nx_is_string(v,"RetryBounded") || nx_is_string(v,"FailOperation")); }
 static inline nx_ProviderFailurePolicy nx_ProviderFailurePolicy_read(nx_value v) { nx_ProviderFailurePolicy_validate(v,0); if(nx_is_string(v,"Unavailable")) return nx_ProviderFailurePolicy_Unavailable; if(nx_is_string(v,"RetryBounded")) return nx_ProviderFailurePolicy_RetryBounded; if(nx_is_string(v,"FailOperation")) return nx_ProviderFailurePolicy_FailOperation; __builtin_trap(); }
 static inline void nx_ProviderFailurePolicy_encode(nx_writer *w,nx_ProviderFailurePolicy value) { switch(value) { case nx_ProviderFailurePolicy_Unavailable: nx_string(w,"Unavailable"); return; case nx_ProviderFailurePolicy_RetryBounded: nx_string(w,"RetryBounded"); return; case nx_ProviderFailurePolicy_FailOperation: nx_string(w,"FailOperation"); return; default: __builtin_trap(); } }
+static inline void nx_ProviderInstanceQuery_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"provider"),depth+1); nx_EntityId_validate(nx_field(v,"instance"),depth+1);  }
+static inline nx_ProviderInstanceQuery nx_ProviderInstanceQuery_read(nx_value v) { nx_ProviderInstanceQuery_validate(v,0); nx_ProviderInstanceQuery result={v}; return result; }
+static inline void nx_ProviderInstanceQuery_encode(nx_writer *w,nx_ProviderInstanceQuery value) { nx_raw(w,value.value); }
 static inline void nx_ProviderKindDefinition_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"id"),depth+1); nx_PublicContract_validate(nx_field(v,"contract"),depth+1); nx_SelectionPolicy_validate(nx_field(v,"selection"),depth+1);  }
 static inline nx_ProviderKindDefinition nx_ProviderKindDefinition_read(nx_value v) { nx_ProviderKindDefinition_validate(v,0); nx_ProviderKindDefinition result={v}; return result; }
 static inline void nx_ProviderKindDefinition_encode(nx_writer *w,nx_ProviderKindDefinition value) { nx_raw(w,value.value); }
@@ -2546,6 +2657,9 @@ static inline void nx_ResolutionReport_encode(nx_writer *w,nx_ResolutionReport v
 static inline void nx_ResourceCollection_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"id"),depth+1); nx_ResourceRefArray_validate(nx_field(v,"resources"),depth+1); nx_QualifiedIdArray_validate(nx_field(v,"tags"),depth+1);  }
 static inline nx_ResourceCollection nx_ResourceCollection_read(nx_value v) { nx_ResourceCollection_validate(v,0); nx_ResourceCollection result={v}; return result; }
 static inline void nx_ResourceCollection_encode(nx_writer *w,nx_ResourceCollection value) { nx_raw(w,value.value); }
+static inline void nx_ResourceCollectionArray_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_u32 count=nx_count(v); for(nx_u32 i=0;i<count;i++) nx_ResourceCollection_validate(nx_at(v,i),depth+1); }
+static inline nx_ResourceCollectionArray nx_ResourceCollectionArray_read(nx_value v) { nx_ResourceCollectionArray_validate(v,0); nx_ResourceCollectionArray result={v}; return result; }
+static inline void nx_ResourceCollectionArray_encode(nx_writer *w,nx_ResourceCollectionArray value) { nx_raw(w,value.value); }
 static inline void nx_ResourceRef_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"provider"),depth+1); nx_string_validate(nx_field(v,"projectId"),depth+1);  }
 static inline nx_ResourceRef nx_ResourceRef_read(nx_value v) { nx_ResourceRef_validate(v,0); nx_ResourceRef result={v}; return result; }
 static inline void nx_ResourceRef_encode(nx_writer *w,nx_ResourceRef value) { nx_raw(w,value.value); }
@@ -2657,6 +2771,9 @@ static inline void nx_SettingChange_encode(nx_writer *w,nx_SettingChange value) 
 static inline void nx_SettingMigration_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"id"),depth+1); nx_ScopedTarget_validate(nx_field(v,"target"),depth+1); nx_ulong_validate(nx_field(v,"fromVersion"),depth+1); nx_ulong_validate(nx_field(v,"toVersion"),depth+1); nx_ulong_validate(nx_field(v,"handler"),depth+1);  }
 static inline nx_SettingMigration nx_SettingMigration_read(nx_value v) { nx_SettingMigration_validate(v,0); nx_SettingMigration result={v}; return result; }
 static inline void nx_SettingMigration_encode(nx_writer *w,nx_SettingMigration value) { nx_raw(w,value.value); }
+static inline void nx_SettingMigrationInput_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_ulong_validate(nx_field(v,"fromVersion"),depth+1); nx_ulong_validate(nx_field(v,"toVersion"),depth+1); nx_AbiValue_validate(nx_field(v,"value"),depth+1);  }
+static inline nx_SettingMigrationInput nx_SettingMigrationInput_read(nx_value v) { nx_SettingMigrationInput_validate(v,0); nx_SettingMigrationInput result={v}; return result; }
+static inline void nx_SettingMigrationInput_encode(nx_writer *w,nx_SettingMigrationInput value) { nx_raw(w,value.value); }
 static inline void nx_SettingQuery_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_QualifiedId_validate(nx_field(v,"id"),depth+1); nx_ScopedTarget_validate(nx_field(v,"target"),depth+1);  }
 static inline nx_SettingQuery nx_SettingQuery_read(nx_value v) { nx_SettingQuery_validate(v,0); nx_SettingQuery result={v}; return result; }
 static inline void nx_SettingQuery_encode(nx_writer *w,nx_SettingQuery value) { nx_raw(w,value.value); }
@@ -2744,6 +2861,9 @@ static inline void nx_StorageWrite_encode(nx_writer *w,nx_StorageWrite value) { 
 static inline void nx_StorageWriteArray_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_u32 count=nx_count(v); for(nx_u32 i=0;i<count;i++) nx_StorageWrite_validate(nx_at(v,i),depth+1); }
 static inline nx_StorageWriteArray nx_StorageWriteArray_read(nx_value v) { nx_StorageWriteArray_validate(v,0); nx_StorageWriteArray result={v}; return result; }
 static inline void nx_StorageWriteArray_encode(nx_writer *w,nx_StorageWriteArray value) { nx_raw(w,value.value); }
+static inline void nx_StoredPluginSetting_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_ulong_validate(nx_field(v,"version"),depth+1); nx_AbiValue_validate(nx_field(v,"value"),depth+1);  }
+static inline nx_StoredPluginSetting nx_StoredPluginSetting_read(nx_value v) { nx_StoredPluginSetting_validate(v,0); nx_StoredPluginSetting result={v}; return result; }
+static inline void nx_StoredPluginSetting_encode(nx_writer *w,nx_StoredPluginSetting value) { nx_raw(w,value.value); }
 static inline void nx_SubscriptionBatch_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_AbiValueArray_validate(nx_field(v,"items"),depth+1); nx_bool_validate(nx_field(v,"resyncRequired"),depth+1);  }
 static inline nx_SubscriptionBatch nx_SubscriptionBatch_read(nx_value v) { nx_SubscriptionBatch_validate(v,0); nx_SubscriptionBatch result={v}; return result; }
 static inline void nx_SubscriptionBatch_encode(nx_writer *w,nx_SubscriptionBatch value) { nx_raw(w,value.value); }
@@ -2867,6 +2987,9 @@ static inline void nx_ValidationIssueArray_encode(nx_writer *w,nx_ValidationIssu
 static inline void nx_ValidationReport_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_bool_validate(nx_field(v,"valid"),depth+1); nx_ValidationIssueArray_validate(nx_field(v,"issues"),depth+1);  }
 static inline nx_ValidationReport nx_ValidationReport_read(nx_value v) { nx_ValidationReport_validate(v,0); nx_ValidationReport result={v}; return result; }
 static inline void nx_ValidationReport_encode(nx_writer *w,nx_ValidationReport value) { nx_raw(w,value.value); }
+static inline void nx_VersionedSettingSchema_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_SettingSchema_validate(nx_field(v,"schema"),depth+1); nx_ulong_validate(nx_field(v,"version"),depth+1);  }
+static inline nx_VersionedSettingSchema nx_VersionedSettingSchema_read(nx_value v) { nx_VersionedSettingSchema_validate(v,0); nx_VersionedSettingSchema result={v}; return result; }
+static inline void nx_VersionedSettingSchema_encode(nx_writer *w,nx_VersionedSettingSchema value) { nx_raw(w,value.value); }
 static inline void nx_Wardrobe_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"account"),depth+1); nx_UriRefOptional_validate(nx_field(v,"skin"),depth+1); nx_CapeArray_validate(nx_field(v,"capes"),depth+1); nx_bool_validate(nx_field(v,"supportsUpload"),depth+1);  }
 static inline nx_Wardrobe nx_Wardrobe_read(nx_value v) { nx_Wardrobe_validate(v,0); nx_Wardrobe result={v}; return result; }
 static inline void nx_Wardrobe_encode(nx_writer *w,nx_Wardrobe value) { nx_raw(w,value.value); }
@@ -2912,6 +3035,9 @@ static inline void nx_WorldMetadata_encode(nx_writer *w,nx_WorldMetadata value) 
 static inline void nx_WorldRenameRequest_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"world"),depth+1); nx_string_validate(nx_field(v,"name"),depth+1); nx_Revision_validate(nx_field(v,"expectedRevision"),depth+1);  }
 static inline nx_WorldRenameRequest nx_WorldRenameRequest_read(nx_value v) { nx_WorldRenameRequest_validate(v,0); nx_WorldRenameRequest result={v}; return result; }
 static inline void nx_WorldRenameRequest_encode(nx_writer *w,nx_WorldRenameRequest value) { nx_raw(w,value.value); }
+static inline void nx_WorldRestoreDestination_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"world"),depth+1); nx_string_validate(nx_field(v,"name"),depth+1); nx_Revision_validate(nx_field(v,"expectedRevision"),depth+1);  }
+static inline nx_WorldRestoreDestination nx_WorldRestoreDestination_read(nx_value v) { nx_WorldRestoreDestination_validate(v,0); nx_WorldRestoreDestination result={v}; return result; }
+static inline void nx_WorldRestoreDestination_encode(nx_writer *w,nx_WorldRestoreDestination value) { nx_raw(w,value.value); }
 static inline void nx_WorldSummary_validate(nx_value v,nx_u32 depth) { nx_require(depth <= 32); nx_require(v.size && v.data[0]==8); nx_EntityId_validate(nx_field(v,"id"),depth+1); nx_EntityId_validate(nx_field(v,"instance"),depth+1); nx_string_validate(nx_field(v,"name"),depth+1); nx_bool_validate(nx_field(v,"running"),depth+1); nx_Revision_validate(nx_field(v,"revision"),depth+1);  }
 static inline nx_WorldSummary nx_WorldSummary_read(nx_value v) { nx_WorldSummary_validate(v,0); nx_WorldSummary result={v}; return result; }
 static inline void nx_WorldSummary_encode(nx_writer *w,nx_WorldSummary value) { nx_raw(w,value.value); }
@@ -2960,6 +3086,9 @@ static inline void nx_ulongOptional_encode(nx_writer *w,nx_ulongOptional value) 
 static inline nx_u32 nx_AbiValueArray_count(nx_AbiValueArray v) { return nx_count(v.value); }
 static inline nx_value nx_AbiValueArray_at(nx_AbiValueArray v,nx_u32 i) { return nx_AbiValue_read(nx_at(v.value,i)); }
 static inline nx_AbiValueArray nx_AbiValueArray_write(nx_writer *w,const nx_value *items,nx_u32 count) { nx_u32 start=w->size; nx_require(count==0 || items); nx_array(w,count); for(nx_u32 i=0;i<count;i++) { nx_AbiValue_encode(w,items[i]); } return nx_AbiValueArray_read(nx_written(w,start)); }
+static inline nx_text nx_AccountProviderConfiguration_Protocol(nx_AccountProviderConfiguration value) { return nx_string_read(nx_field(value.value,"protocol")); }
+static inline nx_text nx_AccountProviderConfiguration_AuthServer(nx_AccountProviderConfiguration value) { return nx_UriRef_read(nx_field(value.value,"authServer")); }
+static inline nx_AccountProviderConfiguration nx_AccountProviderConfiguration_write(nx_writer *w, nx_text arg_Protocol, nx_text arg_AuthServer) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"authServer"); nx_UriRef_encode(w,arg_AuthServer);nx_key(w,"protocol"); nx_string_encode(w,arg_Protocol);return nx_AccountProviderConfiguration_read(nx_written(w,start)); }
 static inline nx_text nx_AccountPublic_Id(nx_AccountPublic value) { return nx_EntityId_read(nx_field(value.value,"id")); }
 static inline nx_text nx_AccountPublic_Provider(nx_AccountPublic value) { return nx_QualifiedId_read(nx_field(value.value,"provider")); }
 static inline nx_text nx_AccountPublic_DisplayName(nx_AccountPublic value) { return nx_string_read(nx_field(value.value,"displayName")); }
@@ -2999,6 +3128,9 @@ static inline nx_FileRefOptional nx_BackupCapture_Target(nx_BackupCapture value)
 static inline nx_QualifiedIdArray nx_BackupCapture_Include(nx_BackupCapture value) { return nx_QualifiedIdArray_read(nx_field(value.value,"include")); }
 static inline nx_QualifiedIdArray nx_BackupCapture_Exclude(nx_BackupCapture value) { return nx_QualifiedIdArray_read(nx_field(value.value,"exclude")); }
 static inline nx_BackupCapture nx_BackupCapture_write(nx_writer *w, nx_text arg_Instance, nx_FileRefOptional arg_Target, nx_QualifiedIdArray arg_Include, nx_QualifiedIdArray arg_Exclude) { nx_u32 start=w->size; nx_map(w,4); nx_key(w,"exclude"); nx_QualifiedIdArray_encode(w,arg_Exclude);nx_key(w,"include"); nx_QualifiedIdArray_encode(w,arg_Include);nx_key(w,"instance"); nx_EntityId_encode(w,arg_Instance);nx_key(w,"target"); nx_FileRefOptional_encode(w,arg_Target);return nx_BackupCapture_read(nx_written(w,start)); }
+static inline nx_text nx_BackupImportRequest_Instance(nx_BackupImportRequest value) { return nx_EntityId_read(nx_field(value.value,"instance")); }
+static inline nx_FileRef nx_BackupImportRequest_File(nx_BackupImportRequest value) { return nx_FileRef_read(nx_field(value.value,"file")); }
+static inline nx_BackupImportRequest nx_BackupImportRequest_write(nx_writer *w, nx_text arg_Instance, nx_FileRef arg_File) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"file"); nx_FileRef_encode(w,arg_File);nx_key(w,"instance"); nx_EntityId_encode(w,arg_Instance);return nx_BackupImportRequest_read(nx_written(w,start)); }
 static inline nx_text nx_BackupPrune_Instance(nx_BackupPrune value) { return nx_EntityId_read(nx_field(value.value,"instance")); }
 static inline nx_RetentionPolicy nx_BackupPrune_Retention(nx_BackupPrune value) { return nx_RetentionPolicy_read(nx_field(value.value,"retention")); }
 static inline nx_text nx_BackupPrune_ExpectedRevision(nx_BackupPrune value) { return nx_Revision_read(nx_field(value.value,"expectedRevision")); }
@@ -3099,6 +3231,16 @@ static inline nx_stringOptional nx_CatalogSearch_GameVersion(nx_CatalogSearch va
 static inline nx_QualifiedIdOptional nx_CatalogSearch_Loader(nx_CatalogSearch value) { return nx_QualifiedIdOptional_read(nx_field(value.value,"loader")); }
 static inline nx_PageRequest nx_CatalogSearch_Page(nx_CatalogSearch value) { return nx_PageRequest_read(nx_field(value.value,"page")); }
 static inline nx_CatalogSearch nx_CatalogSearch_write(nx_writer *w, nx_QualifiedIdArray arg_Providers, nx_text arg_Query, nx_QualifiedIdOptional arg_Kind, nx_stringOptional arg_GameVersion, nx_QualifiedIdOptional arg_Loader, nx_PageRequest arg_Page) { nx_u32 start=w->size; nx_map(w,6); nx_key(w,"gameVersion"); nx_stringOptional_encode(w,arg_GameVersion);nx_key(w,"kind"); nx_QualifiedIdOptional_encode(w,arg_Kind);nx_key(w,"loader"); nx_QualifiedIdOptional_encode(w,arg_Loader);nx_key(w,"page"); nx_PageRequest_encode(w,arg_Page);nx_key(w,"providers"); nx_QualifiedIdArray_encode(w,arg_Providers);nx_key(w,"query"); nx_string_encode(w,arg_Query);return nx_CatalogSearch_read(nx_written(w,start)); }
+static inline nx_text nx_CatalogTranslation_Name(nx_CatalogTranslation value) { return nx_string_read(nx_field(value.value,"name")); }
+static inline nx_text nx_CatalogTranslation_Summary(nx_CatalogTranslation value) { return nx_string_read(nx_field(value.value,"summary")); }
+static inline nx_CatalogTranslation nx_CatalogTranslation_write(nx_writer *w, nx_text arg_Name, nx_text arg_Summary) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"name"); nx_string_encode(w,arg_Name);nx_key(w,"summary"); nx_string_encode(w,arg_Summary);return nx_CatalogTranslation_read(nx_written(w,start)); }
+static inline nx_CatalogProject nx_CatalogTranslationInput_Project(nx_CatalogTranslationInput value) { return nx_CatalogProject_read(nx_field(value.value,"project")); }
+static inline nx_text nx_CatalogTranslationInput_Locale(nx_CatalogTranslationInput value) { return nx_string_read(nx_field(value.value,"locale")); }
+static inline nx_CatalogTranslationInput nx_CatalogTranslationInput_write(nx_writer *w, nx_CatalogProject arg_Project, nx_text arg_Locale) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"locale"); nx_string_encode(w,arg_Locale);nx_key(w,"project"); nx_CatalogProject_encode(w,arg_Project);return nx_CatalogTranslationInput_read(nx_written(w,start)); }
+static inline nx_text nx_CatalogTranslationRequest_Provider(nx_CatalogTranslationRequest value) { return nx_QualifiedId_read(nx_field(value.value,"provider")); }
+static inline nx_ResourceRef nx_CatalogTranslationRequest_Resource(nx_CatalogTranslationRequest value) { return nx_ResourceRef_read(nx_field(value.value,"resource")); }
+static inline nx_text nx_CatalogTranslationRequest_Locale(nx_CatalogTranslationRequest value) { return nx_string_read(nx_field(value.value,"locale")); }
+static inline nx_CatalogTranslationRequest nx_CatalogTranslationRequest_write(nx_writer *w, nx_text arg_Provider, nx_ResourceRef arg_Resource, nx_text arg_Locale) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"locale"); nx_string_encode(w,arg_Locale);nx_key(w,"provider"); nx_QualifiedId_encode(w,arg_Provider);nx_key(w,"resource"); nx_ResourceRef_encode(w,arg_Resource);return nx_CatalogTranslationRequest_read(nx_written(w,start)); }
 static inline nx_ResourceVersionRef nx_CatalogVersion_Version(nx_CatalogVersion value) { return nx_ResourceVersionRef_read(nx_field(value.value,"version")); }
 static inline nx_text nx_CatalogVersion_Name(nx_CatalogVersion value) { return nx_string_read(nx_field(value.value,"name")); }
 static inline nx_stringArray nx_CatalogVersion_GameVersions(nx_CatalogVersion value) { return nx_stringArray_read(nx_field(value.value,"gameVersions")); }
@@ -3144,6 +3286,16 @@ static inline nx_ContentDependencyGraph nx_ContentDependencyGraph_write(nx_write
 static inline nx_u32 nx_ContentDependencyArray_count(nx_ContentDependencyArray v) { return nx_count(v.value); }
 static inline nx_ContentDependency nx_ContentDependencyArray_at(nx_ContentDependencyArray v,nx_u32 i) { return nx_ContentDependency_read(nx_at(v.value,i)); }
 static inline nx_ContentDependencyArray nx_ContentDependencyArray_write(nx_writer *w,const nx_ContentDependency *items,nx_u32 count) { nx_u32 start=w->size; nx_require(count==0 || items); nx_array(w,count); for(nx_u32 i=0;i<count;i++) { nx_ContentDependency_encode(w,items[i]); } return nx_ContentDependencyArray_read(nx_written(w,start)); }
+static inline nx_text nx_ContentInspection_Format(nx_ContentInspection value) { return nx_QualifiedId_read(nx_field(value.value,"format")); }
+static inline nx_NamedValueArray nx_ContentInspection_Properties(nx_ContentInspection value) { return nx_NamedValueArray_read(nx_field(value.value,"properties")); }
+static inline nx_ValidationIssueArray nx_ContentInspection_Issues(nx_ContentInspection value) { return nx_ValidationIssueArray_read(nx_field(value.value,"issues")); }
+static inline nx_ContentInspection nx_ContentInspection_write(nx_writer *w, nx_text arg_Format, nx_NamedValueArray arg_Properties, nx_ValidationIssueArray arg_Issues) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"format"); nx_QualifiedId_encode(w,arg_Format);nx_key(w,"issues"); nx_ValidationIssueArray_encode(w,arg_Issues);nx_key(w,"properties"); nx_NamedValueArray_encode(w,arg_Properties);return nx_ContentInspection_read(nx_written(w,start)); }
+static inline nx_text nx_ContentInspectionInput_Name(nx_ContentInspectionInput value) { return nx_string_read(nx_field(value.value,"name")); }
+static inline nx_value nx_ContentInspectionInput_Bytes(nx_ContentInspectionInput value) { return nx_AbiValue_read(nx_field(value.value,"bytes")); }
+static inline nx_ContentInspectionInput nx_ContentInspectionInput_write(nx_writer *w, nx_text arg_Name, nx_value arg_Bytes) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"bytes"); nx_AbiValue_encode(w,arg_Bytes);nx_key(w,"name"); nx_string_encode(w,arg_Name);return nx_ContentInspectionInput_read(nx_written(w,start)); }
+static inline nx_text nx_ContentInspectionRequest_Provider(nx_ContentInspectionRequest value) { return nx_QualifiedId_read(nx_field(value.value,"provider")); }
+static inline nx_FileRef nx_ContentInspectionRequest_File(nx_ContentInspectionRequest value) { return nx_FileRef_read(nx_field(value.value,"file")); }
+static inline nx_ContentInspectionRequest nx_ContentInspectionRequest_write(nx_writer *w, nx_text arg_Provider, nx_FileRef arg_File) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"file"); nx_FileRef_encode(w,arg_File);nx_key(w,"provider"); nx_QualifiedId_encode(w,arg_Provider);return nx_ContentInspectionRequest_read(nx_written(w,start)); }
 static inline nx_text nx_ContentItem_Id(nx_ContentItem value) { return nx_EntityId_read(nx_field(value.value,"id")); }
 static inline nx_text nx_ContentItem_Instance(nx_ContentItem value) { return nx_EntityId_read(nx_field(value.value,"instance")); }
 static inline nx_text nx_ContentItem_Kind(nx_ContentItem value) { return nx_QualifiedId_read(nx_field(value.value,"kind")); }
@@ -3252,6 +3404,14 @@ static inline nx_DisplayInfo nx_DisplayInfo_write(nx_writer *w, nx_text arg_Id, 
 static inline nx_u32 nx_DisplayInfoArray_count(nx_DisplayInfoArray v) { return nx_count(v.value); }
 static inline nx_DisplayInfo nx_DisplayInfoArray_at(nx_DisplayInfoArray v,nx_u32 i) { return nx_DisplayInfo_read(nx_at(v.value,i)); }
 static inline nx_DisplayInfoArray nx_DisplayInfoArray_write(nx_writer *w,const nx_DisplayInfo *items,nx_u32 count) { nx_u32 start=w->size; nx_require(count==0 || items); nx_array(w,count); for(nx_u32 i=0;i<count;i++) { nx_DisplayInfo_encode(w,items[i]); } return nx_DisplayInfoArray_read(nx_written(w,start)); }
+static inline nx_i64 nx_DownloadChunk_Offset(nx_DownloadChunk value) { return nx_long_read(nx_field(value.value,"offset")); }
+static inline nx_value nx_DownloadChunk_Bytes(nx_DownloadChunk value) { return nx_AbiValue_read(nx_field(value.value,"bytes")); }
+static inline int nx_DownloadChunk_End(nx_DownloadChunk value) { return nx_bool_read(nx_field(value.value,"end")); }
+static inline nx_DownloadChunk nx_DownloadChunk_write(nx_writer *w, nx_i64 arg_Offset, nx_value arg_Bytes, int arg_End) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"bytes"); nx_AbiValue_encode(w,arg_Bytes);nx_key(w,"end"); nx_bool_encode(w,arg_End);nx_key(w,"offset"); nx_long_encode(w,arg_Offset);return nx_DownloadChunk_read(nx_written(w,start)); }
+static inline nx_text nx_DownloadChunkRequest_Source(nx_DownloadChunkRequest value) { return nx_UriRef_read(nx_field(value.value,"source")); }
+static inline nx_i64 nx_DownloadChunkRequest_Offset(nx_DownloadChunkRequest value) { return nx_long_read(nx_field(value.value,"offset")); }
+static inline nx_i64 nx_DownloadChunkRequest_Length(nx_DownloadChunkRequest value) { return nx_long_read(nx_field(value.value,"length")); }
+static inline nx_DownloadChunkRequest nx_DownloadChunkRequest_write(nx_writer *w, nx_text arg_Source, nx_i64 arg_Offset, nx_i64 arg_Length) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"length"); nx_long_encode(w,arg_Length);nx_key(w,"offset"); nx_long_encode(w,arg_Offset);nx_key(w,"source"); nx_UriRef_encode(w,arg_Source);return nx_DownloadChunkRequest_read(nx_written(w,start)); }
 static inline nx_DownloadSourceArray nx_DownloadPlan_Sources(nx_DownloadPlan value) { return nx_DownloadSourceArray_read(nx_field(value.value,"sources")); }
 static inline nx_FileRef nx_DownloadPlan_Target(nx_DownloadPlan value) { return nx_FileRef_read(nx_field(value.value,"target")); }
 static inline nx_longOptional nx_DownloadPlan_Size(nx_DownloadPlan value) { return nx_longOptional_read(nx_field(value.value,"size")); }
@@ -3460,6 +3620,9 @@ static inline nx_QualifiedIdArray nx_InstallTemplate_Loaders(nx_InstallTemplate 
 static inline nx_ResourceVersionRefArray nx_InstallTemplate_Content(nx_InstallTemplate value) { return nx_ResourceVersionRefArray_read(nx_field(value.value,"content")); }
 static inline nx_text nx_InstallTemplate_Workflow(nx_InstallTemplate value) { return nx_QualifiedId_read(nx_field(value.value,"workflow")); }
 static inline nx_InstallTemplate nx_InstallTemplate_write(nx_writer *w, nx_text arg_Id, nx_text arg_GameVersion, nx_QualifiedIdArray arg_Loaders, nx_ResourceVersionRefArray arg_Content, nx_text arg_Workflow) { nx_u32 start=w->size; nx_map(w,5); nx_key(w,"content"); nx_ResourceVersionRefArray_encode(w,arg_Content);nx_key(w,"gameVersion"); nx_string_encode(w,arg_GameVersion);nx_key(w,"id"); nx_QualifiedId_encode(w,arg_Id);nx_key(w,"loaders"); nx_QualifiedIdArray_encode(w,arg_Loaders);nx_key(w,"workflow"); nx_QualifiedId_encode(w,arg_Workflow);return nx_InstallTemplate_read(nx_written(w,start)); }
+static inline nx_InstallTemplate nx_InstallTemplateInvocation_Template(nx_InstallTemplateInvocation value) { return nx_InstallTemplate_read(nx_field(value.value,"template")); }
+static inline nx_InstanceCreateRequest nx_InstallTemplateInvocation_Request(nx_InstallTemplateInvocation value) { return nx_InstanceCreateRequest_read(nx_field(value.value,"request")); }
+static inline nx_InstallTemplateInvocation nx_InstallTemplateInvocation_write(nx_writer *w, nx_InstallTemplate arg_Template, nx_InstanceCreateRequest arg_Request) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"request"); nx_InstanceCreateRequest_encode(w,arg_Request);nx_key(w,"template"); nx_InstallTemplate_encode(w,arg_Template);return nx_InstallTemplateInvocation_read(nx_written(w,start)); }
 static inline nx_FileRef nx_InstallerInspection_File(nx_InstallerInspection value) { return nx_FileRef_read(nx_field(value.value,"file")); }
 static inline nx_QualifiedIdOptional nx_InstallerInspection_Loader(nx_InstallerInspection value) { return nx_QualifiedIdOptional_read(nx_field(value.value,"loader")); }
 static inline nx_stringOptional nx_InstallerInspection_Version(nx_InstallerInspection value) { return nx_stringOptional_read(nx_field(value.value,"version")); }
@@ -3938,6 +4101,10 @@ static inline nx_RegistryDescriptorArray nx_Page_RegistryDescriptor_Items(nx_Pag
 static inline nx_stringOptional nx_Page_RegistryDescriptor_NextCursor(nx_Page_RegistryDescriptor value) { return nx_stringOptional_read(nx_field(value.value,"nextCursor")); }
 static inline nx_text nx_Page_RegistryDescriptor_Revision(nx_Page_RegistryDescriptor value) { return nx_Revision_read(nx_field(value.value,"revision")); }
 static inline nx_Page_RegistryDescriptor nx_Page_RegistryDescriptor_write(nx_writer *w, nx_RegistryDescriptorArray arg_Items, nx_stringOptional arg_NextCursor, nx_text arg_Revision) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"items"); nx_RegistryDescriptorArray_encode(w,arg_Items);nx_key(w,"nextCursor"); nx_stringOptional_encode(w,arg_NextCursor);nx_key(w,"revision"); nx_Revision_encode(w,arg_Revision);return nx_Page_RegistryDescriptor_read(nx_written(w,start)); }
+static inline nx_ResourceCollectionArray nx_Page_ResourceCollection_Items(nx_Page_ResourceCollection value) { return nx_ResourceCollectionArray_read(nx_field(value.value,"items")); }
+static inline nx_stringOptional nx_Page_ResourceCollection_NextCursor(nx_Page_ResourceCollection value) { return nx_stringOptional_read(nx_field(value.value,"nextCursor")); }
+static inline nx_text nx_Page_ResourceCollection_Revision(nx_Page_ResourceCollection value) { return nx_Revision_read(nx_field(value.value,"revision")); }
+static inline nx_Page_ResourceCollection nx_Page_ResourceCollection_write(nx_writer *w, nx_ResourceCollectionArray arg_Items, nx_stringOptional arg_NextCursor, nx_text arg_Revision) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"items"); nx_ResourceCollectionArray_encode(w,arg_Items);nx_key(w,"nextCursor"); nx_stringOptional_encode(w,arg_NextCursor);nx_key(w,"revision"); nx_Revision_encode(w,arg_Revision);return nx_Page_ResourceCollection_read(nx_written(w,start)); }
 static inline nx_RootRegistrationArray nx_Page_RootRegistration_Items(nx_Page_RootRegistration value) { return nx_RootRegistrationArray_read(nx_field(value.value,"items")); }
 static inline nx_stringOptional nx_Page_RootRegistration_NextCursor(nx_Page_RootRegistration value) { return nx_stringOptional_read(nx_field(value.value,"nextCursor")); }
 static inline nx_text nx_Page_RootRegistration_Revision(nx_Page_RootRegistration value) { return nx_Revision_read(nx_field(value.value,"revision")); }
@@ -4013,6 +4180,9 @@ static inline nx_ProviderDescriptor nx_ProviderDescriptor_write(nx_writer *w, nx
 static inline nx_u32 nx_ProviderDescriptorArray_count(nx_ProviderDescriptorArray v) { return nx_count(v.value); }
 static inline nx_ProviderDescriptor nx_ProviderDescriptorArray_at(nx_ProviderDescriptorArray v,nx_u32 i) { return nx_ProviderDescriptor_read(nx_at(v.value,i)); }
 static inline nx_ProviderDescriptorArray nx_ProviderDescriptorArray_write(nx_writer *w,const nx_ProviderDescriptor *items,nx_u32 count) { nx_u32 start=w->size; nx_require(count==0 || items); nx_array(w,count); for(nx_u32 i=0;i<count;i++) { nx_ProviderDescriptor_encode(w,items[i]); } return nx_ProviderDescriptorArray_read(nx_written(w,start)); }
+static inline nx_text nx_ProviderInstanceQuery_Provider(nx_ProviderInstanceQuery value) { return nx_QualifiedId_read(nx_field(value.value,"provider")); }
+static inline nx_text nx_ProviderInstanceQuery_Instance(nx_ProviderInstanceQuery value) { return nx_EntityId_read(nx_field(value.value,"instance")); }
+static inline nx_ProviderInstanceQuery nx_ProviderInstanceQuery_write(nx_writer *w, nx_text arg_Provider, nx_text arg_Instance) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"instance"); nx_EntityId_encode(w,arg_Instance);nx_key(w,"provider"); nx_QualifiedId_encode(w,arg_Provider);return nx_ProviderInstanceQuery_read(nx_written(w,start)); }
 static inline nx_text nx_ProviderKindDefinition_Id(nx_ProviderKindDefinition value) { return nx_QualifiedId_read(nx_field(value.value,"id")); }
 static inline nx_PublicContract nx_ProviderKindDefinition_Contract(nx_ProviderKindDefinition value) { return nx_PublicContract_read(nx_field(value.value,"contract")); }
 static inline nx_SelectionPolicy nx_ProviderKindDefinition_Selection(nx_ProviderKindDefinition value) { return nx_SelectionPolicy_read(nx_field(value.value,"selection")); }
@@ -4090,6 +4260,9 @@ static inline nx_text nx_ResourceCollection_Id(nx_ResourceCollection value) { re
 static inline nx_ResourceRefArray nx_ResourceCollection_Resources(nx_ResourceCollection value) { return nx_ResourceRefArray_read(nx_field(value.value,"resources")); }
 static inline nx_QualifiedIdArray nx_ResourceCollection_Tags(nx_ResourceCollection value) { return nx_QualifiedIdArray_read(nx_field(value.value,"tags")); }
 static inline nx_ResourceCollection nx_ResourceCollection_write(nx_writer *w, nx_text arg_Id, nx_ResourceRefArray arg_Resources, nx_QualifiedIdArray arg_Tags) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"id"); nx_QualifiedId_encode(w,arg_Id);nx_key(w,"resources"); nx_ResourceRefArray_encode(w,arg_Resources);nx_key(w,"tags"); nx_QualifiedIdArray_encode(w,arg_Tags);return nx_ResourceCollection_read(nx_written(w,start)); }
+static inline nx_u32 nx_ResourceCollectionArray_count(nx_ResourceCollectionArray v) { return nx_count(v.value); }
+static inline nx_ResourceCollection nx_ResourceCollectionArray_at(nx_ResourceCollectionArray v,nx_u32 i) { return nx_ResourceCollection_read(nx_at(v.value,i)); }
+static inline nx_ResourceCollectionArray nx_ResourceCollectionArray_write(nx_writer *w,const nx_ResourceCollection *items,nx_u32 count) { nx_u32 start=w->size; nx_require(count==0 || items); nx_array(w,count); for(nx_u32 i=0;i<count;i++) { nx_ResourceCollection_encode(w,items[i]); } return nx_ResourceCollectionArray_read(nx_written(w,start)); }
 static inline nx_text nx_ResourceRef_Provider(nx_ResourceRef value) { return nx_QualifiedId_read(nx_field(value.value,"provider")); }
 static inline nx_text nx_ResourceRef_ProjectId(nx_ResourceRef value) { return nx_string_read(nx_field(value.value,"projectId")); }
 static inline nx_ResourceRef nx_ResourceRef_write(nx_writer *w, nx_text arg_Provider, nx_text arg_ProjectId) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"projectId"); nx_string_encode(w,arg_ProjectId);nx_key(w,"provider"); nx_QualifiedId_encode(w,arg_Provider);return nx_ResourceRef_read(nx_written(w,start)); }
@@ -4238,6 +4411,10 @@ static inline nx_u64 nx_SettingMigration_FromVersion(nx_SettingMigration value) 
 static inline nx_u64 nx_SettingMigration_ToVersion(nx_SettingMigration value) { return nx_ulong_read(nx_field(value.value,"toVersion")); }
 static inline nx_u64 nx_SettingMigration_Handler(nx_SettingMigration value) { return nx_ulong_read(nx_field(value.value,"handler")); }
 static inline nx_SettingMigration nx_SettingMigration_write(nx_writer *w, nx_text arg_Id, nx_ScopedTarget arg_Target, nx_u64 arg_FromVersion, nx_u64 arg_ToVersion, nx_u64 arg_Handler) { nx_u32 start=w->size; nx_map(w,5); nx_key(w,"fromVersion"); nx_ulong_encode(w,arg_FromVersion);nx_key(w,"handler"); nx_ulong_encode(w,arg_Handler);nx_key(w,"id"); nx_QualifiedId_encode(w,arg_Id);nx_key(w,"target"); nx_ScopedTarget_encode(w,arg_Target);nx_key(w,"toVersion"); nx_ulong_encode(w,arg_ToVersion);return nx_SettingMigration_read(nx_written(w,start)); }
+static inline nx_u64 nx_SettingMigrationInput_FromVersion(nx_SettingMigrationInput value) { return nx_ulong_read(nx_field(value.value,"fromVersion")); }
+static inline nx_u64 nx_SettingMigrationInput_ToVersion(nx_SettingMigrationInput value) { return nx_ulong_read(nx_field(value.value,"toVersion")); }
+static inline nx_value nx_SettingMigrationInput_Value(nx_SettingMigrationInput value) { return nx_AbiValue_read(nx_field(value.value,"value")); }
+static inline nx_SettingMigrationInput nx_SettingMigrationInput_write(nx_writer *w, nx_u64 arg_FromVersion, nx_u64 arg_ToVersion, nx_value arg_Value) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"fromVersion"); nx_ulong_encode(w,arg_FromVersion);nx_key(w,"toVersion"); nx_ulong_encode(w,arg_ToVersion);nx_key(w,"value"); nx_AbiValue_encode(w,arg_Value);return nx_SettingMigrationInput_read(nx_written(w,start)); }
 static inline nx_text nx_SettingQuery_Id(nx_SettingQuery value) { return nx_QualifiedId_read(nx_field(value.value,"id")); }
 static inline nx_ScopedTarget nx_SettingQuery_Target(nx_SettingQuery value) { return nx_ScopedTarget_read(nx_field(value.value,"target")); }
 static inline nx_SettingQuery nx_SettingQuery_write(nx_writer *w, nx_text arg_Id, nx_ScopedTarget arg_Target) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"id"); nx_QualifiedId_encode(w,arg_Id);nx_key(w,"target"); nx_ScopedTarget_encode(w,arg_Target);return nx_SettingQuery_read(nx_written(w,start)); }
@@ -4349,6 +4526,9 @@ static inline nx_StorageWrite nx_StorageWrite_write(nx_writer *w, nx_StorageName
 static inline nx_u32 nx_StorageWriteArray_count(nx_StorageWriteArray v) { return nx_count(v.value); }
 static inline nx_StorageWrite nx_StorageWriteArray_at(nx_StorageWriteArray v,nx_u32 i) { return nx_StorageWrite_read(nx_at(v.value,i)); }
 static inline nx_StorageWriteArray nx_StorageWriteArray_write(nx_writer *w,const nx_StorageWrite *items,nx_u32 count) { nx_u32 start=w->size; nx_require(count==0 || items); nx_array(w,count); for(nx_u32 i=0;i<count;i++) { nx_StorageWrite_encode(w,items[i]); } return nx_StorageWriteArray_read(nx_written(w,start)); }
+static inline nx_u64 nx_StoredPluginSetting_Version(nx_StoredPluginSetting value) { return nx_ulong_read(nx_field(value.value,"version")); }
+static inline nx_value nx_StoredPluginSetting_Value(nx_StoredPluginSetting value) { return nx_AbiValue_read(nx_field(value.value,"value")); }
+static inline nx_StoredPluginSetting nx_StoredPluginSetting_write(nx_writer *w, nx_u64 arg_Version, nx_value arg_Value) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"value"); nx_AbiValue_encode(w,arg_Value);nx_key(w,"version"); nx_ulong_encode(w,arg_Version);return nx_StoredPluginSetting_read(nx_written(w,start)); }
 static inline nx_AbiValueArray nx_SubscriptionBatch_Items(nx_SubscriptionBatch value) { return nx_AbiValueArray_read(nx_field(value.value,"items")); }
 static inline int nx_SubscriptionBatch_ResyncRequired(nx_SubscriptionBatch value) { return nx_bool_read(nx_field(value.value,"resyncRequired")); }
 static inline nx_SubscriptionBatch nx_SubscriptionBatch_write(nx_writer *w, nx_AbiValueArray arg_Items, int arg_ResyncRequired) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"items"); nx_AbiValueArray_encode(w,arg_Items);nx_key(w,"resyncRequired"); nx_bool_encode(w,arg_ResyncRequired);return nx_SubscriptionBatch_read(nx_written(w,start)); }
@@ -4507,6 +4687,9 @@ static inline nx_ValidationIssueArray nx_ValidationIssueArray_write(nx_writer *w
 static inline int nx_ValidationReport_Valid(nx_ValidationReport value) { return nx_bool_read(nx_field(value.value,"valid")); }
 static inline nx_ValidationIssueArray nx_ValidationReport_Issues(nx_ValidationReport value) { return nx_ValidationIssueArray_read(nx_field(value.value,"issues")); }
 static inline nx_ValidationReport nx_ValidationReport_write(nx_writer *w, int arg_Valid, nx_ValidationIssueArray arg_Issues) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"issues"); nx_ValidationIssueArray_encode(w,arg_Issues);nx_key(w,"valid"); nx_bool_encode(w,arg_Valid);return nx_ValidationReport_read(nx_written(w,start)); }
+static inline nx_SettingSchema nx_VersionedSettingSchema_Schema(nx_VersionedSettingSchema value) { return nx_SettingSchema_read(nx_field(value.value,"schema")); }
+static inline nx_u64 nx_VersionedSettingSchema_Version(nx_VersionedSettingSchema value) { return nx_ulong_read(nx_field(value.value,"version")); }
+static inline nx_VersionedSettingSchema nx_VersionedSettingSchema_write(nx_writer *w, nx_SettingSchema arg_Schema, nx_u64 arg_Version) { nx_u32 start=w->size; nx_map(w,2); nx_key(w,"schema"); nx_SettingSchema_encode(w,arg_Schema);nx_key(w,"version"); nx_ulong_encode(w,arg_Version);return nx_VersionedSettingSchema_read(nx_written(w,start)); }
 static inline nx_text nx_Wardrobe_Account(nx_Wardrobe value) { return nx_EntityId_read(nx_field(value.value,"account")); }
 static inline nx_UriRefOptional nx_Wardrobe_Skin(nx_Wardrobe value) { return nx_UriRefOptional_read(nx_field(value.value,"skin")); }
 static inline nx_CapeArray nx_Wardrobe_Capes(nx_Wardrobe value) { return nx_CapeArray_read(nx_field(value.value,"capes")); }
@@ -4580,6 +4763,10 @@ static inline nx_text nx_WorldRenameRequest_World(nx_WorldRenameRequest value) {
 static inline nx_text nx_WorldRenameRequest_Name(nx_WorldRenameRequest value) { return nx_string_read(nx_field(value.value,"name")); }
 static inline nx_text nx_WorldRenameRequest_ExpectedRevision(nx_WorldRenameRequest value) { return nx_Revision_read(nx_field(value.value,"expectedRevision")); }
 static inline nx_WorldRenameRequest nx_WorldRenameRequest_write(nx_writer *w, nx_text arg_World, nx_text arg_Name, nx_text arg_ExpectedRevision) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"expectedRevision"); nx_Revision_encode(w,arg_ExpectedRevision);nx_key(w,"name"); nx_string_encode(w,arg_Name);nx_key(w,"world"); nx_EntityId_encode(w,arg_World);return nx_WorldRenameRequest_read(nx_written(w,start)); }
+static inline nx_text nx_WorldRestoreDestination_World(nx_WorldRestoreDestination value) { return nx_EntityId_read(nx_field(value.value,"world")); }
+static inline nx_text nx_WorldRestoreDestination_Name(nx_WorldRestoreDestination value) { return nx_string_read(nx_field(value.value,"name")); }
+static inline nx_text nx_WorldRestoreDestination_ExpectedRevision(nx_WorldRestoreDestination value) { return nx_Revision_read(nx_field(value.value,"expectedRevision")); }
+static inline nx_WorldRestoreDestination nx_WorldRestoreDestination_write(nx_writer *w, nx_text arg_World, nx_text arg_Name, nx_text arg_ExpectedRevision) { nx_u32 start=w->size; nx_map(w,3); nx_key(w,"expectedRevision"); nx_Revision_encode(w,arg_ExpectedRevision);nx_key(w,"name"); nx_string_encode(w,arg_Name);nx_key(w,"world"); nx_EntityId_encode(w,arg_World);return nx_WorldRestoreDestination_read(nx_written(w,start)); }
 static inline nx_text nx_WorldSummary_Id(nx_WorldSummary value) { return nx_EntityId_read(nx_field(value.value,"id")); }
 static inline nx_text nx_WorldSummary_Instance(nx_WorldSummary value) { return nx_EntityId_read(nx_field(value.value,"instance")); }
 static inline nx_text nx_WorldSummary_Name(nx_WorldSummary value) { return nx_string_read(nx_field(value.value,"name")); }
@@ -4991,6 +5178,10 @@ static inline void nx_Minecraft_Content_Export(nx_writer *w,nx_ContentTransfer r
 static inline int nx_Minecraft_Content_Export_result(nx_value reply,nx_OperationRef *result) { nx_require(result!=0); *result=(nx_OperationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_OperationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Content_RegisterFormatProvider(nx_writer *w,nx_ProviderDescriptor request,const nx_call_options *options) { nx_ProviderDescriptor_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.content/100",21,request.value,options); }
 static inline int nx_Minecraft_Content_RegisterFormatProvider_result(nx_value reply,nx_RegistrationRef *result) { nx_require(result!=0); *result=(nx_RegistrationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RegistrationRef_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Minecraft_Content_PreviewClearTrash(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.content/100",22,request.value,options); }
+static inline int nx_Minecraft_Content_PreviewClearTrash_result(nx_value reply,nx_MutationPlan *result) { nx_require(result!=0); *result=(nx_MutationPlan){0}; if(!nx_reply_success(reply)) return 0; *result=nx_MutationPlan_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Minecraft_Content_InspectWithProvider(nx_writer *w,nx_ContentInspectionRequest request,const nx_call_options *options) { nx_ContentInspectionRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.content/100",23,request.value,options); }
+static inline int nx_Minecraft_Content_InspectWithProvider_result(nx_value reply,nx_ContentInspection *result) { nx_require(result!=0); *result=(nx_ContentInspection){0}; if(!nx_reply_success(reply)) return 0; *result=nx_ContentInspection_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Worlds_List(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.worlds/100",1,request.value,options); }
 static inline int nx_Minecraft_Worlds_List_result(nx_value reply,nx_Page_WorldSummary *result) { nx_require(result!=0); *result=(nx_Page_WorldSummary){0}; if(!nx_reply_success(reply)) return 0; *result=nx_Page_WorldSummary_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Worlds_Read(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.worlds/100",2,request.value,options); }
@@ -5017,6 +5208,12 @@ static inline void nx_Minecraft_Worlds_Restore(nx_writer *w,nx_PlanRequest reque
 static inline int nx_Minecraft_Worlds_Restore_result(nx_value reply,nx_OperationRef *result) { nx_require(result!=0); *result=(nx_OperationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_OperationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Worlds_ReadHealth(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.worlds/100",13,request.value,options); }
 static inline int nx_Minecraft_Worlds_ReadHealth_result(nx_value reply,nx_IntegrityReport *result) { nx_require(result!=0); *result=(nx_IntegrityReport){0}; if(!nx_reply_success(reply)) return 0; *result=nx_IntegrityReport_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Minecraft_Worlds_ListBackups(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.worlds/100",14,request.value,options); }
+static inline int nx_Minecraft_Worlds_ListBackups_result(nx_value reply,nx_Page_BackupSummary *result) { nx_require(result!=0); *result=(nx_Page_BackupSummary){0}; if(!nx_reply_success(reply)) return 0; *result=nx_Page_BackupSummary_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Minecraft_Worlds_PrepareRestoreDestination(nx_writer *w,nx_WorldRestoreDestination request,const nx_call_options *options) { nx_WorldRestoreDestination_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.worlds/100",15,request.value,options); }
+static inline int nx_Minecraft_Worlds_PrepareRestoreDestination_result(nx_value reply,nx_text *result) { nx_require(result!=0); *result=(nx_text){0}; if(!nx_reply_success(reply)) return 0; *result=nx_EntityId_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Minecraft_Worlds_Delete(nx_writer *w,nx_PlanRequest request,const nx_call_options *options) { nx_PlanRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.worlds/100",16,request.value,options); }
+static inline int nx_Minecraft_Worlds_Delete_result(nx_value reply,nx_OperationRef *result) { nx_require(result!=0); *result=(nx_OperationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_OperationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Servers_ListSaved(nx_writer *w,nx_Empty request,const nx_call_options *options) { nx_Empty_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.servers/100",1,request.value,options); }
 static inline int nx_Minecraft_Servers_ListSaved_result(nx_value reply,nx_ServerList *result) { nx_require(result!=0); *result=(nx_ServerList){0}; if(!nx_reply_success(reply)) return 0; *result=nx_ServerList_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Servers_SaveList(nx_writer *w,nx_ServerList request,const nx_call_options *options) { nx_ServerList_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.servers/100",2,request.value,options); }
@@ -5061,6 +5258,12 @@ static inline void nx_Catalog_RegisterCollection(nx_writer *w,nx_ResourceCollect
 static inline int nx_Catalog_RegisterCollection_result(nx_value reply,nx_RegistrationRef *result) { nx_require(result!=0); *result=(nx_RegistrationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RegistrationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Catalog_RegisterTranslationProvider(nx_writer *w,nx_ProviderDescriptor request,const nx_call_options *options) { nx_ProviderDescriptor_validate(request.value,0); nx_invoke_options(w,"nexa.catalog/100",17,request.value,options); }
 static inline int nx_Catalog_RegisterTranslationProvider_result(nx_value reply,nx_RegistrationRef *result) { nx_require(result!=0); *result=(nx_RegistrationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RegistrationRef_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Catalog_ReadTranslatedProject(nx_writer *w,nx_CatalogTranslationRequest request,const nx_call_options *options) { nx_CatalogTranslationRequest_validate(request.value,0); nx_invoke_options(w,"nexa.catalog/100",18,request.value,options); }
+static inline int nx_Catalog_ReadTranslatedProject_result(nx_value reply,nx_CatalogProject *result) { nx_require(result!=0); *result=(nx_CatalogProject){0}; if(!nx_reply_success(reply)) return 0; *result=nx_CatalogProject_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Catalog_ListCollections(nx_writer *w,nx_PageRequest request,const nx_call_options *options) { nx_PageRequest_validate(request.value,0); nx_invoke_options(w,"nexa.catalog/100",19,request.value,options); }
+static inline int nx_Catalog_ListCollections_result(nx_value reply,nx_Page_ResourceCollection *result) { nx_require(result!=0); *result=(nx_Page_ResourceCollection){0}; if(!nx_reply_success(reply)) return 0; *result=nx_Page_ResourceCollection_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Catalog_ReadCollection(nx_writer *w,nx_QualifiedRequest request,const nx_call_options *options) { nx_QualifiedRequest_validate(request.value,0); nx_invoke_options(w,"nexa.catalog/100",20,request.value,options); }
+static inline int nx_Catalog_ReadCollection_result(nx_value reply,nx_ResourceCollection *result) { nx_require(result!=0); *result=(nx_ResourceCollection){0}; if(!nx_reply_success(reply)) return 0; *result=nx_ResourceCollection_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Accounts_List(nx_writer *w,nx_PageRequest request,const nx_call_options *options) { nx_PageRequest_validate(request.value,0); nx_invoke_options(w,"nexa.accounts/100",1,request.value,options); }
 static inline int nx_Accounts_List_result(nx_value reply,nx_Page_AccountPublic *result) { nx_require(result!=0); *result=(nx_Page_AccountPublic){0}; if(!nx_reply_success(reply)) return 0; *result=nx_Page_AccountPublic_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Accounts_ReadPublic(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.accounts/100",2,request.value,options); }
@@ -5123,6 +5326,8 @@ static inline void nx_Settings_BeginTemporaryOverlay(nx_writer *w,nx_SettingsOve
 static inline int nx_Settings_BeginTemporaryOverlay_result(nx_value reply,nx_RegistrationRef *result) { nx_require(result!=0); *result=(nx_RegistrationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RegistrationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Settings_EndTemporaryOverlay(nx_writer *w,nx_RegistrationRequest request,const nx_call_options *options) { nx_RegistrationRequest_validate(request.value,0); nx_invoke_options(w,"nexa.settings/100",14,request.value,options); }
 static inline int nx_Settings_EndTemporaryOverlay_result(nx_value reply,nx_Empty *result) { nx_require(result!=0); *result=(nx_Empty){0}; if(!nx_reply_success(reply)) return 0; *result=nx_Empty_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Settings_RegisterVersionedSchema(nx_writer *w,nx_VersionedSettingSchema request,const nx_call_options *options) { nx_VersionedSettingSchema_validate(request.value,0); nx_invoke_options(w,"nexa.settings/100",15,request.value,options); }
+static inline int nx_Settings_RegisterVersionedSchema_result(nx_value reply,nx_RegistrationRef *result) { nx_require(result!=0); *result=(nx_RegistrationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RegistrationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Themes_List(nx_writer *w,nx_PageRequest request,const nx_call_options *options) { nx_PageRequest_validate(request.value,0); nx_invoke_options(w,"nexa.themes/100",1,request.value,options); }
 static inline int nx_Themes_List_result(nx_value reply,nx_Page_ThemeSummary *result) { nx_require(result!=0); *result=(nx_Page_ThemeSummary){0}; if(!nx_reply_success(reply)) return 0; *result=nx_Page_ThemeSummary_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Themes_Read(nx_writer *w,nx_EntityRequest request,const nx_call_options *options) { nx_EntityRequest_validate(request.value,0); nx_invoke_options(w,"nexa.themes/100",2,request.value,options); }
@@ -5181,6 +5386,10 @@ static inline void nx_Backups_ReadRetention(nx_writer *w,nx_EntityRequest reques
 static inline int nx_Backups_ReadRetention_result(nx_value reply,nx_RetentionPolicy *result) { nx_require(result!=0); *result=(nx_RetentionPolicy){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RetentionPolicy_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Backups_SetRetention(nx_writer *w,nx_BackupRetention request,const nx_call_options *options) { nx_BackupRetention_validate(request.value,0); nx_invoke_options(w,"nexa.backups/100",14,request.value,options); }
 static inline int nx_Backups_SetRetention_result(nx_value reply,nx_RetentionPolicy *result) { nx_require(result!=0); *result=(nx_RetentionPolicy){0}; if(!nx_reply_success(reply)) return 0; *result=nx_RetentionPolicy_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Backups_PrepareRestoreDestination(nx_writer *w,nx_FileRef request,const nx_call_options *options) { nx_FileRef_validate(request.value,0); nx_invoke_options(w,"nexa.backups/100",15,request.value,options); }
+static inline int nx_Backups_PrepareRestoreDestination_result(nx_value reply,nx_text *result) { nx_require(result!=0); *result=(nx_text){0}; if(!nx_reply_success(reply)) return 0; *result=nx_EntityId_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Backups_ImportInto(nx_writer *w,nx_BackupImportRequest request,const nx_call_options *options) { nx_BackupImportRequest_validate(request.value,0); nx_invoke_options(w,"nexa.backups/100",16,request.value,options); }
+static inline int nx_Backups_ImportInto_result(nx_value reply,nx_OperationRef *result) { nx_require(result!=0); *result=(nx_OperationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_OperationRef_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Downloads_Resolve(nx_writer *w,nx_DownloadPlan request,const nx_call_options *options) { nx_DownloadPlan_validate(request.value,0); nx_invoke_options(w,"nexa.downloads/100",1,request.value,options); }
 static inline int nx_Downloads_Resolve_result(nx_value reply,nx_DownloadPlan *result) { nx_require(result!=0); *result=(nx_DownloadPlan){0}; if(!nx_reply_success(reply)) return 0; *result=nx_DownloadPlan_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Downloads_Start(nx_writer *w,nx_DownloadPlan request,const nx_call_options *options) { nx_DownloadPlan_validate(request.value,0); nx_invoke_options(w,"nexa.downloads/100",2,request.value,options); }
@@ -5303,6 +5512,8 @@ static inline void nx_Minecraft_Diagnostics_PreviewRepair(nx_writer *w,nx_Repair
 static inline int nx_Minecraft_Diagnostics_PreviewRepair_result(nx_value reply,nx_MutationPlan *result) { nx_require(result!=0); *result=(nx_MutationPlan){0}; if(!nx_reply_success(reply)) return 0; *result=nx_MutationPlan_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Minecraft_Diagnostics_ExecuteRepair(nx_writer *w,nx_PlanRequest request,const nx_call_options *options) { nx_PlanRequest_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.diagnostics/100",4,request.value,options); }
 static inline int nx_Minecraft_Diagnostics_ExecuteRepair_result(nx_value reply,nx_OperationRef *result) { nx_require(result!=0); *result=(nx_OperationRef){0}; if(!nx_reply_success(reply)) return 0; *result=nx_OperationRef_read(nx_field(reply,"value")); return 1; }
+static inline void nx_Minecraft_Diagnostics_AnalyzeWithProvider(nx_writer *w,nx_ProviderInstanceQuery request,const nx_call_options *options) { nx_ProviderInstanceQuery_validate(request.value,0); nx_invoke_options(w,"nexa.minecraft.diagnostics/100",5,request.value,options); }
+static inline int nx_Minecraft_Diagnostics_AnalyzeWithProvider_result(nx_value reply,nx_DiagnosticAnalysis *result) { nx_require(result!=0); *result=(nx_DiagnosticAnalysis){0}; if(!nx_reply_success(reply)) return 0; *result=nx_DiagnosticAnalysis_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Legacy_Events_DeclareEvent(nx_writer *w,nx_LegacyEventDeclaration request,const nx_call_options *options) { nx_LegacyEventDeclaration_validate(request.value,0); nx_invoke_options(w,"nexa.events/100",1,request.value,options); }
 static inline int nx_Legacy_Events_DeclareEvent_result(nx_value reply,nx_value *result) { nx_require(result!=0); *result=(nx_value){0}; if(!nx_reply_success(reply)) return 0; *result=nx_AbiValue_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Legacy_Events_Subscribe(nx_writer *w,nx_LegacyEventSubscription request,const nx_call_options *options) { nx_LegacyEventSubscription_validate(request.value,0); nx_invoke_options(w,"nexa.events/100",2,request.value,options); }
@@ -5347,11 +5558,13 @@ static inline void nx_Legacy_Diagnostics_QueryBindingStatus(nx_writer *w,nx_Empt
 static inline int nx_Legacy_Diagnostics_QueryBindingStatus_result(nx_value reply,nx_value *result) { nx_require(result!=0); *result=(nx_value){0}; if(!nx_reply_success(reply)) return 0; *result=nx_AbiValue_read(nx_field(reply,"value")); return 1; }
 static inline void nx_Legacy_Resources_RegisterCleanup(nx_writer *w,nx_LegacyCleanup request,const nx_call_options *options) { nx_LegacyCleanup_validate(request.value,0); nx_invoke_options(w,"nexa.resources/100",1,request.value,options); }
 static inline int nx_Legacy_Resources_RegisterCleanup_result(nx_value reply,nx_value *result) { nx_require(result!=0); *result=(nx_value){0}; if(!nx_reply_success(reply)) return 0; *result=nx_AbiValue_read(nx_field(reply,"value")); return 1; }
+static inline nx_SchemaRef nx_schema_AccountProviderConfiguration(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/accountproviderconfiguration"),1,nx_literal("0aae5261d09427ae4a2a75d1793a127a5d4d404878c52875fdfc3fdfb1599f22")); }
 static inline nx_SchemaRef nx_schema_AccountPublic(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/accountpublic"),1,nx_literal("f8c542528c8f191ca3897a8174bc76d5b3b23209bd90e85c3bf8a804da09fe07")); }
 static inline nx_SchemaRef nx_schema_ActionDescriptor(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/actiondescriptor"),1,nx_literal("0d2d40ab3e7c440532d6fc5e7c9688caa10380b60d4f81bf672fe62aa8f72ce1")); }
 static inline nx_SchemaRef nx_schema_ActionRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/actionrequest"),1,nx_literal("930c661c6f6a5ec57619fc058b09300c134516db4b8114eee2977377b322cdd0")); }
 static inline nx_SchemaRef nx_schema_ArchitectureInfo(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/architectureinfo"),1,nx_literal("c198d0df30bee3342838bdcc724098b96ea0d5d2e1be45b3fed295eb8b736353")); }
 static inline nx_SchemaRef nx_schema_BackupCapture(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/backupcapture"),1,nx_literal("3bd94e283a71198775c41e6464d50f96261ed865e6a9b6947c3b7e6013fb2b9e")); }
+static inline nx_SchemaRef nx_schema_BackupImportRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/backupimportrequest"),1,nx_literal("3f110185ab2b3e9638f49c1a5bc63a9da1811c31f0610c08733422ff4ecf778b")); }
 static inline nx_SchemaRef nx_schema_BackupPrune(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/backupprune"),1,nx_literal("88d9d4c59767bbb64cfc7b592d48182d6f672c98a7d06c17a6571ae760ac2192")); }
 static inline nx_SchemaRef nx_schema_BackupRestore(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/backuprestore"),1,nx_literal("99bd8f372b97424c2fa02a0762fb0d19898db6224f2f8c6119c524bcbd2979a7")); }
 static inline nx_SchemaRef nx_schema_BackupRetention(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/backupretention"),1,nx_literal("0dddf1c45d76b29259f6603412222ebb3ee90d776dc505ce68d7e620f69deb4a")); }
@@ -5369,6 +5582,9 @@ static inline nx_SchemaRef nx_schema_CatalogFile(nx_writer *w) { return nx_Schem
 static inline nx_SchemaRef nx_schema_CatalogInstallRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/cataloginstallrequest"),1,nx_literal("880a877233abdca1816723bde84e71b1ac030fe17913ec24904a5f74c364534a")); }
 static inline nx_SchemaRef nx_schema_CatalogProject(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogproject"),1,nx_literal("6fd72224c2905944449b066f2a910e9378e7882ad13834b89425890309160a63")); }
 static inline nx_SchemaRef nx_schema_CatalogSearch(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogsearch"),1,nx_literal("9dbdf6546b54310b34c973211267a2bc7e21c7a2f4681ce51289a4b2fba4d532")); }
+static inline nx_SchemaRef nx_schema_CatalogTranslation(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogtranslation"),1,nx_literal("0dafc8bdbd9dca21ef87fbcdb9d2b046230133bac4658dab8fee659ff30bb2ef")); }
+static inline nx_SchemaRef nx_schema_CatalogTranslationInput(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogtranslationinput"),1,nx_literal("d6b7d84db3585a396327c18b7c5689a715fd4a4ccfe5569ff214059bf2dabec6")); }
+static inline nx_SchemaRef nx_schema_CatalogTranslationRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogtranslationrequest"),1,nx_literal("ff50f45b07146185abb624d3e3869d78b83292f498d4d75c70d44754f0225ab4")); }
 static inline nx_SchemaRef nx_schema_CatalogVersion(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogversion"),1,nx_literal("804475680f3d898f26e9c9eb235f9f440e07abaefb92554f1a8fa1779884c557")); }
 static inline nx_SchemaRef nx_schema_CatalogVersionQuery(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/catalogversionquery"),1,nx_literal("3fa9f017d1c08f0727bb5f312822407170c1f4bdb3cb00cd81a9a3541976566e")); }
 static inline nx_SchemaRef nx_schema_CleanupRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/cleanuprequest"),1,nx_literal("adf45def79bd712c26fd15422bd089942b3f3bfb861548622ad87748f1749faf")); }
@@ -5378,6 +5594,9 @@ static inline nx_SchemaRef nx_schema_ConsumerDefinition(nx_writer *w) { return n
 static inline nx_SchemaRef nx_schema_ContentChangeRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentchangerequest"),1,nx_literal("62b87e3c35407fa55feb01469926293f2e19967e7764cfd68bb185998672d8ea")); }
 static inline nx_SchemaRef nx_schema_ContentDependency(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentdependency"),1,nx_literal("fd30c115e51c8cdea5b86c0728646fc4f1ceb822dee1c2e84052dff3e5baf29c")); }
 static inline nx_SchemaRef nx_schema_ContentDependencyGraph(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentdependencygraph"),1,nx_literal("0027b980ab62c154048a39a34bc89988eed004dc628d86d1b43147597d082345")); }
+static inline nx_SchemaRef nx_schema_ContentInspection(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentinspection"),1,nx_literal("cce6f74e7ee6ae38efb657af4b1a9ade84d03e27df9b1260a45e93773b9a83ed")); }
+static inline nx_SchemaRef nx_schema_ContentInspectionInput(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentinspectioninput"),1,nx_literal("280fe79cd4b170bc4fae1e955becb5ebe0e5fef11afab66eca42c453024bfaf5")); }
+static inline nx_SchemaRef nx_schema_ContentInspectionRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentinspectionrequest"),1,nx_literal("ae666210ba0fc955c7a0bba207820aad352323956c4ee89f1213a278e5776827")); }
 static inline nx_SchemaRef nx_schema_ContentItem(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentitem"),1,nx_literal("841b0fe21c7e848d55722a1f64326f22458abd7f2108f319a7a508f21f0eedf3")); }
 static inline nx_SchemaRef nx_schema_ContentPlan(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentplan"),1,nx_literal("df28799224e40701ff4f1f45f0be6763ffd674aa3239a8bf2980e97e50d2af36")); }
 static inline nx_SchemaRef nx_schema_ContentQuery(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/contentquery"),1,nx_literal("f8e1577a0836d550f1f646fca5e5420168afe3243dd99ff0df2cb75cec0b3d82")); }
@@ -5397,6 +5616,8 @@ static inline nx_SchemaRef nx_schema_DiagnosticAnalysis(nx_writer *w) { return n
 static inline nx_SchemaRef nx_schema_DiagnosticReport(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/diagnosticreport"),1,nx_literal("e50b76d4160710627ef03d51adee278832e515ffbf8aa5ea774d03e200bd80bb")); }
 static inline nx_SchemaRef nx_schema_DiagnosticSpan(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/diagnosticspan"),1,nx_literal("cecdcfb0a85b746df5bada7b6fdaec1f07de5a37dcb0cb59c39779140a831aed")); }
 static inline nx_SchemaRef nx_schema_DisplayInfo(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/displayinfo"),1,nx_literal("5000c9e621d87742e057d1454460bc5aa49744f476ada0dc3cfe2479c95b3ed4")); }
+static inline nx_SchemaRef nx_schema_DownloadChunk(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/downloadchunk"),1,nx_literal("76e79a6e1a3265e6f33f73d2055125c94f6bb90ee82b250ded8287120d64435f")); }
+static inline nx_SchemaRef nx_schema_DownloadChunkRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/downloadchunkrequest"),1,nx_literal("f165de80f2f0233cdf078551b4babeea7554b1a79c72a6e58018697b2a929257")); }
 static inline nx_SchemaRef nx_schema_DownloadPlan(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/downloadplan"),1,nx_literal("3f0b6302fedbc1adc08fed126ee0aca80166ee7e1fff99f52869b561d3c28b4f")); }
 static inline nx_SchemaRef nx_schema_DownloadSource(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/downloadsource"),1,nx_literal("9f72c7303d5e3fab9d5f1ceefe7245edcb6870f4c5075d652abac8fd74f9331f")); }
 static inline nx_SchemaRef nx_schema_DownloadState(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/downloadstate"),1,nx_literal("4f4244d91a4e0cadf0a7a9d521fbba81241656097780e92da4e2e13e7bc15d55")); }
@@ -5430,6 +5651,7 @@ static inline nx_SchemaRef nx_schema_InstallDraftUpdate(nx_writer *w) { return n
 static inline nx_SchemaRef nx_schema_InstallPlan(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/installplan"),1,nx_literal("f6c99ad538e1cff014dc31f1fa9736811c504167700e16c1623ec02207a77856")); }
 static inline nx_SchemaRef nx_schema_InstallStep(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/installstep"),1,nx_literal("f705177773610246486210117326b3bbf50ae4c737719a207347ec8335d57b1e")); }
 static inline nx_SchemaRef nx_schema_InstallTemplate(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/installtemplate"),1,nx_literal("b260f80f2b4eee006a6dacbcbba3c2b810cf9e3963fa08e0063648cfc1fd65c9")); }
+static inline nx_SchemaRef nx_schema_InstallTemplateInvocation(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/installtemplateinvocation"),1,nx_literal("835615a0b3660425c1eda6da2b52fbd62376042c0b66e91ca145ed384ac34c61")); }
 static inline nx_SchemaRef nx_schema_InstallerInspection(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/installerinspection"),1,nx_literal("fe8a40c4e1d8807b355ea81c6d5ec116f416f44d565728d6b5baddaafc523bdd")); }
 static inline nx_SchemaRef nx_schema_InstanceCloneRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/instanceclonerequest"),1,nx_literal("3282cf65d5a11722b9145d82e2740db5bd12ac35c50bb5b947532b05c8842b22")); }
 static inline nx_SchemaRef nx_schema_InstanceCreateRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/instancecreaterequest"),1,nx_literal("818f857f2ccc4fcadb73f1783e549dcc5f3c071fefaf1fcbf5535186bb8a1a2d")); }
@@ -5508,6 +5730,7 @@ static inline nx_SchemaRef nx_schema_PageOfPublicContract(nx_writer *w) { return
 static inline nx_SchemaRef nx_schema_PageOfRecoveryRecord(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofrecoveryrecord"),1,nx_literal("67903e684116ca6224e250c1eb053bf07d2d1e2f972bf65d58b67f1a57e371ec")); }
 static inline nx_SchemaRef nx_schema_PageOfRegistrationRef(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofregistrationref"),1,nx_literal("78952dfd1be36481031a50fbf910917b02c05fafa91d0cd23adc7712bfe3131c")); }
 static inline nx_SchemaRef nx_schema_PageOfRegistryDescriptor(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofregistrydescriptor"),1,nx_literal("0f19143ed791906ab1fc81aa0f994c7127ef1d05c2146df397b4ea920c45686e")); }
+static inline nx_SchemaRef nx_schema_PageOfResourceCollection(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofresourcecollection"),1,nx_literal("e4204d408be7b0273d21aee8635515fc02de49a2ba40135ba5bfce8c28e556a0")); }
 static inline nx_SchemaRef nx_schema_PageOfRootRegistration(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofrootregistration"),1,nx_literal("4807102ab2a8e3cf340434cbea4c49053ed35c322392f7221262123fb638ead6")); }
 static inline nx_SchemaRef nx_schema_PageOfScheduleState(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofschedulestate"),1,nx_literal("7d41ffc578b1855711ec1ffdcab801c4a760653329825b36b0582e279d84e6db")); }
 static inline nx_SchemaRef nx_schema_PageOfSettingsProfile(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/pageofsettingsprofile"),1,nx_literal("db753499e0b5adfba86792b9b31176bffa73ab4b8c4dfc811b5ca56940e06e1a")); }
@@ -5524,6 +5747,7 @@ static inline nx_SchemaRef nx_schema_PredicateDefinition(nx_writer *w) { return 
 static inline nx_SchemaRef nx_schema_PredicateRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/predicaterequest"),1,nx_literal("b05ffd8d3ac09a1764b6f1eb547e54d557a7ae1abed304e861c5c2451ac80d4f")); }
 static inline nx_SchemaRef nx_schema_PredicateResult(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/predicateresult"),1,nx_literal("8247659a27d8f2f9cede472baf95beb83af74ead71697d83abd547d2a6d5ef76")); }
 static inline nx_SchemaRef nx_schema_ProviderDescriptor(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/providerdescriptor"),1,nx_literal("fba1846ea23567eeeb2c327ffd97d64a73bf7ec09a26a9af833892e2643f6c9c")); }
+static inline nx_SchemaRef nx_schema_ProviderInstanceQuery(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/providerinstancequery"),1,nx_literal("293f5ebe18b2de8b4e9ea51dc59f4cc81627869a6799a51ba30ec8c56c22b961")); }
 static inline nx_SchemaRef nx_schema_ProviderKindDefinition(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/providerkinddefinition"),1,nx_literal("2f927c6bf4aabd0d2e6aee80607cd4d01a7950ff1899748bd282f8d81e5e4534")); }
 static inline nx_SchemaRef nx_schema_PublicContract(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/publiccontract"),1,nx_literal("a45e49022711065a5ab42cd9dbf7724f265d49e368fc24f1595354323d6bcbb9")); }
 static inline nx_SchemaRef nx_schema_QualifiedRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/qualifiedrequest"),1,nx_literal("8bd9ee4a8435ff021e669bb574bc90c3395f1c751c6207265da30f8060be7299")); }
@@ -5559,6 +5783,7 @@ static inline nx_SchemaRef nx_schema_ServiceProbe(nx_writer *w) { return nx_Sche
 static inline nx_SchemaRef nx_schema_SessionMetrics(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/sessionmetrics"),1,nx_literal("1844d33c8cc896564dd474e83b9d0576b10eaf71e6e993c85a7b8ef7f8eaf454")); }
 static inline nx_SchemaRef nx_schema_SettingChange(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/settingchange"),1,nx_literal("fac04b31a1265df95b1b013703194a7083ae9b5660c37a1d2c2fd24a2ae20bf1")); }
 static inline nx_SchemaRef nx_schema_SettingMigration(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/settingmigration"),1,nx_literal("40fd441c92d1a805b0d4d68760fe05a57912b04bf2b217816a9fe11894a1bb03")); }
+static inline nx_SchemaRef nx_schema_SettingMigrationInput(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/settingmigrationinput"),1,nx_literal("002fe06e93ec10bc5dd8c4d4ef9085aecbbb5f975ca62ec347b1d8a18d66c282")); }
 static inline nx_SchemaRef nx_schema_SettingQuery(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/settingquery"),1,nx_literal("9c6fdcf24cb4a6006e92ea315c1635f56f77df48fa3c38fdb7c666205c961772")); }
 static inline nx_SchemaRef nx_schema_SettingSchema(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/settingschema"),1,nx_literal("40a680c26fae61d3bab4998f2ec20a1ffa7aa091dfc492d50b2a018776577821")); }
 static inline nx_SchemaRef nx_schema_SettingsOverlay(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/settingsoverlay"),1,nx_literal("1f464567510100c9a8a1bef16d1357014f533894ebe401cfea2a3f264b596fd3")); }
@@ -5584,6 +5809,7 @@ static inline nx_SchemaRef nx_schema_StorageQuery(nx_writer *w) { return nx_Sche
 static inline nx_SchemaRef nx_schema_StorageTransaction(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/storagetransaction"),1,nx_literal("db554d8c5938e1534f1cf13638ded1cb756f62af925b26f0878bfdb4120b74b0")); }
 static inline nx_SchemaRef nx_schema_StorageValue(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/storagevalue"),1,nx_literal("36dc329ec8bf50eb148c650ebb74062d4aa447860dda09f4842453573e181249")); }
 static inline nx_SchemaRef nx_schema_StorageWrite(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/storagewrite"),1,nx_literal("ec43cc0015783374a4b77d81324f0cd8df58a3ea15d3e38e0699cf2e726bc7f5")); }
+static inline nx_SchemaRef nx_schema_StoredPluginSetting(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/storedpluginsetting"),1,nx_literal("087fa3d3d52cca65dc9331fa3c9a48c4c79b0555a6ce98dd02977e2d88f5b93c")); }
 static inline nx_SchemaRef nx_schema_SubscriptionBatch(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/subscriptionbatch"),1,nx_literal("dad7176a95c7e2b80e79dd9db582b8d1ce7eed4c77e37a297f1ba739caed3513")); }
 static inline nx_SchemaRef nx_schema_SubscriptionRead(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/subscriptionread"),1,nx_literal("2612bfb615b0faf1a440f8e316f37c1f9547177b7f4a6a6a8f91b09e957bf453")); }
 static inline nx_SchemaRef nx_schema_SubscriptionRef(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/subscriptionref"),1,nx_literal("9dd19e4a7a181f5e1f9b424666fcc8d62a768784b08efa40dcacdb4ccae5e22b")); }
@@ -5616,6 +5842,7 @@ static inline nx_SchemaRef nx_schema_UIViewReplacement(nx_writer *w) { return nx
 static inline nx_SchemaRef nx_schema_UIViewWatch(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/uiviewwatch"),1,nx_literal("9bb5b7de88db2c1b1e1b1e18d0c29a943d2ae09f0b213c4686a0caea368ddff6")); }
 static inline nx_SchemaRef nx_schema_ValidationIssue(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/validationissue"),1,nx_literal("553e031af0affda27493ca5c1422f5798eda3197714276f96a78a6bf0fddf399")); }
 static inline nx_SchemaRef nx_schema_ValidationReport(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/validationreport"),1,nx_literal("f908ee6084464d6cf284c8d77eac632c194169474858833d8310d70e074f0729")); }
+static inline nx_SchemaRef nx_schema_VersionedSettingSchema(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/versionedsettingschema"),1,nx_literal("5f90ff2f08a5e949c82279a64bd27d55f6b53bda41bdcc0efd0a1d8155e0bfa0")); }
 static inline nx_SchemaRef nx_schema_Wardrobe(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/wardrobe"),1,nx_literal("98143add849a78c4ddbb18c9e65121c419ff6566060a9a10cc457067e908b8d4")); }
 static inline nx_SchemaRef nx_schema_WatchRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/watchrequest"),1,nx_literal("db4672f1b89cad524f4a5f22feb78185d214e0db21a273290ae742e53627bcce")); }
 static inline nx_SchemaRef nx_schema_WorkflowDefinition(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/workflowdefinition"),1,nx_literal("db74647dc2273c9041a9c390208310e149881f4705ca1ffe2f36ea8f3304ee17")); }
@@ -5628,6 +5855,7 @@ static inline nx_SchemaRef nx_schema_WorkflowTrace(nx_writer *w) { return nx_Sch
 static inline nx_SchemaRef nx_schema_WorldCopyRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/worldcopyrequest"),1,nx_literal("2660b1673aae0aad7ed7474fe45864a1bfcb1279044fb5fe3f656cab3f004c4d")); }
 static inline nx_SchemaRef nx_schema_WorldMetadata(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/worldmetadata"),1,nx_literal("097b3389749051fe3141538bec76abae3a0c030152005e64d9f02bcf73fcf3dd")); }
 static inline nx_SchemaRef nx_schema_WorldRenameRequest(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/worldrenamerequest"),1,nx_literal("a4f7fe7625f89ae173964ce0a0503324aa7b5c8f043f9bd9c6f19a150eaf0427")); }
+static inline nx_SchemaRef nx_schema_WorldRestoreDestination(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/worldrestoredestination"),1,nx_literal("704cbf26fa911fd8b7f46e54667e0e84743ff4020c1e66bd70ebf6455f6834d4")); }
 static inline nx_SchemaRef nx_schema_WorldSummary(nx_writer *w) { return nx_SchemaRef_write(w,nx_literal("nexa:abi100/worldsummary"),1,nx_literal("6f9b03937403adb8e3b5175f81d396b4701981d560c9196fd0ec074cb399edbb")); }
 typedef struct { const char *group, *name, *contract, *input, *output, *kind, *permission, *idempotency, *host_binding; nx_u32 method, phase_count; const char *phases[8]; } nx_operation_descriptor;
 static const nx_operation_descriptor nx_operation_catalog[] = {
@@ -5821,6 +6049,8 @@ static const nx_operation_descriptor nx_operation_catalog[] = {
     {"Minecraft.Content", "Import", "nexa.minecraft.content/100", "ContentTransfer", "OperationRef", "Operation", "nexa.minecraft.content.write", "RequiredKey", "HostDefined", 19, 1, {"Active"}},
     {"Minecraft.Content", "Export", "nexa.minecraft.content/100", "ContentTransfer", "OperationRef", "Operation", "nexa.minecraft.content.write", "RequiredKey", "HostDefined", 20, 1, {"Active"}},
     {"Minecraft.Content", "RegisterFormatProvider", "nexa.minecraft.content/100", "ProviderDescriptor", "RegistrationRef", "Registration", "nexa.minecraft.content.write", "RequiredKey", "HostDefined", 21, 1, {"Initialize"}},
+    {"Minecraft.Content", "PreviewClearTrash", "nexa.minecraft.content/100", "EntityRequest", "MutationPlan", "Query", "nexa.minecraft.content.read", "ReadOnly", "HostDefined", 22, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Minecraft.Content", "InspectWithProvider", "nexa.minecraft.content/100", "ContentInspectionRequest", "ContentInspection", "Query", "nexa.minecraft.content.read", "ReadOnly", "HostDefined", 23, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Minecraft.Worlds", "List", "nexa.minecraft.worlds/100", "EntityRequest", "Page<WorldSummary>", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 1, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Minecraft.Worlds", "Read", "nexa.minecraft.worlds/100", "EntityRequest", "WorldSummary", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 2, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Minecraft.Worlds", "ReadMetadata", "nexa.minecraft.worlds/100", "EntityRequest", "WorldMetadata", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 3, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
@@ -5834,6 +6064,9 @@ static const nx_operation_descriptor nx_operation_catalog[] = {
     {"Minecraft.Worlds", "PreviewRestore", "nexa.minecraft.worlds/100", "BackupRestore", "MutationPlan", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 11, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Minecraft.Worlds", "Restore", "nexa.minecraft.worlds/100", "PlanRequest", "OperationRef", "Operation", "nexa.minecraft.worlds.write", "RequiredKey", "HostDefined", 12, 1, {"Active"}},
     {"Minecraft.Worlds", "ReadHealth", "nexa.minecraft.worlds/100", "EntityRequest", "IntegrityReport", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 13, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Minecraft.Worlds", "ListBackups", "nexa.minecraft.worlds/100", "EntityRequest", "Page<BackupSummary>", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 14, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Minecraft.Worlds", "PrepareRestoreDestination", "nexa.minecraft.worlds/100", "WorldRestoreDestination", "EntityId", "Query", "nexa.minecraft.worlds.read", "ReadOnly", "HostDefined", 15, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Minecraft.Worlds", "Delete", "nexa.minecraft.worlds/100", "PlanRequest", "OperationRef", "Operation", "nexa.minecraft.worlds.write", "RequiredKey", "HostDefined", 16, 1, {"Active"}},
     {"Minecraft.Servers", "ListSaved", "nexa.minecraft.servers/100", "Empty", "ServerList", "Query", "nexa.minecraft.servers.read", "ReadOnly", "HostDefined", 1, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Minecraft.Servers", "SaveList", "nexa.minecraft.servers/100", "ServerList", "ServerList", "Mutation", "nexa.minecraft.servers.write", "RequiredKey", "HostDefined", 2, 1, {"Active"}},
     {"Minecraft.Servers", "ReadStatus", "nexa.minecraft.servers/100", "EntityRequest", "ServerStatus", "Query", "nexa.minecraft.servers.read", "ReadOnly", "HostDefined", 3, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
@@ -5856,6 +6089,9 @@ static const nx_operation_descriptor nx_operation_catalog[] = {
     {"Catalog", "ExecutePlan", "nexa.catalog/100", "PlanRequest", "OperationRef", "Operation", "nexa.catalog.write", "RequiredKey", "HostDefined", 15, 1, {"Active"}},
     {"Catalog", "RegisterCollection", "nexa.catalog/100", "ResourceCollection", "RegistrationRef", "Registration", "nexa.catalog.write", "RequiredKey", "HostDefined", 16, 1, {"Initialize"}},
     {"Catalog", "RegisterTranslationProvider", "nexa.catalog/100", "ProviderDescriptor", "RegistrationRef", "Registration", "nexa.catalog.write", "RequiredKey", "HostDefined", 17, 1, {"Initialize"}},
+    {"Catalog", "ReadTranslatedProject", "nexa.catalog/100", "CatalogTranslationRequest", "CatalogProject", "Query", "nexa.catalog.read", "ReadOnly", "HostDefined", 18, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Catalog", "ListCollections", "nexa.catalog/100", "PageRequest", "Page<ResourceCollection>", "Query", "nexa.catalog.read", "ReadOnly", "HostDefined", 19, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Catalog", "ReadCollection", "nexa.catalog/100", "QualifiedRequest", "ResourceCollection", "Query", "nexa.catalog.read", "ReadOnly", "HostDefined", 20, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Accounts", "List", "nexa.accounts/100", "PageRequest", "Page<AccountPublic>", "Query", "nexa.accounts.read", "ReadOnly", "HostDefined", 1, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Accounts", "ReadPublic", "nexa.accounts/100", "EntityRequest", "AccountPublic", "Query", "nexa.accounts.read", "ReadOnly", "HostDefined", 2, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Accounts", "Watch", "nexa.accounts/100", "WatchRequest", "SubscriptionRef", "Subscription", "nexa.accounts.read", "ReadOnly", "HostDefined", 3, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
@@ -5887,6 +6123,7 @@ static const nx_operation_descriptor nx_operation_catalog[] = {
     {"Settings", "SelectProfile", "nexa.settings/100", "EntityRequest", "SettingsProfile", "Mutation", "nexa.settings.write", "RequiredKey", "HostDefined", 12, 1, {"Active"}},
     {"Settings", "BeginTemporaryOverlay", "nexa.settings/100", "SettingsOverlay", "RegistrationRef", "Mutation", "nexa.settings.write", "RequiredKey", "HostDefined", 13, 1, {"Active"}},
     {"Settings", "EndTemporaryOverlay", "nexa.settings/100", "RegistrationRequest", "Empty", "Mutation", "nexa.settings.write", "RequiredKey", "HostDefined", 14, 1, {"Active"}},
+    {"Settings", "RegisterVersionedSchema", "nexa.settings/100", "VersionedSettingSchema", "RegistrationRef", "Registration", "nexa.settings.write", "RequiredKey", "HostDefined", 15, 1, {"Initialize"}},
     {"Themes", "List", "nexa.themes/100", "PageRequest", "Page<ThemeSummary>", "Query", "nexa.themes.read", "ReadOnly", "HostDefined", 1, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Themes", "Read", "nexa.themes/100", "EntityRequest", "ThemeSummary", "Query", "nexa.themes.read", "ReadOnly", "HostDefined", 2, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Themes", "Prepare", "nexa.themes/100", "EntityRequest", "ThemePreparation", "Query", "nexa.themes.read", "ReadOnly", "HostDefined", 3, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
@@ -5916,6 +6153,8 @@ static const nx_operation_descriptor nx_operation_catalog[] = {
     {"Backups", "Prune", "nexa.backups/100", "PlanRequest", "OperationRef", "Operation", "nexa.backups.write", "RequiredKey", "HostDefined", 12, 1, {"Active"}},
     {"Backups", "ReadRetention", "nexa.backups/100", "EntityRequest", "RetentionPolicy", "Query", "nexa.backups.read", "ReadOnly", "HostDefined", 13, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Backups", "SetRetention", "nexa.backups/100", "BackupRetention", "RetentionPolicy", "Mutation", "nexa.backups.write", "RequiredKey", "HostDefined", 14, 1, {"Active"}},
+    {"Backups", "PrepareRestoreDestination", "nexa.backups/100", "FileRef", "EntityId", "Query", "nexa.backups.read", "ReadOnly", "HostDefined", 15, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
+    {"Backups", "ImportInto", "nexa.backups/100", "BackupImportRequest", "OperationRef", "Operation", "nexa.backups.write", "RequiredKey", "HostDefined", 16, 1, {"Active"}},
     {"Downloads", "Resolve", "nexa.downloads/100", "DownloadPlan", "DownloadPlan", "Query", "nexa.downloads.read", "ReadOnly", "HostDefined", 1, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Downloads", "Start", "nexa.downloads/100", "DownloadPlan", "OperationRef", "Operation", "nexa.downloads.write", "RequiredKey", "HostDefined", 2, 1, {"Active"}},
     {"Downloads", "Read", "nexa.downloads/100", "EntityRequest", "DownloadState", "Query", "nexa.downloads.read", "ReadOnly", "HostDefined", 3, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
@@ -5977,6 +6216,7 @@ static const nx_operation_descriptor nx_operation_catalog[] = {
     {"Minecraft.Diagnostics", "RegisterRuleProvider", "nexa.minecraft.diagnostics/100", "ProviderDescriptor", "RegistrationRef", "Registration", "nexa.minecraft.diagnostics.write", "RequiredKey", "HostDefined", 2, 1, {"Initialize"}},
     {"Minecraft.Diagnostics", "PreviewRepair", "nexa.minecraft.diagnostics/100", "RepairRequest", "MutationPlan", "Query", "nexa.minecraft.diagnostics.read", "ReadOnly", "HostDefined", 3, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Minecraft.Diagnostics", "ExecuteRepair", "nexa.minecraft.diagnostics/100", "PlanRequest", "OperationRef", "Operation", "nexa.minecraft.diagnostics.write", "RequiredKey", "HostDefined", 4, 1, {"Active"}},
+    {"Minecraft.Diagnostics", "AnalyzeWithProvider", "nexa.minecraft.diagnostics/100", "ProviderInstanceQuery", "DiagnosticAnalysis", "Query", "nexa.minecraft.diagnostics.read", "ReadOnly", "HostDefined", 5, 5, {"Initialize", "PostInitialize", "Checkup", "Finalize", "Active"}},
     {"Legacy.Events", "DeclareEvent", "nexa.events/100", "LegacyEventDeclaration", "AbiValue", "Legacy", "", "Unspecified", "HostDefined", 1, 0, {0}},
     {"Legacy.Events", "Subscribe", "nexa.events/100", "LegacyEventSubscription", "AbiValue", "Legacy", "", "Unspecified", "HostDefined", 2, 0, {0}},
     {"Legacy.Events", "Publish", "nexa.events/100", "LegacyEventPublish", "AbiValue", "Legacy", "", "Unspecified", "HostDefined", 4, 0, {0}},

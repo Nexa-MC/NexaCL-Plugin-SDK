@@ -119,6 +119,7 @@ def generate(spec, schema_fingerprints):
     test += ['default: __builtin_trap(); } return nx_result(w); } nx_call_options options={"12345678-1234-1234-1234-123456789abc","conformance","revision",0,1000}; switch(operation) {']
     for i,fn,inp,result in dispatch: test.append(f'case {i}: {fn}(w,{read(inp,"args")},&options); break;')
     test+=['default: __builtin_trap(); } waiting=1; } else { waiting=0; switch(operation) {']
-    for i,fn,inp,result in dispatch:test.append(f'case {i}: {{ {ctype(result)} result; if({fn}_result(value,&result)) nx_complete_value(w,{"result" if result=="AbiValue" else "result.value"}); else nx_complete_value(w,nx_reply_error(value)); break; }}')
+    for i,fn,inp,result in dispatch:
+        test.append(f'case {i}: {{ {ctype(result)} result; if({fn}_result(value,&result)) {{ nx_writer constructed={{scratch,0,sizeof scratch}}; nx_{name(result)}_encode(&constructed,result); nx_complete_value(w,nx_written(&constructed,0)); }} else nx_complete_value(w,nx_reply_error(value)); break; }}')
     test+=['default: __builtin_trap(); } } return nx_result(w); }']
     return '\n'.join(out)+'\n','\n'.join(test)+'\n'

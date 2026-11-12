@@ -35,6 +35,10 @@ def model_link(name):
     return f'`{name}`'
 
 field_notes = {
+    'FromVersion': 'Exact stored setting version to transform. A mismatch rejects migration before committing.',
+    'ToVersion': 'Currently registered positive setting version. Migrations must move forward.',
+    'End': 'For a download chunk, true exactly when Offset plus returned byte count equals the plan’s declared size.',
+    'RetainUserData': 'For instance deletion, true moves the version directory into .recycle; false permanently deletes that directory. Shared root files remain.',
     'ExpectedRevision': 'Revision observed before this change. Preserve it exactly; a mismatch requires re-reading and reconciling the target.',
     'Revision': 'Opaque version token issued by the owner. Do not increment it or substitute another object’s revision.',
     'LoadInstanceId': 'Identity of the admitted load that owns this handle; it is not portable to a replacement load.',
@@ -254,8 +258,9 @@ option in a request. The SDK deliberately describes the complete catalog so
 compatible Hosts can implement more routes. Older released Alphas can map fewer.
 
 The current custom catalog provider supports seven read methods. Custom catalog
-installation and favorites are not implied. Managed Java offers use the additive
-multi-file distribution path; the older distribution routes below remain absent.
+installation and favorites are not implied. Java providers use verified ZIP archives; managed Mojang offers use the separate
+multi-file distribution path. Provider families, supported fields and budgets are
+documented in the [business provider guide](business-providers.md).
 Production Market delivery is a separate unfinished integration boundary.
 
 ## Before requiring a capability
@@ -268,7 +273,7 @@ that bypasses Host ownership. Source mappings are recorded in
 
 ## Unmapped operations
 
-'''+''.join(f'- `{name}`\n' for name in remaining)+'\n[API reference](api/index.md) · [Migration](migration.md)\n'
+'''+(''.join(f'- `{name}`\n' for name in remaining) if remaining else 'None in the recorded Host revision.\n')+'\n[API reference](api/index.md) · [Migration](migration.md)\n'
 legacy = json.loads((root / 'contracts/abi100-legacy.json').read_text(encoding='utf-8'))
 legacy_body = '''# Retained Nexa preview bindings
 
@@ -281,7 +286,7 @@ not transport opcodes. The current catalog uses its own non-overlapping IDs.
 The C bindings use the `nx_Legacy_*` prefix. Results in this compatibility catalog
 are generic AbiValue; use the matching legacy facade's decoder instead of assuming
 that a similarly named current method returns the same shape. The current Host
-mapping count does not add these slots to the 346-operation catalog.
+mapping count does not add these slots to the current-operation catalog.
 
 ## Lifecycle and authority
 
@@ -313,6 +318,8 @@ for group in spec['groups']:
     missing=[op['name'] for op in group['operations'] if (group['name'],op['name']) not in implemented]
     if missing:
         summary+=f"| {group['name']} | {len(group['operations'])-len(missing)} | {len(missing)} | "+', '.join(f'`{name}`' for name in missing)+' |\n'
+if not remaining:
+    summary = '\n## Gaps by capability group\n\nNo groups have unmapped operations in this Host revision.\n'
 files['docs/host-support.md'] = files['docs/host-support.md'].replace('## Unmapped operations', summary.lstrip() + '\n## Unmapped operations')
 files['docs/api/resources.md'] += '\n## Why numbering starts at 2\n\nSlot 1 is occupied by the retained Bootstrap-era `RegisterCleanup` in `contracts/abi100-legacy.json`. It is included in the 22 legacy operations, not a twenty-third burned slot. The current typed cleanup operation has ID 2 and must not be renumbered. The additional reserved slot is Events/3; it remains unavailable.\n'
 files['docs/api/legacy.md'] += '\n## Reserved versus occupied IDs\n\nResources/1 is the retained cleanup operation listed above. Events/3 is reserved and excluded from the 22 callable legacy operations. A gap is not authority to assign a new operation: published IDs must retain their meaning.\n'

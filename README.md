@@ -10,7 +10,7 @@ retained. New plugins use Nexa Bootstrap V1 and negotiated ABI 100, not the lega
 ## What is included
 
 - `Nexa.Plugin.Bootstrap.V1`: loading lifecycle, negotiation, generic values and errors.
-- `Nexa.Plugin.Sdk.Abi100`: 33 capability groups, 346 typed operations, 245 models,
+- `Nexa.Plugin.Sdk.Abi100`: 33 capability groups, 358 typed operations, 261 models,
   schema validators and 22 retained preview dispatch slots.
 - `sdk/wasm/include/nexa`: freestanding C/Wasm bindings generated from the same contract.
 - Executable examples, contract tests, NativeAOT smoke and complete API reference.
@@ -39,7 +39,7 @@ See [the walkthrough](docs/quickstart.md), [packaging](docs/packaging.md) and
 
 ## Distribution and compatibility
 
-SDK version: **0.2.0-alpha.12**. Download immutable bundles from
+SDK version: **0.2.0-alpha.13**. Download immutable bundles from
 [GitHub Releases](https://github.com/Nexa-MC/NexaCL-Plugin-SDK/releases).
 The bundle contains two NuGet packages and the C/Wasm SDK. Add its `packages/`
 directory as a local NuGet source alongside nuget.org. No NuGet.org publication is

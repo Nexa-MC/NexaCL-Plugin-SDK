@@ -26,6 +26,7 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 - [Minecraft.Content.ClearTrash](../minecraft-content.md#cleartrash)
 - [Minecraft.Worlds.ApplyDataPackPlan](../minecraft-worlds.md#applydatapackplan)
 - [Minecraft.Worlds.Restore](../minecraft-worlds.md#restore)
+- [Minecraft.Worlds.Delete](../minecraft-worlds.md#delete)
 - [Catalog.ExecutePlan](../catalog.md#executeplan)
 - [Settings.Apply](../settings.md#apply)
 - [Themes.Preview](../themes.md#preview)

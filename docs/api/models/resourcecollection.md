@@ -13,5 +13,6 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 ## Used directly by
 
 - [Catalog.RegisterCollection](../catalog.md#registercollection)
+- [Catalog.ReadCollection](../catalog.md#readcollection)
 
 For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

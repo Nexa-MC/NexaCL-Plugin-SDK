@@ -16,6 +16,7 @@ This is the exact wire model. Non-nullable fields are required; field types do n
 
 - [Minecraft.Install.InspectLocalInstaller](../minecraft-install.md#inspectlocalinstaller)
 - [Minecraft.Java.Inspect](../minecraft-java.md#inspect)
+- [Backups.PrepareRestoreDestination](../backups.md#preparerestoredestination)
 - [Files.Pick](../files.md#pick)
 - [Files.Stat](../files.md#stat)
 - [Files.Watch](../files.md#watch)

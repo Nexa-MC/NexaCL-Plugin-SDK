@@ -59,7 +59,7 @@ for g in spec['groups']:
         key=(g['contractId'],op['methodId'])
         if key in seen: raise ValueError(f'Duplicate dispatch slot: {key}')
         seen.add(key)
-        apis+=f'    /// <summary>Draft {op["kind"]}; Host mapping pending. See Abi100Catalog for authority and phase requirements.</summary>\n'
+        apis+=f'    /// <summary>{op["kind"]}; host support is versioned in host-support.json. See Abi100Catalog for authority and phase requirements.</summary>\n'
         apis+=f'    public ValueTask<AbiReply<{typ(op["output"])}>> {op["name"]}({typ(op["input"])} request, InvocationOptions options) =>\n        AbiContractCall.Invoke<{typ(op["input"])}, {typ(op["output"])}>(ability, ContractId, {op["methodId"]}, request, options);\n'
     apis+='}\n\n'
 
