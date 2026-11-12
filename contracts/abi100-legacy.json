@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 1,
+  "models": {
+    "LegacyHandle": [
+      {
+        "name": "Handle",
+        "type": "ulong"
+      }
+    ],
+    "LegacyEventDeclaration": [
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "PayloadSchemaId",
+        "type": "string"
+      },
+      {
+        "name": "PayloadSchemaDigest",
+        "type": "string"
+      },
+      {
+        "name": "Delivery",
+        "type": "string",
+        "constant": "BestEffortAtMostOnce"
+      },
+      {
+        "name": "MaxPayloadBytes",
+        "type": "int"
+      },
+      {
+        "name": "QueueLimit",
+        "type": "int"
+      }
+    ],
+    "LegacyEventSubscription": [
+      {
+        "name": "SourcePluginId",
+        "type": "string"
+      },
+      {
+        "name": "EventName",
+        "type": "string"
+      },
+      {
+        "name": "SchemaId",
+        "type": "string"
+      },
+      {
+        "name": "Handler",
+        "type": "ulong"
+      },
+      {
+        "name": "Required",
+        "type": "bool"
+      },
+      {
+        "name": "Concurrency",
+        "type": "int"
+      },
+      {
+        "name": "QueueLimit",
+        "type": "int"
+      }
+    ],
+    "LegacyEventPublish": [
+      {
+        "name": "Handle",
+        "type": "ulong"
+      },
+      {
+        "name": "Payload",
+        "type": "AbiValue"
+      }
+    ],
+    "LegacySurface": [
+      {
+        "name": "LocalId",
+        "type": "string"
+      },
+      {
+        "name": "Nodes",
+        "type": "AbiValue"
+      },
+      {
+        "name": "ResourceIds",
+        "type": "string[]"
+      }
+    ],
+    "LegacyCommand": [
+      {
+        "name": "LocalId",
+        "type": "string"
+      },
+      {
+        "name": "Title",
+        "type": "string"
+      },
+      {
+        "name": "Handler",
+        "type": "ulong"
+      }
+    ],
+    "LegacyPlacement": [
+      {
+        "name": "LocalId",
+        "type": "string"
+      },
+      {
+        "name": "SurfaceId",
+        "type": "string"
+      },
+      {
+        "name": "SlotId",
+        "type": "string"
+      }
+    ],
+    "LegacySettings": [
+      {
+        "name": "LocalId",
+        "type": "string"
+      },
+      {
+        "name": "SchemaId",
+        "type": "string"
+      },
+      {
+        "name": "SchemaDigest",
+        "type": "string"
+      },
+      {
+        "name": "Layout",
+        "type": "AbiValue"
+      }
+    ],
+    "LegacyPatch": [
+      {
+        "name": "Handle",
+        "type": "ulong"
+      },
+      {
+        "name": "Revision",
+        "type": "ulong"
+      },
+      {
+        "name": "Patch",
+        "type": "AbiValue"
+      }
+    ],
+    "LegacyCommandState": [
+      {
+        "name": "Handle",
+        "type": "ulong"
+      },
+      {
+        "name": "Enabled",
+        "type": "bool"
+      },
+      {
+        "name": "Visible",
+        "type": "bool"
+      }
+    ],
+    "LegacyServiceRequirement": [
+      {
+        "name": "ProviderPluginId",
+        "type": "string"
+      },
+      {
+        "name": "ServiceId",
+        "type": "string"
+      },
+      {
+        "name": "MinimumContractVersion",
+        "type": "uint"
+      },
+      {
+        "name": "MaximumContractVersion",
+        "type": "uint"
+      },
+      {
+        "name": "Required",
+        "type": "bool"
+      }
+    ],
+    "LegacyServiceQuery": [
+      {
+        "name": "ProviderPluginId",
+        "type": "string"
+      },
+      {
+        "name": "ServiceId",
+        "type": "string"
+      }
+    ],
+    "LegacyServiceCall": [
+      {
+        "name": "Handle",
+        "type": "ulong"
+      },
+      {
+        "name": "MethodId",
+        "type": "uint"
+      },
+      {
+        "name": "Payload",
+        "type": "AbiValue"
+      }
+    ],
+    "LegacyServiceDeclaration": [
+      {
+        "name": "ServiceId",
+        "type": "string"
+      },
+      {
+        "name": "ContractId",
+        "type": "string"
+      },
+      {
+        "name": "ContractVersion",
+        "type": "uint"
+      },
+      {
+        "name": "SchemaDigest",
+        "type": "string"
+      },
+      {
+        "name": "Methods",
+        "type": "AbiValue[]"
+      },
+      {
+        "name": "HealthProbe",
+        "type": "AbiValue"
+      },
+      {
+        "name": "Handler",
+        "type": "ulong"
+      }
+    ],
+    "LegacyServiceProbe": [
+      {
+        "name": "Handle",
+        "type": "ulong"
+      },
+      {
+        "name": "ProbeId",
+        "type": "uint"
+      },
+      {
+        "name": "Payload",
+        "type": "AbiValue"
+      }
+    ],
+    "LegacyDiagnostic": [
+      {
+        "name": "Code",
+        "type": "string"
+      },
+      {
+        "name": "Message",
+        "type": "string"
+      },
+      {
+        "name": "Severity",
+        "type": "string"
+      }
+    ],
+    "LegacyFinding": [
+      {
+        "name": "Code",
+        "type": "string"
+      },
+      {
+        "name": "Message",
+        "type": "string"
+      },
+      {
+        "name": "Fatal",
+        "type": "bool"
+      }
+    ],
+    "LegacyCleanup": [
+      {
+        "name": "Callback",
+        "type": "ulong"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Legacy.Events",
+      "contractId": "nexa.events/100",
+      "operations": [
+        {
+          "name": "DeclareEvent",
+          "methodId": 1,
+          "input": "LegacyEventDeclaration",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Subscribe",
+          "methodId": 2,
+          "input": "LegacyEventSubscription",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Publish",
+          "methodId": 4,
+          "input": "LegacyEventPublish",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Unsubscribe",
+          "methodId": 5,
+          "input": "LegacyHandle",
+          "output": "AbiValue"
+        }
+      ]
+    },
+    {
+      "name": "Legacy.UI",
+      "contractId": "nexa.ui/100",
+      "operations": [
+        {
+          "name": "DeclareSurface",
+          "methodId": 1,
+          "input": "LegacySurface",
+          "output": "AbiValue"
+        },
+        {
+          "name": "DeclareCommand",
+          "methodId": 2,
+          "input": "LegacyCommand",
+          "output": "AbiValue"
+        },
+        {
+          "name": "DeclarePlacement",
+          "methodId": 3,
+          "input": "LegacyPlacement",
+          "output": "AbiValue"
+        },
+        {
+          "name": "DeclareSettings",
+          "methodId": 4,
+          "input": "LegacySettings",
+          "output": "AbiValue"
+        },
+        {
+          "name": "PatchState",
+          "methodId": 5,
+          "input": "LegacyPatch",
+          "output": "AbiValue"
+        },
+        {
+          "name": "SetCommandState",
+          "methodId": 6,
+          "input": "LegacyCommandState",
+          "output": "AbiValue"
+        }
+      ]
+    },
+    {
+      "name": "Legacy.Plugins",
+      "contractId": "nexa.interplugin/100",
+      "operations": [
+        {
+          "name": "Describe",
+          "methodId": 1,
+          "input": "LegacyServiceQuery",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Bind",
+          "methodId": 2,
+          "input": "LegacyServiceRequirement",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Call",
+          "methodId": 3,
+          "input": "LegacyServiceCall",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Release",
+          "methodId": 4,
+          "input": "LegacyHandle",
+          "output": "AbiValue"
+        },
+        {
+          "name": "RebindOptional",
+          "methodId": 5,
+          "input": "LegacyServiceRequirement",
+          "output": "AbiValue"
+        },
+        {
+          "name": "ExportService",
+          "methodId": 6,
+          "input": "LegacyServiceDeclaration",
+          "output": "AbiValue"
+        },
+        {
+          "name": "Probe",
+          "methodId": 7,
+          "input": "LegacyServiceProbe",
+          "output": "AbiValue"
+        }
+      ]
+    },
+    {
+      "name": "Legacy.Diagnostics",
+      "contractId": "nexa.diagnostics/100",
+      "operations": [
+        {
+          "name": "Report",
+          "methodId": 1,
+          "input": "LegacyDiagnostic",
+          "output": "AbiValue"
+        },
+        {
+          "name": "ReportFinding",
+          "methodId": 2,
+          "input": "LegacyFinding",
+          "output": "AbiValue"
+        },
+        {
+          "name": "QueryRegistrations",
+          "methodId": 3,
+          "input": "Empty",
+          "output": "AbiValue"
+        },
+        {
+          "name": "QueryBindingStatus",
+          "methodId": 4,
+          "input": "Empty",
+          "output": "AbiValue"
+        }
+      ]
+    },
+    {
+      "name": "Legacy.Resources",
+      "contractId": "nexa.resources/100",
+      "operations": [
+        {
+          "name": "RegisterCleanup",
+          "methodId": 1,
+          "input": "LegacyCleanup",
+          "output": "AbiValue"
+        }
+      ]
+    }
+  ]
+}

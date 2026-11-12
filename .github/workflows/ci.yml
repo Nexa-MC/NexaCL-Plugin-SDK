@@ -1,122 +1,46 @@
 name: SDK CI
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-  workflow_dispatch:
-
+on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
-
 jobs:
-  build-test:
+  contracts:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-24.04
+            rid: linux-x64
+          - os: windows-2025
+            rid: win-x64
+          - os: macos-15
+            rid: osx-arm64
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-dotnet@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 10.0.x
-      - run: dotnet restore PCL-N-Plugin-SDK.slnx
-      - run: dotnet build PCL-N-Plugin-SDK.slnx -c Release --no-restore -warnaserror
-      - run: dotnet test PCL-N-Plugin-SDK.slnx -c Release --no-build --no-restore -warnaserror
-
-  package:
-    needs: build-test
-    runs-on: ubuntu-latest
+          dotnet-version: '10.0.403'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python eng/generate_abi100.py --verify
+      - run: python -m unittest discover -s eng -p "test_*.py"
+      - run: python eng/verify_docs.py
+      - run: dotnet build NexaCL-Plugin-SDK.slnx -c Release
+      - run: dotnet run --project tests/Nexa.Plugin.Sdk.Tests -c Release --no-build
+      - run: dotnet publish tests/Nexa.Plugin.Sdk.AotSmoke -c Release -r ${{ matrix.rid }} -p:PublishAot=true -o artifacts/aot
+      - shell: pwsh
+        run: |
+          $binary = if ($IsWindows) { './artifacts/aot/Nexa.Plugin.Sdk.AotSmoke.exe' } else { './artifacts/aot/Nexa.Plugin.Sdk.AotSmoke' }
+          & $binary
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+  wasm:
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: 10.0.x
-      - name: Read package version
-        id: package-version
-        shell: bash
-        run: |
-          set -euo pipefail
-          prefix=$(sed -n 's:.*<VersionPrefix>\(.*\)</VersionPrefix>.*:\1:p' Directory.Build.props)
-          suffix=$(sed -n 's:.*<VersionSuffix>\(.*\)</VersionSuffix>.*:\1:p' Directory.Build.props)
-          test -n "$prefix"
-          if [ -n "$suffix" ]; then
-            echo "version=$prefix-$suffix" >> "$GITHUB_OUTPUT"
-          else
-            echo "version=$prefix" >> "$GITHUB_OUTPUT"
-          fi
-      - run: dotnet restore PCL-N-Plugin-SDK.slnx
-      - run: dotnet build PCL-N-Plugin-SDK.slnx -c Release --no-restore -warnaserror
-      - run: dotnet test PCL-N-Plugin-SDK.slnx -c Release --no-build --no-restore -warnaserror
-      - name: Verify public API boundary
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -s PublicApiBaseline.md
-          grep -Eq 'IPclNPlugin|PluginManifest|IPluginUiPatchService' PublicApiBaseline.md
-      - name: Pack all public packages
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p artifacts/nuget
-          for project in \
-            src/PCL.N.Plugin.Abstractions/PCL.N.Plugin.Abstractions.csproj \
-            src/PCL.N.Plugin.i18n/PCL.N.Plugin.i18n.csproj \
-            src/PCL.N.Plugin.UI/PCL.N.Plugin.UI.csproj \
-            src/PCL.N.Plugin.UI.Avalonia/PCL.N.Plugin.UI.Avalonia.csproj \
-            src/PCL.N.Plugin.Sdk/PCL.N.Plugin.Sdk.csproj \
-            src/PCL.N.Plugin.Analyzers/PCL.N.Plugin.Analyzers.csproj \
-            src/PCL.N.Plugin.Testing/PCL.N.Plugin.Testing.csproj \
-            src/PCL.N.Plugin.Sdk.Build/PCL.N.Plugin.Sdk.Build.csproj; do
-            dotnet pack "$project" -c Release --no-build -o artifacts/nuget
-          done
-          test "$(find artifacts/nuget -name '*.nupkg' ! -name '*.symbols.nupkg' | wc -l)" -eq 8
-          test "$(find artifacts/nuget -name '*.snupkg' | wc -l)" -eq 8
-      - name: Verify packages restore in a clean project
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p /tmp/pcl-sdk-consumer
-          cd /tmp/pcl-sdk-consumer
-          dotnet new classlib --framework net10.0 --no-restore
-          version="${{ steps.package-version.outputs.version }}"
-          dotnet add package PCLN.Plugin.Abstractions --version "$version" --source "$GITHUB_WORKSPACE/artifacts/nuget"
-          dotnet add package PCLN.Plugin.i18n --version "$version" --source "$GITHUB_WORKSPACE/artifacts/nuget"
-          dotnet add package PCLN.Plugin.UI --version "$version" --source "$GITHUB_WORKSPACE/artifacts/nuget"
-          dotnet add package PCLN.Plugin.UI.Avalonia --version "$version" --source "$GITHUB_WORKSPACE/artifacts/nuget"
-          dotnet add package PCLN.Plugin.Sdk --version "$version" --source "$GITHUB_WORKSPACE/artifacts/nuget"
-          dotnet add package PCLN.Plugin.Testing --version "$version" --source "$GITHUB_WORKSPACE/artifacts/nuget"
-          dotnet build -c Release -warnaserror
-      - name: Verify reproducible example package
-        shell: bash
-        run: |
-          set -euo pipefail
-          package="$GITHUB_WORKSPACE/examples/HelloPlugin/bin/Release/net10.0/dev.muxue.hello-0.1.0-alpha.1.pnp"
-          rm -f "$package"
-          dotnet build examples/HelloPlugin/HelloPlugin.csproj -c Release --no-restore -warnaserror
-          test -s "$package"
-          first=$(sha256sum "$package" | cut -d' ' -f1)
-          rm -f "$package"
-          dotnet build examples/HelloPlugin/HelloPlugin.csproj -c Release --no-restore -warnaserror
-          second=$(sha256sum "$package" | cut -d' ' -f1)
-          test "$first" = "$second"
-          python - <<'PY'
-          import os, zipfile
-          p=os.environ['GITHUB_WORKSPACE'] + '/examples/HelloPlugin/bin/Release/net10.0/dev.muxue.hello-0.1.0-alpha.1.pnp'
-          with zipfile.ZipFile(p) as z:
-              names=set(z.namelist())
-              required={'plugin.json','ui/HelloPanel.axaml','META-INF/pnp.files.json','META-INF/pnp.signed.json'}
-              assert required <= names, required-names
-              forbidden={'PCL.N.Plugin.Abstractions.dll','PCL.N.Plugin.UI.dll','PCL.N.Plugin.UI.Avalonia.dll','PCL.Application.dll','PCL.Desktop.dll','PCL.Plugin.dll'}
-              assert not ({n.rsplit('/',1)[-1] for n in names} & forbidden)
-          PY
-          mkdir -p artifacts/examples
-          cp "$package" artifacts/examples/
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y clang lld
+      - run: python3 eng/build_wasm_sample.py
       - uses: actions/upload-artifact@v4
         with:
-          name: pcl-n-plugin-sdk-${{ steps.package-version.outputs.version }}
-          path: |
-            artifacts/nuget/*
-            artifacts/examples/*
-          if-no-files-found: error
+          name: executable-wasm-examples
+          path: artifacts/wasm-sample/*.zip

@@ -1,6 +1,5 @@
-bin/
-obj/
+**/bin/
+**/obj/
 artifacts/
+**/__pycache__/
 *.user
-.vs/
-.idea/

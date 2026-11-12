@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/Nexa.Plugin.Bootstrap.V1/Nexa.Plugin.Bootstrap.V1.csproj"/>
+  <Project Path="src/Nexa.Plugin.Sdk.Abi100/Nexa.Plugin.Sdk.Abi100.csproj"/>
+  <Project Path="samples/HelloPlugin/HelloPlugin.csproj"/>
+  <Project Path="tests/Nexa.Plugin.Sdk.Tests/Nexa.Plugin.Sdk.Tests.csproj"/>
+  <Project Path="tests/Nexa.Plugin.Sdk.AotSmoke/Nexa.Plugin.Sdk.AotSmoke.csproj"/>
+</Solution>

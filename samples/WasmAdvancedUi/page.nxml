@@ -1,0 +1,1 @@
+<nxml-page><Page Key="AdvancedPage"><StackPanel><Text Content="Advanced plugin page" Localize="false"/><TextInput Key="text" Label="Answer" Placeholder="Answer"/><Button Key="AdvancedAction" Content="Submit answer" Localize="false" Command="ui.plugin.action" Argument="example.advanced:hello"/><Dynamic Key="canvas" Height="200" /></StackPanel></Page></nxml-page>

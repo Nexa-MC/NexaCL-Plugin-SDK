@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup><ProjectReference Include="../../src/Nexa.Plugin.Bootstrap.V1/Nexa.Plugin.Bootstrap.V1.csproj"/><ProjectReference Include="../../src/Nexa.Plugin.Sdk.Abi100/Nexa.Plugin.Sdk.Abi100.csproj"/></ItemGroup></Project>

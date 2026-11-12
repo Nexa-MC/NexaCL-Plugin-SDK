@@ -1,0 +1,5 @@
+# Security
+
+Do not put credentials, account data, signing keys or exploit details in public issues. Report privately through [GitHub private vulnerability reporting](https://github.com/Nexa-MC/PluginSidecar/security/advisories/new) when available, or contact a Nexa-MC maintainer privately. No response-time guarantee is currently offered.
+
+The CoreCLR runtime adapter is a trusted development fixture and must not execute untrusted plugins. Blocking native dependency resolution does not block framework process, interop or dynamic-code paths. The v0.2 native-execution restriction requires a separately enforced controlled runtime. The fixture loads caller-verified plugin bytes. It does not verify package signatures or authorize plugins; integrations must complete those checks before calling it. The CLI does not expose plugin loading. A separate process is not an OS sandbox. Future admission must verify provenance and capabilities before code runs; plugins must never receive launcher credentials implicitly.

@@ -1,81 +1,53 @@
-# PCL N Plugin SDK
+# NexaCL Plugin SDK
 
-PCL N 第三方插件的公开契约、开发工具、分析器、测试宿主和 `.pnp` 构建工具。
+[简体中文](README.zh-CN.md) · [Documentation](docs/index.md) · [Template repository](https://github.com/Nexa-MC/NexaCL-Plugin-Template)
 
-> 当前版本：`0.2.5`。
+The independent, public SDK for NexaCL plugin authors, derived launcher developers
+and contributors. This repository replaces `PCL-N-Plugin-SDK`; its Git history is
+retained. New plugins use Nexa Bootstrap V1 and negotiated ABI 100, not the legacy
+`PCL.N.Plugin.*` injection API.
 
-## 包
+## What is included
 
-| NuGet 包 | 用途 |
-|---|---|
-| `PCLN.Plugin.Abstractions` | 插件入口、生命周期、服务、Manifest 和 UI 公共 ABI |
-| `PCLN.Plugin.i18n` | 强类型本地化文本和本地化设置页契约 |
-| `PCLN.Plugin.UI` | UI Target、导航和页面注册的稳定契约 |
-| `PCLN.Plugin.UI.Avalonia` | 受权限控制的 Raw Avalonia、页面和窗口契约 |
-| `PCLN.Plugin.Sdk` | Manifest 验证、SemVer 范围和开发辅助 API |
-| `PCLN.Plugin.Analyzers` | `PNPSDK001–010` 编译诊断 |
-| `PCLN.Plugin.Testing` | 内存服务与生命周期测试宿主 |
-| `PCLN.Plugin.Sdk.Build` | 可复现 `.pnp` 打包和 OpenPGP/GPG 签名 |
+- `Nexa.Plugin.Bootstrap.V1`: loading lifecycle, negotiation, generic values and errors.
+- `Nexa.Plugin.Sdk.Abi100`: 33 capability groups, 346 typed operations, 245 models,
+  schema validators and 22 retained preview dispatch slots.
+- `sdk/wasm/include/nexa`: freestanding C/Wasm bindings generated from the same contract.
+- Executable examples, contract tests, NativeAOT smoke and complete API reference.
 
-NuGet 包 ID 使用 `PCLN.Plugin.*`；为保持源码和二进制兼容，程序集名与命名空间仍使用 `PCL.N.Plugin.*`。
+PluginSidecar owns execution and admission. NexaCL owns application services and
+user confirmation. Neither runtime is embedded in this authoring SDK.
+The production executable profile is import-free `nexa-wasm-1`; the managed sample
+illustrates the Bootstrap contract and is not an ordinary Desktop-loadable DLL.
 
-`PCL.Plugin` 是 PCL-N 的私有特权 Host，不属于公共 SDK。第三方插件不得引用 `PCL.Application`、`PCL.Desktop` 或 `PCL.Plugin`。
+## Start developing
 
-## 快速开始
+Create a repository from [NexaCL-Plugin-Template](https://github.com/Nexa-MC/NexaCL-Plugin-Template),
+or build the checked-in examples with .NET 10, Python 3.12 and Clang/wasm-ld:
 
-安装 .NET 10 SDK，然后参考 `examples/HelloPlugin`。示例展示：
-
-- `IPclNPlugin` 生命周期；
-- 命令和设置页注册；
-- Manifest UI Patch 声明；
-- 无代码隐藏的声明式 AXAML；
-- Release 构建生成平台无关的 AnyCPU `.pnp`，并支持 `runtimes/<rid>/native/` 多架构原生资产。
-
-```powershell
-dotnet restore PCL-N-Plugin-SDK.slnx
-dotnet build PCL-N-Plugin-SDK.slnx -c Release -warnaserror
-dotnet test PCL-N-Plugin-SDK.slnx -c Release --no-build
+```sh
+dotnet build NexaCL-Plugin-SDK.slnx -c Release
+python eng/generate_abi100.py --verify
+python eng/build_wasm_sample.py --clang clang
+dotnet run --project tests/Nexa.Plugin.Sdk.Tests -c Release --no-build
 ```
 
-正式插件包必须签名。开发构建可以显式设置：
+The Desktop example is `artifacts/wasm-sample/desktop.zip`. A compatible NexaCL
+build must enable developer mode and approve the package and requested permissions.
+See [the walkthrough](docs/quickstart.md), [packaging](docs/packaging.md) and
+[host support](docs/host-support.md) before choosing required capabilities.
 
-```xml
-<PclNPluginSign>false</PclNPluginSign>
-```
+## Distribution and compatibility
 
-该设置不会生成未签名包：构建工具会创建并使用本机开发密钥。开发签名包可以本地安装，但不得提交插件市场；运行时不提供“允许未签名插件”开关。
+SDK version: **0.2.0-alpha.10**. Download immutable bundles from
+[GitHub Releases](https://github.com/Nexa-MC/NexaCL-Plugin-SDK/releases).
+The bundle contains two NuGet packages and the C/Wasm SDK. Add its `packages/`
+directory as a local NuGet source alongside nuget.org. No NuGet.org publication is
+implied. See [migration](docs/migration.md) before replacing an old SDK reference.
 
-插件中心使用双层签名：开发者上传自己的 OpenPGP 自签名候选包；审核通过后，网站保留开发者签名并生成带 `META-INF/market/` 网站签名封套的新分发包。PCL 从市场安装时会对最终包计算 SHA-256，并向 `POST /v1/packages/verify` 在线核对发布者、命名空间、双指纹和吊销状态；验证服务不可用时拒绝首次安装。
+SDK availability does not mean every launcher implements every operation. Negotiate
+required and optional contracts, handle structured failures, and inspect the
+[per-operation reference](docs/api/index.md). Publisher authenticity and Market
+entitlements belong to Host distribution; checksums alone do not establish them.
 
-## AXAML UI
-
-Manifest 的 UI operation 可以引用包内 `ui/*.axaml`：
-
-```json
-{
-  "id": "hello-panel",
-  "kind": "inject",
-  "slot": "cards.flip",
-  "axaml": "ui/HelloPanel.axaml",
-  "command": "dev.muxue.hello.say-hello"
-}
-```
-
-首版只支持声明式 AXAML：禁止 `x:Class`、代码隐藏和 PCL-N 私有 CLR 命名空间。行为通过公开命令 ID 和 Host 提供的公开绑定上下文连接。
-
-## 文档
-
-版本化 Wiki 源文件位于 `wiki/`，发布工作流会同步到 [GitHub Wiki](https://github.com/PCL-N-Edition/PCL-N-Plugin-SDK/wiki)。同一套详细文档也发布到 [docs.pcln.top](https://docs.pcln.top/plugin-sdk/)。
-
-- [从零创建第一个插件](https://docs.pcln.top/plugin-sdk/Getting-Started)
-- [桌面端安装与调试](https://docs.pcln.top/plugin-sdk/Desktop-Installation-and-Debugging)
-- [十个实战案例](https://docs.pcln.top/plugin-sdk/Examples-Cookbook)
-- [完整 Manifest 参考](https://docs.pcln.top/plugin-sdk/Plugin-Manifest)
-
-Manifest Schema 位于 `schemas/plugin.schema.json`。
-
-## CI 与发布
-
-CI 在 Windows、Linux 和 macOS 上构建与测试，并验证八个 NuGet 包、示例 `.pnp`、AXAML 资源和可复现输出。`sdk-v*` Tag 经 `nuget-production` 环境审批后发布 NuGet 并同步 Wiki。
-
-Licensed under the Apache License 2.0.
+[Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Apache-2.0](LICENSE)

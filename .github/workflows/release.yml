@@ -1,161 +1,35 @@
-name: Publish SDK and Wiki
-
+name: Release SDK
 on:
-  push:
-    tags: ['sdk-v*']
   workflow_dispatch:
-
 permissions:
   contents: write
-  id-token: write
-
 jobs:
   release:
-    runs-on: ubuntu-latest
-    environment: nuget-production
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
-          fetch-depth: 0
-      - uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: 10.0.x
-      - name: Validate release version
-        shell: bash
-        run: |
-          set -euo pipefail
-          prefix=$(sed -n 's:.*<VersionPrefix>\(.*\)</VersionPrefix>.*:\1:p' Directory.Build.props)
-          suffix=$(sed -n 's:.*<VersionSuffix>\(.*\)</VersionSuffix>.*:\1:p' Directory.Build.props)
-          test -n "$prefix"
-          if [[ -n "$suffix" ]]; then
-            version="$prefix-$suffix"
-          else
-            version="$prefix"
-          fi
-          if [[ "${GITHUB_REF_TYPE:-}" == "tag" ]]; then
-            test "${GITHUB_REF_NAME}" = "sdk-v${version}"
-          fi
-          echo "SDK_VERSION=$version" >> "$GITHUB_ENV"
-      - run: dotnet restore PCL-N-Plugin-SDK.slnx
-      - run: dotnet build PCL-N-Plugin-SDK.slnx -c Release --no-restore -warnaserror
-      - run: dotnet test PCL-N-Plugin-SDK.slnx -c Release --no-build --no-restore -warnaserror
-      - name: Pack
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p artifacts
-          for project in src/*/*.csproj; do
-            case "$project" in
-              *Abstractions*|*Plugin.i18n.csproj|*Plugin.UI.csproj|*Plugin.UI.Avalonia.csproj|*Analyzers*|*Sdk.csproj|*Sdk.Build*|*Testing*) dotnet pack "$project" -c Release --no-build -o artifacts ;;
-            esac
-          done
-          test "$(find artifacts -name '*.nupkg' ! -name '*.symbols.nupkg' | wc -l)" -eq 8
-          test "$(find artifacts -name '*.snupkg' | wc -l)" -eq 8
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pcl-n-plugin-sdk-${{ env.SDK_VERSION }}-release-candidate
-          path: artifacts/*
-          if-no-files-found: error
-      - name: NuGet login (trusted publishing)
-        if: github.ref_type == 'tag'
-        id: nuget-login
-        uses: NuGet/login@v1
-        with:
-          user: ${{ vars.NUGET_USER }}
-      - name: Push NuGet packages
-        if: github.ref_type == 'tag'
+          dotnet-version: '10.0.403'
+      - run: sudo apt-get update && sudo apt-get install -y clang lld
+      - run: python3 eng/generate_abi100.py --verify
+      - run: python3 -m unittest discover -s eng -p "test_*.py"
+      - run: python3 eng/verify_docs.py
+      - run: dotnet build NexaCL-Plugin-SDK.slnx -c Release
+      - run: dotnet run --project tests/Nexa.Plugin.Sdk.Tests -c Release --no-build
+      - run: python3 eng/build_wasm_sample.py
+      - run: dotnet publish tests/Nexa.Plugin.Sdk.AotSmoke -c Release -r linux-x64 -p:PublishAot=true -o artifacts/aot
+      - run: artifacts/aot/Nexa.Plugin.Sdk.AotSmoke
+      - run: dotnet pack src/Nexa.Plugin.Bootstrap.V1 -c Release -o artifacts/packages
+      - run: dotnet pack src/Nexa.Plugin.Sdk.Abi100 -c Release -o artifacts/packages
+      - run: python3 eng/package_sdk.py && python3 eng/bundle_sdk.py
+      - name: Publish immutable SDK inputs
         env:
-          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
-        shell: bash
+          GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          if [[ -z "${NUGET_API_KEY:-}" ]]; then
-            echo "NuGet trusted publishing did not return a temporary API key." >&2
-            exit 1
-          fi
-          while IFS= read -r package; do
-            dotnet nuget push "$package" \
-              --api-key "$NUGET_API_KEY" \
-              --source https://api.nuget.org/v3/index.json
-          done < <(find artifacts -maxdepth 1 -name '*.nupkg' ! -name '*.symbols.nupkg' -print | sort)
-      - name: Verify NuGet availability
-        if: github.ref_type == 'tag'
-        shell: bash
-        run: |
-          set -euo pipefail
-          packages=(
-            PCLN.Plugin.Abstractions
-            PCLN.Plugin.i18n
-            PCLN.Plugin.UI
-            PCLN.Plugin.UI.Avalonia
-            PCLN.Plugin.Analyzers
-            PCLN.Plugin.Sdk
-            PCLN.Plugin.Sdk.Build
-            PCLN.Plugin.Testing
-          )
-          for attempt in $(seq 1 60); do
-            missing=()
-            for package in "${packages[@]}"; do
-              id=$(printf '%s' "$package" | tr '[:upper:]' '[:lower:]')
-              versions=$(curl --fail --silent --show-error \
-                "https://api.nuget.org/v3-flatcontainer/${id}/index.json" || true)
-              if ! grep -Fq "\"${SDK_VERSION}\"" <<<"$versions"; then
-                missing+=("$package")
-              fi
-            done
-            if [[ ${#missing[@]} -eq 0 ]]; then
-              echo "All packages are available from NuGet: ${SDK_VERSION}"
-              exit 0
-            fi
-            echo "Waiting for NuGet indexing (${attempt}/60): ${missing[*]}"
-            sleep 10
-          done
-          echo "Packages were pushed but did not become visible on NuGet: ${missing[*]}" >&2
-          exit 1
-      - name: Sync GitHub Wiki
-        if: github.ref_type == 'tag'
-        env:
-          WIKI_TOKEN: ${{ secrets.WIKI_TOKEN }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [[ -z "${WIKI_TOKEN:-}" ]]; then
-            echo "WIKI_TOKEN is not configured in the nuget-production environment." >&2
-            exit 1
-          fi
-          git clone "https://x-access-token:${WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" wiki-target
-          find wiki-target -maxdepth 1 -type f -name '*.md' -delete
-          cp wiki/*.md wiki-target/
-          cd wiki-target
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add --all
-          git diff --cached --quiet || git commit -m "docs: sync SDK ${SDK_VERSION} wiki"
-          git push
-      - name: Sync docs.pcln.top source
-        if: github.ref_type == 'tag'
-        env:
-          WIKI_TOKEN: ${{ secrets.WIKI_TOKEN }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [[ -z "${WIKI_TOKEN:-}" ]]; then
-            echo "WIKI_TOKEN is not configured in the nuget-production environment." >&2
-            exit 1
-          fi
-          git clone "https://x-access-token:${WIKI_TOKEN}@github.com/PCL-N-Edition/PCLN-Docs.git" docs-target
-          PCLN_PLUGIN_SDK_WIKI="$GITHUB_WORKSPACE/wiki" \
-          PCLN_PLUGIN_SDK_WIKI_EN="$GITHUB_WORKSPACE/wiki-en" \
-            node docs-target/scripts/sync-plugin-sdk-docs.mjs
-          cd docs-target
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add docs/zhHans/plugin-sdk docs/en/plugin-sdk
-          git diff --cached --quiet || git commit -m "docs: sync SDK ${SDK_VERSION} site"
-          git push
-      - uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
-        with:
-          name: PCL N Plugin SDK ${{ env.SDK_VERSION }}
-          prerelease: false
-          files: artifacts/*
+          python3 - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          directory=Path('artifacts/packages');release=json.loads((directory/'sdk.release.json').read_text())
+          subprocess.run(['gh','release','create',release['release'],*map(str,sorted(directory.glob('*.nupkg'))),*map(str,sorted(directory.glob('*.zip'))),str(directory/'sdk.release.json'),'--prerelease','--latest=false','--target','${{ github.sha }}','--title','NexaCL Plugin SDK '+release['version'],'--notes','Independent Bootstrap/ABI 100 authoring SDK, C/Wasm bindings, detailed reference and examples. Existing Nexa ABI 100 contracts are preserved; legacy PCL plugins require porting.'],check=True)
+          PY
