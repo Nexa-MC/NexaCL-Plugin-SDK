@@ -26,6 +26,9 @@ without adding unrelated UI code.
 
 ## Understand the system
 
+After Beta, follow [contract evolution and EXP_ID](guides/contract-evolution.md)
+for SDK changes. The stable catalog remains frozen.
+
 Read [architecture](architecture.md) for ownership, [loading](loading-contract.md)
 for callback order, and [permissions](permissions.md) for authority. The
 [asynchronous call guide](guides/asynchronous-calls.md) explains why a returned

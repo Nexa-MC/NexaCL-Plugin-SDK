@@ -15,6 +15,8 @@
 
 ## 理解运行规则
 
+Beta 之后的 SDK 修改遵循[契约演进与 EXP_ID](guides/contract-evolution.md)，稳定目录保持冻结。
+
 阅读[架构与职责](architecture.md)、[加载生命周期](loading-contract.md)和[权限](permissions.md)，再查阅[异步调用](guides/asynchronous-calls.md)与[离线使用](guides/offline.md)。这些规则解释了为什么“调用成功”“任务完成”和“外部副作用已确认”是不同的结果。
 
 ## 按目标查找做法

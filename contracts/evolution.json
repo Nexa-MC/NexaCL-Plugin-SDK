@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "baselineVersion": "0.2.0-beta.1",
+  "abi": 100,
+  "frozenFiles": {
+    "contracts/abi100.json": "1f43d2aa64884d0508b3825bf1a38e7ab8ad67a92b31ce15ce8731b9647997f7",
+    "contracts/abi100-legacy.json": "afa2a0d7aa10290122a25247df1d8ac92f5755738cedece2b8b99480bf59c144",
+    "src/Nexa.Plugin.Bootstrap.V1/AbiErrors.cs": "ff520e1c9a09473e4a9793998844328d81e2afc990666f69aebd98361354654b",
+    "src/Nexa.Plugin.Bootstrap.V1/AbiNegotiatorExtensions.cs": "8cab9254c027693b09b9ed9c736155e85ba49a2f23c23951132dd43ed84863d7",
+    "src/Nexa.Plugin.Bootstrap.V1/Lifecycle.cs": "90c8409013d735e1099a9c3422f06d2bb020587f9ced87f5f72bbaa202d08841",
+    "src/Nexa.Plugin.Bootstrap.V1/Loading.cs": "05cfc70662f0662da4b13229dea8a5cb693623afc957714deb94fa43e25dcc5f",
+    "src/Nexa.Plugin.Bootstrap.V1/Primitives.cs": "a5fb2f6c97028b47c185d8e506701d2f084804e29ca6ccf4ea41a9b5d2fbe66d"
+  },
+  "experiments": []
+}
