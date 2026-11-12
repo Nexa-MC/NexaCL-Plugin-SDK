@@ -463,7 +463,7 @@ and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone gu
 | Idempotency | RequiredKey |
 | Host status | Mapped in recorded snapshot |
 
-Register kind nexa:java/distributions with method ListDistributions: PageRequest → Page<JavaDistribution>. The current Host accepts verified ZIP distributions. Each entry identifies this provider and supplies OS, architecture, version, exact archive size and SHA-256. Multi-file Mojang offers continue to use ListManagedDistributions and PrepareManagedInstall.
+Register kind nexa:java/distributions with method ListDistributions: PageRequest → `Page<JavaDistribution>`. The current Host accepts verified ZIP distributions. Each entry identifies this provider and supplies OS, architecture, version, exact archive size and SHA-256. Multi-file Mojang offers continue to use ListManagedDistributions and PrepareManagedInstall.
 
 **Request fields**
 

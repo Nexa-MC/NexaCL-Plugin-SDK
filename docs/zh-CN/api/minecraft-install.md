@@ -585,7 +585,7 @@ and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone gu
 | Idempotency | RequiredKey |
 | Host status | Mapped in recorded snapshot |
 
-Register kind nexa:install/loader-catalog with method ListVersions: LoaderVersionRequest → Page<LoaderVersion>. Consumers pass the provider ID as Loader in ListLoaderVersions. Returned items must use a supported built-in loader family and the requested game version. The Host wraps pagination and feeds the selections to its existing installer; this does not authorize an arbitrary executable installer.
+Register kind nexa:install/loader-catalog with method ListVersions: LoaderVersionRequest → `Page<LoaderVersion>`. Consumers pass the provider ID as Loader in ListLoaderVersions. Returned items must use a supported built-in loader family and the requested game version. The Host wraps pagination and feeds the selections to its existing installer; this does not authorize an arbitrary executable installer.
 
 **Request fields**
 
