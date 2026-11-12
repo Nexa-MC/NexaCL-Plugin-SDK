@@ -98,3 +98,20 @@ with zipfile.ZipFile(args.out/'advanced.zip','w',compression=zipfile.ZIP_DEFLATE
     for name,data in files.items():
         entry=zipfile.ZipInfo(name,date_time=(1980,1,1,0,0,0));entry.external_attr=0o100644<<16;archive.writestr(entry,data)
 print(args.out/'advanced.zip')
+
+# Durable private data projected into revisioned owned state; no UI is implied.
+state = args.out / 'state.wasm'
+subprocess.run([args.clang, '--target=wasm32-unknown-unknown', '-std=c11', '-O2', '-Wall', '-Wextra', '-Werror',
+    '-ffreestanding', '-fno-builtin', '-nostdlib', '-I', str(root / 'sdk/wasm/include'), str(root / 'samples/WasmStateStorage/plugin.c'),
+    '-Wl,--no-entry', '-Wl,--export-memory', '-Wl,-z,stack-size=131072', '-Wl,--initial-memory=1048576', '-Wl,--max-memory=1048576', '-o', str(state)], check=True)
+payload = state.read_bytes()
+manifest.update(pluginId='example.state', webAssemblyEntryPath='state.wasm',
+    requestedPermissions=['nexa.storage.read', 'nexa.storage.write', 'nexa.state.read', 'nexa.state.write'],
+    requiredCapabilities=[{'contractId': c, 'minimumVersion': 1} for c in ['nexa.storage', 'nexa.state']],
+    optionalCapabilities=[],
+    payloads=[{'path': 'state.wasm', 'size': len(payload), 'sha256': hashlib.sha256(payload).hexdigest()}])
+with zipfile.ZipFile(args.out / 'state.zip', 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+    for name, data in [('plugin.json', json.dumps(manifest, sort_keys=True, separators=(',', ':')).encode()), ('state.wasm', payload)]:
+        entry = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0)); entry.external_attr = 0o100644 << 16
+        archive.writestr(entry, data)
+print(args.out / 'state.zip')

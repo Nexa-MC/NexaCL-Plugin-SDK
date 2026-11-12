@@ -1,29 +1,76 @@
-# Packaging and distribution
+# Package format and distribution
 
-A plugin ZIP contains `plugin.json`, its declared entry and verified assets.
-The manifest binds plugin ID/version, Bootstrap version, target profile, ABI
-candidates, dependency/conflict declarations, requested permissions and required/
-optional capabilities. Every payload has a normalized relative path, exact byte
-length and SHA-256. Never include paths outside the package, duplicate entries,
-symlinks or an undeclared replacement for a hashed asset.
+A plugin package binds identity, executable profile, capability requests and payload
+bytes into a reviewable artifact. Build it from source; do not hand-edit a ZIP after
+its payload hashes have been computed.
 
-The sample build script is the executable manifest example. Keep build inputs
-under version control, run the generator consistency check, compile the guest,
-then compute manifest hashes from the actual output bytes. The ZIP uses stable
-entry order and timestamps. A changed asset requires a fresh package digest.
+## Container layout
 
-SDK releases contain two NuGet packages, C/Wasm headers, contracts, samples and
-documentation. `SHA256.json` records every bundle member. Consumers pin both the
-release and bundle digest; they must not silently download a mutable `main` branch.
-Checksums verify integrity, not publisher authenticity. Host/Market trust and
-entitlement verification are separate from an authoring SDK archive.
+The template emits this root layout:
 
-Use GitHub Releases as a download distribution, then add the extracted `packages/`
-as a local NuGet source. Package IDs and exact versions remain explicit in the
-consumer project. No private GitHub access or checkout of PluginSidecar should be
-required to compile an SDK-only project.
+```text
+plugin.json
+plugin.wasm
+page.nxml
+```
 
-Local developer admission and production Market delivery are distinct. The SDK
-cannot issue production entitlements, forge a verification result, or embed Market
-private keys. The Host can preserve approved encrypted packages for offline use;
-plugin code must still tolerate revoked permissions and missing optional services.
+Do not wrap these files in another directory. Each declared payload has a normalized
+relative path, exact byte length and SHA-256. Duplicate entries, traversal paths,
+symlinks and undeclared replacement assets must not become a way to change verified
+bytes. The actual admission policy is owned by the Host.
+
+## Manifest fields used by the executable example
+
+| Field | Meaning and author action |
+| --- | --- |
+| manifestVersion | Container manifest schema; the current example uses 1 |
+| pluginId / pluginVersion | Stable author-controlled identity and package version; keep qualified registration IDs consistent |
+| bootstrapVersion | Loading contract version, currently 1; not the SDK package version |
+| entry | Managed entry descriptor retained in the schema; the Wasm example leaves assembly/type empty |
+| target | Runtime profile plus OS/architecture restrictions; the example uses nexa-wasm-1 |
+| declaredAbiCandidates | Stable ABI candidates; the example declares [100] |
+| requiredDependencies / optionalDependencies | Dependency declarations used during admission and group coordination |
+| conflicts | Declared incompatibilities; do not silently assume conflicting loads can coexist |
+| requestedPermissions | Exact permissions the plugin asks the Host to grant |
+| requiredCapabilities / optionalCapabilities | Contract IDs and minimum versions needed for mandatory/optional features |
+| webAssemblyEntryPath | Relative path of the executable module |
+| declarativeEntryPath | Optional declarative content entry for the supported content profile |
+| payloads | Paths, sizes and digests computed from the actual payload bytes |
+
+`eng/build_wasm_sample.py` in the SDK and `eng/build.py` in the template are the
+executable examples of constructing these fields. The template deliberately exposes
+a smaller `plugin.config.json`; its builder fills the complete manifest. If you
+need new dependency or target metadata, extend the builder and validation together.
+
+## Profiles and assets
+
+`nexa-wasm-1` is an import-free WebAssembly module. Static assets are opened through
+verified package file references. `nexa-content-1` uses a declarative content entry
+without a code entry. A managed DLL does not become an allowed production profile
+by changing its extension or manifest string.
+
+The guest binary format and declarative schema are documented in [Wasm SDK](wasm-sdk.md).
+A plugin archive and an SDK bundle are different artifacts: do not install the SDK
+bundle as a plugin or include its NuGet packages in the guest package.
+
+## Consume an immutable SDK bundle
+
+The public SDK release includes two NuGet packages, headers, contracts, examples
+and documents. `sdk-manifest.json` identifies the source and package versions;
+`SHA256.json` covers its other members. Consumers pin the release filename, commit,
+size and outer digest, then validate the member digests and manifest identity.
+
+Use the bundle's `packages/` directory as a local NuGet source alongside nuget.org
+when compiling managed contract code. Publication on GitHub Releases does not imply
+those packages are available from nuget.org. No private Sidecar checkout is required.
+
+## Separate integrity from trust
+
+Checksums establish byte identity, not publisher authenticity. Local unsigned
+packages need explicit developer admission. Production Market delivery additionally
+needs authenticated acquisition, publisher/entitlement verification and Host policy.
+The SDK cannot manufacture those approvals or hold Market private keys.
+
+Approved cached content can support offline use only under the Host's actual
+policy. See [offline design](guides/offline.md) and [test and release](tutorials/test-and-release.md)
+before describing your package's distribution guarantees.

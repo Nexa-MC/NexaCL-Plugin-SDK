@@ -1,10 +1,16 @@
-# Runtime services
+# Runtime service behavior
 
-`PluginHostRuntime` installs 97 implemented operations from the ABI catalog. The
-embedding Host still supplies schema policy, verified acquisition, grants and
-launcher business adapters. This is a runnable library kernel, not an installed
-Desktop Sidecar. The CLI remains a scaffold. No production signing key or live
-Market grant endpoint is provisioned by these changes.
+Use this reference when a plugin depends on event delivery, workflows, service
+binding or persistent recovery. These behaviors belong to PluginSidecar's runtime
+and the embedding Host; the standalone SDK supplies their types and codecs.
+
+The recorded implementation has 97 kernel mappings and 200 Desktop mappings.
+[Host support](host-support.md) identifies the exact development snapshot. These
+counts describe routes, not a promise that every provider family or every released
+Alpha implements the full catalog. Production Market delivery remains incomplete.
+
+Read [asynchronous calls](guides/asynchronous-calls.md) first if you need to distinguish
+call completion, task completion and uncertain external effects.
 
 ## Publication and callbacks
 
@@ -32,7 +38,7 @@ provider retirement cancels a pending confirmation. After approval, permissions
 and registration identity are checked again. Non-read-only action idempotency keys bind inputs within a load;
 a reused key with different arguments fails instead of invoking the handler again.
 An unvalidated result or interrupted effect is `OUTCOME_UNKNOWN` and is not replayed.
-The real Desktop confirmation UI remains an embedding integration task.
+The recorded Desktop integration supplies the confirmation UI. Other embedding Hosts must provide their own trusted confirmation port.
 
 ## State, events and subscriptions
 
@@ -180,7 +186,7 @@ members and reject cycles or missing members. Tagged queries intersect requested
 tags; their cursors bind identity, registry, tag filter and revision. Overlay
 publication/retirement invalidates definition CAS revisions. PreviewOverlay returns
 a plan containing the resolved result without publishing it. Definitions.Watch
-uses owned Resources subscriptions and sends Snapshot<DefinitionBatch> values.
+uses owned Resources subscriptions and sends `Snapshot<DefinitionBatch>` values.
 Host Snapshot and consumer publication use the same resolved values as SDK reads.
 
 Content dependencies participate in consumer-first plugin retirement. Dynamic

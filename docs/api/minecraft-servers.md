@@ -1,83 +1,206 @@
 # Minecraft.Servers
 
-Contract: `nexa.minecraft.servers/100`. [Capability index](index.md).
+Manage the saved server list, query status, discover LAN announcements and request joining through the launcher. Discovery and status are observations, not launch authorization.
 
-All calls return `AbiReply<T>`; inspect success before reading the value.
-The Host verifies permission, lifecycle phase, ownership and business preconditions.
-Mapped status records a development snapshot, not a promise for every released launcher.
+Contract: `nexa.minecraft.servers/100`. [API index](index.md).
+
+## Typical sequence
+
+Preserve the saved list’s revision when updating it. Read status through the Host resolver; consume LAN discovery as a subscription and handle disappearance or gaps.
+
+## Behavior and limits
+
+An unreachable status probe is not definitive proof a server never accepts clients. Joining still requires a compatible instance and account; do not convert a server address into arbitrary process arguments.
+
+The recorded Host maps 5 of 5 operations in this group.
+A mapping is subject to permission, phase, scope, platform and business preconditions.
+[Host snapshot](../host-support.md) identifies the source revision; negotiate against
+the actual installed Host.
+
+## Operations
+
+[ListSaved](#listsaved) · [SaveList](#savelist) · [ReadStatus](#readstatus) · [DiscoverLan](#discoverlan) · [Join](#join)
 
 ### ListSaved
 
-`Empty -> ServerList`
+[`Empty`](models/empty.md) → [`ServerList`](models/serverlist.md)
 
 | Property | Contract |
 | --- | --- |
-| SDK method ID | `1` |
+| Local SDK method ID | `1` |
 | Kind | Query |
 | Permission | `nexa.minecraft.servers.read` |
 | Legal phases | Initialize, PostInitialize, Checkup, Finalize, Active |
 | Idempotency | ReadOnly |
-| Host status | Mapped in recorded Host snapshot |
+| Host status | Mapped in recorded snapshot |
 
-Input and output fields are defined in [models](models.md). Respect cancellation and the caller budget.
+**Request fields**
+
+This model has no fields. Send its encoded empty object, not an arbitrary Null value.
+
+**Successful result**
+
+Decode the exact output model after Success. Preserve its identities, revision and schema metadata for subsequent domain operations.
+
+**Failure and retry**
+
+Unavailable capability, denied permission, wrong phase, malformed schema or foreign ownership fails the call. A read-only classification does not bypass budgets or guarantee a failed request can be retried indefinitely. Preserve structured errors; see [recovery guidance](../errors.md).
+
+**C binding** (call fragment; the caller supplies the encoded request and buffers):
+
+```c
+nx_Minecraft_Servers_ListSaved(&reply, request, &options);
+```
+
+The next resume receives the reply. Check `nx_reply_success` before
+`nx_Minecraft_Servers_ListSaved_result`. See the [complete continuation example](../tutorials/page-and-action.md)
+and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone guest.
 
 ### SaveList
 
-`ServerList -> ServerList`
+[`ServerList`](models/serverlist.md) → [`ServerList`](models/serverlist.md)
 
 | Property | Contract |
 | --- | --- |
-| SDK method ID | `2` |
+| Local SDK method ID | `2` |
 | Kind | Mutation |
 | Permission | `nexa.minecraft.servers.write` |
 | Legal phases | Active |
 | Idempotency | RequiredKey |
-| Host status | Mapped in recorded Host snapshot |
+| Host status | Mapped in recorded snapshot |
 
-Input and output fields are defined in [models](models.md). Supply a unique idempotency key for a new effect and retain it while checking an uncertain result. Respect cancellation and the caller budget.
+**Request fields**
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Servers` | [`ServerRecord[]`](models/serverrecord.md) | Structured ServerRecord value; follow its linked field contract. A bounded collection; do not assume an unbounded result or unspecified ordering. |
+| `Revision` | `Revision` | Opaque version token issued by the owner. Do not increment it or substitute another object’s revision. |
+
+**Successful result**
+
+Decode the exact output model after Success. Preserve its identities, revision and schema metadata for subsequent domain operations.
+
+**Failure and retry**
+
+Unavailable capability, denied permission, wrong phase, malformed schema or foreign ownership fails the call. Supply a key for the intended effect and retain that key and inputs while resolving an uncertain reply. Do not retry with changed inputs under the same key. Re-read after revision conflicts; cancellation does not prove rollback. Preserve structured errors; see [recovery guidance](../errors.md).
+
+**C binding** (call fragment; the caller supplies the encoded request and buffers):
+
+```c
+nx_Minecraft_Servers_SaveList(&reply, request, &options);
+```
+
+The next resume receives the reply. Check `nx_reply_success` before
+`nx_Minecraft_Servers_SaveList_result`. See the [complete continuation example](../tutorials/page-and-action.md)
+and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone guest.
 
 ### ReadStatus
 
-`EntityRequest -> ServerStatus`
+[`EntityRequest`](models/entityrequest.md) → [`ServerStatus`](models/serverstatus.md)
 
 | Property | Contract |
 | --- | --- |
-| SDK method ID | `3` |
+| Local SDK method ID | `3` |
 | Kind | Query |
 | Permission | `nexa.minecraft.servers.read` |
 | Legal phases | Initialize, PostInitialize, Checkup, Finalize, Active |
 | Idempotency | ReadOnly |
-| Host status | Mapped in recorded Host snapshot |
+| Host status | Mapped in recorded snapshot |
 
-Input and output fields are defined in [models](models.md). Respect cancellation and the caller budget.
+**Request fields**
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Id` | `EntityId` | Identity in this model’s domain. Use the identity issued or declared for this object, not a display name or filesystem path. |
+
+**Successful result**
+
+Decode the exact output model after Success. Preserve its identities, revision and schema metadata for subsequent domain operations.
+
+**Failure and retry**
+
+Unavailable capability, denied permission, wrong phase, malformed schema or foreign ownership fails the call. A read-only classification does not bypass budgets or guarantee a failed request can be retried indefinitely. Preserve structured errors; see [recovery guidance](../errors.md).
+
+**C binding** (call fragment; the caller supplies the encoded request and buffers):
+
+```c
+nx_Minecraft_Servers_ReadStatus(&reply, request, &options);
+```
+
+The next resume receives the reply. Check `nx_reply_success` before
+`nx_Minecraft_Servers_ReadStatus_result`. See the [complete continuation example](../tutorials/page-and-action.md)
+and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone guest.
 
 ### DiscoverLan
 
-`Empty -> SubscriptionRef`
+[`Empty`](models/empty.md) → [`SubscriptionRef`](models/subscriptionref.md)
 
 | Property | Contract |
 | --- | --- |
-| SDK method ID | `4` |
+| Local SDK method ID | `4` |
 | Kind | Subscription |
 | Permission | `nexa.minecraft.servers.read` |
 | Legal phases | Initialize, PostInitialize, Checkup, Finalize, Active |
 | Idempotency | ReadOnly |
-| Host status | Mapped in recorded Host snapshot |
+| Host status | Mapped in recorded snapshot |
 
-Input and output fields are defined in [models](models.md). Read bounded batches, handle resynchronization and release the subscription before retirement. Respect cancellation and the caller budget.
+**Request fields**
+
+This model has no fields. Send its encoded empty object, not an arbitrary Null value.
+
+**Successful result**
+
+Retain the subscription identity, consume bounded batches or callbacks as specified, handle gaps, and release it when no longer needed.
+
+**Failure and retry**
+
+Unavailable capability, denied permission, wrong phase, malformed schema or foreign ownership fails the call. A read-only classification does not bypass budgets or guarantee a failed request can be retried indefinitely. Preserve structured errors; see [recovery guidance](../errors.md).
+
+**C binding** (call fragment; the caller supplies the encoded request and buffers):
+
+```c
+nx_Minecraft_Servers_DiscoverLan(&reply, request, &options);
+```
+
+The next resume receives the reply. Check `nx_reply_success` before
+`nx_Minecraft_Servers_DiscoverLan_result`. See the [complete continuation example](../tutorials/page-and-action.md)
+and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone guest.
 
 ### Join
 
-`ServerJoinRequest -> OperationRef`
+[`ServerJoinRequest`](models/serverjoinrequest.md) → [`OperationRef`](models/operationref.md)
 
 | Property | Contract |
 | --- | --- |
-| SDK method ID | `5` |
+| Local SDK method ID | `5` |
 | Kind | Operation |
 | Permission | `nexa.minecraft.servers.write` |
 | Legal phases | Active |
 | Idempotency | RequiredKey |
-| Host status | Mapped in recorded Host snapshot |
+| Host status | Mapped in recorded snapshot |
 
-Input and output fields are defined in [models](models.md). Supply a unique idempotency key for a new effect and retain it while checking an uncertain result. Track the returned operation through Tasks; admission is not completion. Respect cancellation and the caller budget.
+**Request fields**
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Server` | `EntityId` | Identity or revision in this model’s domain; preserve ownership and exact spelling. |
+| `Intent` | [`LaunchIntent`](models/launchintent.md) | Structured LaunchIntent value; follow its linked field contract. |
+
+**Successful result**
+
+Work has been admitted. Read or watch the owned operation through Tasks to establish its terminal result; admission is not completion.
+
+**Failure and retry**
+
+Unavailable capability, denied permission, wrong phase, malformed schema or foreign ownership fails the call. Supply a key for the intended effect and retain that key and inputs while resolving an uncertain reply. Do not retry with changed inputs under the same key. Re-read after revision conflicts; cancellation does not prove rollback. Preserve structured errors; see [recovery guidance](../errors.md).
+
+**C binding** (call fragment; the caller supplies the encoded request and buffers):
+
+```c
+nx_Minecraft_Servers_Join(&reply, request, &options);
+```
+
+The next resume receives the reply. Check `nx_reply_success` before
+`nx_Minecraft_Servers_Join_result`. See the [complete continuation example](../tutorials/page-and-action.md)
+and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone guest.
 

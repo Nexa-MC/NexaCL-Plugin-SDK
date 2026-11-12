@@ -1,142 +1,120 @@
-# Plugin loading contract — ABI v0.2
+# Loading, activation and retirement
 
-Design input: [v0.2 proposal](specifications/plugin-abi-v0.2.proposal.zh-CN.md).
-The v0.1 proposal is retained as loading history where compatible. Host traffic
-continues to use the existing NexaCL binary Sidecar ABI; no JSON framing or new
-transport message IDs are introduced.
-Local managed facades never cross that boundary; adapters send opaque handles
-and explicit bounded data through reviewed upstream operations.
+A plugin becomes usable only after negotiation, staged registration and atomic
+activation. Treat this as a state machine: receiving a context or completing one
+callback does not mean the plugin may already perform Active-only work.
 
-## Preview compatibility
+This page describes Bootstrap V1 with ABI 100. The original
+[v0.2 proposal](specifications/plugin-abi-v0.2.proposal.zh-CN.md) records design input;
+use the generated API and Host support pages for current operation availability.
 
-The independent SDK starts at `0.2.0-alpha.10`. Extraction from alpha.9 preserves
-existing ABI 100 operation numbers, model fields, schema fingerprints and Bootstrap
-signatures. Package version, Bootstrap version and negotiated ABI version are
-separate axes. Earlier v0.1 prototypes and legacy PCL.N.Plugin.* plugins must be
-ported; the repository replacement does not make those binaries compatible.
+## Negotiate once, then use the confirmed context
 
-## Unified context
+In managed Bootstrap, `GetABIContext(100, options)` returns a draft. Build required
+and optional capability requests, then call Make through the negotiator. Only the
+Host-confirmed final context is used for loading callbacks. `GetExpermentABI`
+retains its historical spelling. ABI requests must be positive multiples of 100;
+an unsupported version does not silently fall back.
 
-`GetABIContext` returns a Draft `ABIContext`; Host-confirmed `MakeABIContext`
-returns the final facade. `GetExpermentABI` retains its intentional spelling.
-Requests must be positive multiples of 100 and never implicitly fall back.
-`AbiReply<T>.Fail` carries a structured error and default value (null for local
-facades, zero for opaque handles). Ready does not mean Active.
+`ABIContext.Info` describes the admitted identity and negotiated capabilities.
+`GetAbility` and `GetExperiment` access already confirmed contracts. They do not
+perform new negotiation or grant permissions. An optional capability may be absent;
+a missing required capability should prevent the unsupported feature from loading.
 
-Bootstrap freezes only the generic context facade:
+## Callback order and purpose
 
-- `Info`: immutable identity, opaque handle, stable version, confirmed experiment
-  and capability descriptions, permissions and session/permit information.
-- `GetAbility(contractId)`: access an already confirmed capability.
-- `GetExperiment(expId, contractId)`: access an interface belonging to an already
-  confirmed experiment. Neither accessor negotiates, grants permission or calls Make.
-
-Initialize, PostInitialize, Checkup and Finalize receive **the same final
-ABIContext**, plus an independently issued StageContext. StageContext owns the
-StageInvocationId, cancellation, budget and optional read-only CheckupInfo.
-Its monotonic remaining budget starts when the local callback context is created;
-creating another SDK view does not reset it. Abort can carry a null final context
-when negotiation failed. Stop carries the original final context.
-
-## ABI 100 SDK views
-
-Use `abi.AsAbi100()` for runtime views and `abi.ForStage100(stage)` inside a load
-callback. Both expose all 33 public capability groups, including the nine Minecraft subgroups.
-`Experiments` exposes confirmed experimental views; `TryGet<T>` preserves missing
-capability errors and `IsAvailable<T>` offers a convenience check.
-`Abi100Draft.Require/Optional/Include` assembles immutable Make inputs.
-Views lazily request exact contract IDs and preserve structured Host errors.
-A different stable ABI is rejected, never silently upgraded. `GetExperiment<T>`
-uses the static `IExperimentView<T>` ContractId/Create mapping; no reflection is
-used. Saved experiment proxies recheck access before dispatch.
-
-| Contract | Callable methods | Notes |
+| Phase | What to do | What must not be assumed |
 | --- | --- | --- |
-| `nexa.events/100` | 1, 2, 4, 5 | Slot 3 reserved; no service export |
-| `nexa.ui/100` | 1–6 | Existing UI methods |
-| `nexa.interplugin/100` | 1–7 | ExportService = 6; Probe = 7 |
-| `nexa.diagnostics/100` | 1–4 | Report, ReportFinding, QueryRegistrations, QueryBindingStatus |
-| `nexa.resources/100` | 1 | RegisterCleanup |
+| PreInitialize | Negotiate; prepare callback and cleanup ownership | A draft is not an Active context |
+| Initialize | Stage allowed contracts, pages, actions and definitions | Staged registrations are not visible to consumers |
+| PostInitialize | Establish allowed inter-plugin bindings | A service name does not bind every future provider load |
+| Checkup | Probe dependencies and return explicit findings | Passing one probe does not skip later Host checks |
+| Finalize | Finish the admitted load without new registrations | Finalize is not another Initialize |
+| Activated | Begin normal runtime work after group commit | This notification is not an extra loading stage |
+| Abort | Clean up an unsuccessful load | A final context may not exist if negotiation failed |
+| Stop | Retire active work and release local resources | Old handles cannot be reused after a new load |
 
-These 22 historical methods keep their dispatch meaning. The v0.2 catalog adds
-341 operations with typed requests and replies. Each entry records phase,
-permission, idempotency and pending Host mapping. Contract IDs, schemas and
-permissions are preview design choices until Host mapping is reviewed. Diagnostic source/ownership is assigned by Host.
-The pre-Make `PreInitContext.Resources` port and post-Make `api.Resources` MUST
-map to one instance resource table, preserving operation IDs and avoiding duplicate
-cleanup. This SDK does not create another cleanup registry.
+Required participants publish together. Failure before commit removes the staged
+group, so users cannot interact with a half-registered plugin. After commit,
+retirement cancels retained work and removes owned registrations.
 
+## Scope every managed view
+
+The final ABIContext is shared across Initialize, PostInitialize, Checkup and
+Finalize, but each callback receives its own StageContext. Use
+`abi.ForStage100(stage)` inside that callback and dispose the view before returning.
+Use `abi.AsAbi100()` for a runtime view with a runtime invocation scope.
+
+A stage view forwards its invocation ID, cancellation and remaining budget. A
+saved proxy from a disposed view fails with STAGE_FROZEN. Creating another wrapper
+does not extend a deadline. The Host independently rejects retired stage IDs,
+wrong phases, foreign loads and missing permissions; wrapper disposal is a local
+convenience, not the security boundary.
+
+See `samples/HelloPlugin/Plugin.cs` for a complete compiled managed implementation.
+It illustrates the contract and is not an installable production DLL plugin.
+
+## Scope Wasm continuations
+
+Wasm receives lifecycle messages through `nexa_resume`. An SDK call yields an
+`invoke` continuation; its reply arrives in a later resume. Keep only owned scalar
+state or copied values across that boundary. Borrowed model views refer to the
+current input buffer and cannot outlive it.
+
+The guest does not choose its trusted identity, stage or remaining budget by
+adding fields to the request. PluginSidecar supplies them from the admitted load.
+See [the page tutorial](tutorials/page-and-action.md) for a complete call chain.
+
+## Handle failure without hiding it
+
+Check `AbiReply<T>.Success` before using Value. A failed reply's default value is
+not an empty successful response. Preserve the structured error and let Abort or
+Stop perform the appropriate cleanup. Cleanup itself is bounded; do not block it
+waiting synchronously for unrelated Host work.
+
+Activation, stop and provider replacement require fresh ownership decisions.
+A service binding does not silently attach to a new provider instance, and a saved
+file or subscription handle is not portable across loads.
+
+[Permission checks](permissions.md) · [Asynchronous calls](guides/asynchronous-calls.md) ·
+[Host implementation snapshot](host-support.md)
+
+## Complete source
+
+The following is synchronized with `samples/HelloPlugin/Plugin.cs` and compiled by SDK CI.
+
+<!-- example:samples/HelloPlugin/Plugin.cs language:csharp -->
 ```csharp
-public async ValueTask<AbiReply<CheckupResult>> OnCheckup(ABIContext abi, StageContext stage)
+using Nexa.Plugin.Bootstrap.V1;
+using Nexa.Plugin.Sdk.Abi100;
+namespace HelloPlugin;
+
+public sealed class Plugin : IPluginBootstrapV1
 {
-    using var api = abi.ForStage100(stage);
-    var result = await api.Plugins.ReadOwnLoadReport(new Empty(),
-        new(Guid.NewGuid(), stage.Budget, stage.Cancellation));
-    return result.Success
-        ? AbiReply<CheckupResult>.Ok(new(CheckupStatus.Passed, [], []))
-        : AbiReply<CheckupResult>.Fail(result.Error!);
+    public async ValueTask<AbiReply<PreInitResult>> OnPreInitialize(PreInitContext context)
+    {
+        var options = new InvocationOptions(Guid.NewGuid(), context.Budget, context.Cancellation);
+        var draft = await context.Negotiator.GetABIContext(100, options);
+        if (!draft.Success) return AbiReply<PreInitResult>.Fail(draft.Error!);
+        var ready = await new Abi100Draft(draft.Value).Require("nexa.diagnostics", 1).Optional("nexa.ui", 1)
+            .Make(context.Negotiator, Guid.NewGuid(), [], context.Cancellation);
+        return ready.Success ? AbiReply<PreInitResult>.Ok(new(ready.Value, [], [], [], [])) : AbiReply<PreInitResult>.Fail(ready.Error!);
+    }
+    public ValueTask<AbiReply<Unit>> OnInitialize(ABIContext abi, StageContext stage) => Ok();
+    public ValueTask<AbiReply<Unit>> OnPostInitialize(ABIContext abi, StageContext stage) => Ok();
+    public async ValueTask<AbiReply<CheckupResult>> OnCheckup(ABIContext abi, StageContext stage)
+    {
+        using var api = abi.ForStage100(stage);
+        var registrations = await api.Diagnostics.QueryRegistrations(new(Guid.NewGuid(), stage.Budget, stage.Cancellation));
+        return registrations.Success
+            ? AbiReply<CheckupResult>.Ok(new(CheckupStatus.Passed, [], []))
+            : AbiReply<CheckupResult>.Fail(registrations.Error!);
+    }
+    public ValueTask<AbiReply<Unit>> OnFinalize(ABIContext abi, StageContext stage) => Ok();
+    public ValueTask<AbiReply<Unit>> OnActivated(ABIContext abi, InvocationContext invocation) => Ok();
+    public ValueTask<AbiReply<Unit>> OnAbort(AbortContext context) => Ok();
+    public ValueTask<AbiReply<Unit>> OnStop(StopContext context) => Ok();
+    private static ValueTask<AbiReply<Unit>> Ok() => ValueTask.FromResult(AbiReply<Unit>.Ok(new()));
 }
 ```
-
-Dispose the stage view before returning. It attaches the stage invocation ID,
-links cancellation and forwards the smaller remaining/caller budget. Saved proxies
-from a disposed view fail with STAGE_FROZEN. Runtime views do not inherit stage IDs
-or deadlines. This convenience is **not authorization**: callers can retain or
-recreate StageContext and can call Bootstrap facades directly. The coordinator must
-retire invocation IDs on callback completion; Host must reject stale IDs, wrong
-phases, cross-instance access, expired contexts and missing permissions on every
-call. It must also reject unconfirmed experiments through either accessor.
-
-ExportService is valid in Initialize, Bind in PostInitialize, Probe in Checkup,
-and ordinary Call in Active. Finalize cannot add registrations. Abort/Stop only
-allow corresponding cleanup, unbinding and diagnostic operations. Merely retaining
-`api.Plugins` must never broaden the allowed methods.
-
-## Verification and remaining integration
-
-Tests cover all 22 dispatch slots, reserved event slot exclusion, exact UInt64,
-structured error propagation, lazy views, draft/unconfirmed experiment errors,
-stage-ID forwarding and conflict rejection, disposed proxies, runtime budgets,
-and a real in-memory sample using a private SDK against shared Bootstrap types.
-The repository also contains a real local Host authority and coordinator. Tests
-exercise exact Make admission, phase leases, timeout/idempotency handling,
-required-dependency groups, hot-conflict stop closure, atomic publication and
-instance-owned cleanup. A signed encrypted package is reopened offline and loaded
-through either actual Wasmtime callbacks or a declarative entry. These tests use
-the production kernel with explicit trusted schema policies, not fake route
-replies. The separately labelled SDK tests still use test ports.
-
-The Desktop composition, authenticated remote loading port, actual business
-adapters and full proposal scenario matrix remain incomplete. No experimental
-capabilities are currently offered; existing experiment IDs must gain retained
-compatibility fixtures when implementations are added.
-
-## v0.2 data and authority
-
-`contracts/abi100.json` is the machine-readable source; generated source uses static
-codecs over the closed Bootstrap value union. No reflection dispatcher or CLR
-object serialization is added. The JSON catalog is build input, not IPC data.
-`Snapshot<T>` includes revision, schema version and observation time. Pages carry
-opaque cursors. Definitions in `DeclarativeContentPack` use the same `Definition`
-as code registration; this does not introduce a second content-pack file format.
-
-All methods require Host validation of schemas and effect-specific scopes.
-Catalog `.read`/`.write` permissions identify draft capability families and are
-not substitutes for target grants. An acquisition such as Storage.OpenNamespace
-can only open the caller's already authorized namespace during initialization.
-Network receive/stream operations consume external state and are Active-only.
-No automatic retry is performed; uncertain external outcomes remain explicit.
-
-`InvocationOptions` carries expected revision, idempotency key, correlation and
-causation IDs. `AbiError` carries localized message parameters and operation ID.
-The SDK facade does not implement durable idempotency or mutation-plan confirmation.
-The Host kernel separately owns per-load replay, persistent workflow checkpoints
-and the trusted action-confirmation port described in [runtime services](runtime-services.md).
-Opaque FileRef/BlobRef and service bindings retain their load-instance identity.
-
-OnActivated receives an InvocationContext only after atomic commit. It is not a
-seventh loading stage. Events/workflow callbacks need their own invocation scope.
-Raw CoreCLR development loading is not allowed as the production isolation
-boundary. Service/provider descriptors, Java arguments and public launch profiles
-must be checked against actual execution effects; a provider's own metadata is
-not proof that it cannot delegate arbitrary native execution.
+<!-- /example -->

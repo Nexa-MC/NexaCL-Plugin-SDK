@@ -1,0 +1,188 @@
+{
+  "groups": {
+    "Contracts": {
+      "purpose": "Describe and negotiate public contracts before using their operations. A contract declaration identifies schemas and versions; it does not grant permission to perform the declared effects.",
+      "sequence": "Define contracts during the allowed registration stage, then query compatibility and availability. A successful schema check validates the value against that schema; domain ownership and effect checks still apply.",
+      "limits": "WatchAvailability returns a subscription. Refresh dependent UI after availability changes, but do not silently rebind a required service to a different provider."
+    },
+    "Definitions": {
+      "purpose": "Publish typed definitions into registries and resolve the definitions visible to a consumer. Definitions are data; registering one does not make arbitrary launcher code execute it.",
+      "sequence": "Discover the registry and its accepted schema first. Register owned values during staging, and use the returned identity and revision for later updates. Tags and overlays affect resolution according to the registry contract.",
+      "limits": "Use ExplainResolution when an overlay or tag produces an unexpected result. Keep a failed resolution distinct from a valid empty result; remove only definitions owned by the current load."
+    },
+    "Predicates": {
+      "purpose": "Declare and evaluate bounded conditions for workflows and other authorized consumers. A predicate computes a result; it must not smuggle a mutation into a query callback.",
+      "sequence": "Register the input schema and handler or supported expression, then evaluate with matching inputs. The runtime supports a closed expression grammar rather than arbitrary source evaluation.",
+      "limits": "Treat an evaluation failure separately from false. A missing capability, bad schema or retired handler is not evidence that the business condition is false."
+    },
+    "Actions": {
+      "purpose": "Expose a named, typed operation that the Host can invoke with the declared effects and confirmation policy. An action connects a descriptor to a callback; a registered callback alone is not a public action.",
+      "sequence": "Register the descriptor during initialization. Call Invoke after activation with matching inputs and the required idempotency key. Inspect the returned operation through Tasks.",
+      "limits": "Confirmation occurs before handler dispatch. Decline must not invoke the handler. Reusing a mutation key with changed inputs is a conflict; an unknown result must not be replayed with a new key."
+    },
+    "Commands": {
+      "purpose": "Discover and execute Host-exposed commands through typed action contracts. A command ID names a public operation, not an arbitrary shell command or executable.",
+      "sequence": "List or describe the command, validate its input schema, then Execute with the same target and inputs the user reviewed. Execution returns an operation to observe.",
+      "limits": "An unavailable command remains unavailable even if a similarly named UI control exists. Do not fall back to process execution or private UI access."
+    },
+    "Workflows": {
+      "purpose": "Compose registered actions and predicates into bounded, observable work. Workflow definitions describe ordering, branches, retries and recovery; they do not bypass each node’s permissions.",
+      "sequence": "Register and validate the definition before activation. Start with typed inputs, then read or watch the operation. Persistent recovery requires the saved revision, unchanged definition and compatible inputs.",
+      "limits": "Resume known progress only. OUTCOME_UNKNOWN records an effect whose result cannot be established; it is not a failed step that is automatically safe to retry."
+    },
+    "Schedules": {
+      "purpose": "Trigger an owned workflow at a declared time, interval or event. Scheduling determines when work is requested; the workflow still performs normal authority checks.",
+      "sequence": "Register the schedule with a valid timezone and trigger definition. Enable or disable it explicitly, inspect ReadNextRun, and use TriggerNow for an intentional manual run.",
+      "limits": "Missed-trigger policies govern backlog, not exactly-once effects. Disabling or stopping fences future dispatch; it does not undo effects already completed by a run."
+    },
+    "Events": {
+      "purpose": "Publish typed events and subscribe with explicit delivery and resumption behavior. Event payloads describe observations; the Host supplies trusted origin and invocation identity.",
+      "sequence": "Define the event contract, subscribe during the permitted registration stage, and publish only with the declared schema and scope. Keep the returned subscription identity for cleanup.",
+      "limits": "Callbacks may repeat under at-least-once delivery. Handle resynchronization after gaps and retention loss. Use the matching subscription-based unsubscribe operation instead of reinterpreting a subscription as a registration."
+    },
+    "State": {
+      "purpose": "Expose a current, revisioned value and observe changes. State is useful for a view of current data; event history and private durable storage serve different purposes.",
+      "sequence": "Define the owned state and schema, then read a snapshot before a conditional update. Pass the exact returned revision to CompareExchangeOwned and reconcile conflicts.",
+      "limits": "A watch can report a gap; recover with a fresh Read. Uninitialized state is explicit and must not be confused with a failed read or with a valid empty value."
+    },
+    "UI": {
+      "purpose": "Contribute verified NXML pages, components and finite UI behavior to Host-owned rendering. Plugins provide assets and typed intent; the Host owns controls, input, navigation and confirmation.",
+      "sequence": "Open verified package assets before registration. Discover extension targets and their contracts before contributing or replacing a view. Keep action IDs and NXML bindings in the plugin namespace.",
+      "limits": "Stage registrations are not visible before atomic activation. Stop retires them. Model updates, drawing surfaces and input subscriptions retain their own schemas, budgets and ownership checks."
+    },
+    "Plugins": {
+      "purpose": "Export a typed service or bind to a compatible service from another admitted plugin. Bindings are explicit relationships between particular loads, not ambient access to other plugins.",
+      "sequence": "Export during Initialize, bind during PostInitialize and probe during Checkup. Invoke only after activation. Describe the service before choosing a version range.",
+      "limits": "A required provider dependency can stop its consumers when it retires; an optional binding becomes unavailable. Bindings never silently switch to a replacement load."
+    },
+    "Diagnostics": {
+      "purpose": "Report bounded, structured information about the current plugin’s work. Diagnostics help explain a failure without exposing private account data or creating an unbounded logging channel.",
+      "sequence": "Use stable message keys and relevant operation/correlation IDs. ReadOwnReports is scoped to the caller; it is not a global launcher log reader.",
+      "limits": "The Host assigns source and ownership. Do not log bearer tokens, grants, encrypted package keys or full user file contents. A diagnostic report does not turn a failed operation into success."
+    },
+    "Resources": {
+      "purpose": "Register cleanup and release owned registrations or subscriptions. This group coordinates specific resource kinds; it is not a universal release API for every opaque value.",
+      "sequence": "Retain each acquisition’s actual handle type. ReadSubscription consumes a bounded batch, so retain the same key while resolving an uncertain read. Release a subscription when it is no longer needed.",
+      "limits": "A gap requires a new authoritative snapshot or domain-specific resynchronization. Stopped loads cannot reuse prior handles; do not cast blobs or files to RegistrationRef."
+    },
+    "Minecraft.Instances": {
+      "purpose": "Read the launcher’s instance inventory and request supported instance changes. An instance identity is a Host-owned reference, not a directory name or a plugin-selected filesystem path.",
+      "sequence": "List within the requested inventory scope, read details by returned identity, and prepare changes before committing the exact plan. Selection and launch are separate operations.",
+      "limits": "Several clone/delete routes remain unmapped in the recorded Host. Do not emulate them by deleting files through unrelated APIs. Read errors must remain distinct from an empty inventory."
+    },
+    "Minecraft.Install": {
+      "purpose": "Resolve an installation draft into an explicit plan and execute it through the launcher’s installer. Draft edits, plan validation and execution are separate steps.",
+      "sequence": "List compatible game/loader versions, update and validate the draft, resolve its plan, review it, then execute that plan. Monitor the returned operation for actual completion.",
+      "limits": "An accepted execution request does not prove all files installed. Recovery and custom loader/template registration remain unavailable where marked; do not fabricate recovery records."
+    },
+    "Minecraft.Java": {
+      "purpose": "Discover Java runtimes, inspect requirements and select a runtime through launcher policy. Managed distribution offers describe the complete installable content accepted by the current installer.",
+      "sequence": "Read the instance’s requirements before resolving selection. Use ListManagedDistributions and PrepareManagedInstall for the mapped multi-file distribution path, then commit through Install.",
+      "limits": "The older single-file distribution catalog and preparation route are not mapped in this snapshot. A selected runtime still needs platform, architecture and version compatibility."
+    },
+    "Minecraft.Launch": {
+      "purpose": "Prepare and start a game using an explicit profile and launch plan. Profile editing, plan creation and process observation are different lifecycle steps.",
+      "sequence": "Read or select the intended instance profile, prepare the launch, validate the exact plan, then Start. Observe the attempt and resulting session rather than assuming admission means a running game.",
+      "limits": "A changed account, Java selection or instance state can invalidate the plan. Contribution/preflight registration routes remain unmapped where listed; arbitrary native command injection is not a fallback."
+    },
+    "Minecraft.Processes": {
+      "purpose": "Observe game sessions owned by the launcher and request session lifecycle actions. A session ID is not a raw operating-system PID.",
+      "sequence": "List sessions, read a selected session, and subscribe to bounded log or metric updates. Use RequestClose for the supported graceful path; Stop has separate termination semantics.",
+      "limits": "Missing metrics are not measured zero. A log subscription can lose history; use the supported range read and gap handling. Closing a launcher view must not imply killing a game session."
+    },
+    "Minecraft.Content": {
+      "purpose": "Inspect and change instance content with dependency-aware plans and transaction records. A content item belongs to a specific instance and content domain.",
+      "sequence": "Build the relevant install/enable/disable/remove/update plan, inspect the preview and execute its exact identity/revision. Read the operation and transaction records before offering rollback.",
+      "limits": "Rollback is a reviewed domain operation, not arbitrary file reversal. Import/export supports an explicit format allowlist. Trash clearing and custom format providers remain unavailable where marked."
+    },
+    "Minecraft.Worlds": {
+      "purpose": "Read world metadata and request supported copy, rename, data-pack and backup operations. A world belongs to an instance; its display name does not grant path access.",
+      "sequence": "Read the world identity and health, then prepare data-pack changes or other planned operations. Use the returned task to observe long-running copies and backups.",
+      "limits": "Delete and restore routes are not fully mapped in this snapshot. Never substitute a live directory overwrite for an unavailable restore operation."
+    },
+    "Minecraft.Servers": {
+      "purpose": "Manage the saved server list, query status, discover LAN announcements and request joining through the launcher. Discovery and status are observations, not launch authorization.",
+      "sequence": "Preserve the saved list’s revision when updating it. Read status through the Host resolver; consume LAN discovery as a subscription and handle disappearance or gaps.",
+      "limits": "An unreachable status probe is not definitive proof a server never accepts clients. Joining still requires a compatible instance and account; do not convert a server address into arbitrary process arguments."
+    },
+    "Catalog": {
+      "purpose": "Search resource providers and resolve projects, versions, files and dependencies. Provider identity remains part of every resource reference and page sequence.",
+      "sequence": "Choose an explicit provider, search with a bounded page, then resolve a selected version before planning installation. Read-provider callbacks return typed values with matching provenance.",
+      "limits": "Custom catalog providers currently support seven read queries. Mixed built-in/custom searches, custom installation and favorites are not implied by successful registration."
+    },
+    "Accounts": {
+      "purpose": "Read public account information and request account workflows without exposing credentials. Authentication tokens and launch credentials are not ordinary account metadata.",
+      "sequence": "Begin sign-in, present its challenge through the supported user flow, then continue or cancel with the returned identity. Check launch eligibility before requesting a scoped launch grant.",
+      "limits": "Public reads do not authorize token extraction. Sign-out and custom account providers remain unmapped where listed. A cancelled challenge is not a successful sign-in."
+    },
+    "Settings": {
+      "purpose": "Read effective settings and apply reviewed changes to the requested scope. Stored values, inherited values and temporary overlays have different ownership and lifetimes.",
+      "sequence": "Use GetEffective when the UI needs the value and its origin. Preview a change and apply its plan; retain an overlay’s registration so it can be ended explicitly.",
+      "limits": "A temporary overlay is not a durable profile write. Schema/page registration and migration routes remain unmapped where listed; direct modification of launcher configuration files is not a supported substitute."
+    },
+    "Themes": {
+      "purpose": "Inspect themes, preview a prepared theme and commit or revert it through Host appearance ownership. Preview is a temporary visible effect, not merely a query.",
+      "sequence": "Prepare the selected theme, preview the returned plan if desired, then commit it or revert the preview registration. Edit theme options using the current revision.",
+      "limits": "A failed candidate should not erase the last valid appearance. Resource and migration routes remain unmapped where listed; Theme.ReleaseResource must not be used as a generic blob-release mechanism."
+    },
+    "Backups": {
+      "purpose": "The catalog reserves explicit backup capture, verification, restoration and retention contracts. The recorded Desktop Host does not map this group yet.",
+      "sequence": "Treat this capability as unavailable in that Host. Do not offer controls that imply a successful backup or silently return empty backup history from a failed call.",
+      "limits": "Implementations must define target scope, plan confirmation, integrity and retention semantics before enabling these operations. Existing world backup features do not establish support for this separate API group."
+    },
+    "Downloads": {
+      "purpose": "Resolve and run downloads as observable Host tasks with verification and cancellation. A download plan identifies approved sources and expected content.",
+      "sequence": "Resolve the plan, start it, then read or watch progress. Verify the final content before using it. Pause and resume availability depends on the admitted operation and transfer behavior.",
+      "limits": "A completed transport is not proof of a matching hash. Custom source-resolver and transfer-provider routes remain unmapped; do not infer them from built-in download support."
+    },
+    "Tasks": {
+      "purpose": "Create and observe bounded records of work. A task communicates progress and terminal results; it is not permission to perform the underlying business action.",
+      "sequence": "For plugin-owned work, CreateOwned, Report progress, then Complete or Fail exactly as the result warrants. For Host work, read/watch the returned operation and request cancellation through its supported route.",
+      "limits": "Dismiss terminal records when no longer needed. Retry is not mapped in the current Desktop snapshot; a generic retry button must not replay unknown effects with fresh keys."
+    },
+    "Storage": {
+      "purpose": "Persist private plugin data in authorized namespaces with revision checks and transactions. Namespace handles are scoped to the admitted load even when the persisted data survives restart.",
+      "sequence": "Open the namespace, read before conditional writes, and use CompareExchange for competing updates. Commit a transaction only with its actual returned identity and revision.",
+      "limits": "Migration is explicit and bounded. A failed or oversized migration must not reset the store. The storage implementation assumes one trusted Host owner; it is not a distributed database protocol."
+    },
+    "Files": {
+      "purpose": "Access verified package assets and Host-granted user files. Paths and opaque FileRef values have different meanings; a displayed path is not an access grant.",
+      "sequence": "Open a package asset by its declared relative path or request a user picker grant. Read bounded data, use atomic replacement for writes, and prepare move/delete plans before execution.",
+      "limits": "Do not expand a grant to siblings or symlink targets outside its scope. Payload integrity and filesystem authority are checked separately. Cancellation from a picker is not a selected empty file."
+    },
+    "Network": {
+      "purpose": "Perform authorized network operations with explicit request/connection identities, bounded payloads and cancellation. This capability is not unrestricted socket access.",
+      "sequence": "Use the Host’s approved request or connection route, read bounded responses, and close owned connections when finished. Receiving consumes external state and is restricted to Active.",
+      "limits": "Timeout can leave an external mutation outcome unknown. A redirect or resolved address remains subject to Host policy; do not retry through another transport to bypass a denied destination."
+    },
+    "Platform": {
+      "purpose": "Request finite operating-system integration through the Host. Platform availability, user grants and application policy determine which actions can run.",
+      "sequence": "Describe the platform or query its facts before presenting optional features. Use explicit URI, file and clipboard operations with the requested data type and scope.",
+      "limits": "Opening a URI is an external effect, not arbitrary command execution. Unsupported display/power/clipboard data must remain unavailable rather than being reported as fabricated measurements."
+    },
+    "Minecraft.Diagnostics": {
+      "purpose": "Analyze an instance and preview a repair using the launcher’s diagnostic owner. Findings identify suspected conditions; a finding alone does not authorize a write.",
+      "sequence": "Analyze the selected instance, review the returned findings, then prepare and confirm a supported repair plan. Execute the exact plan and observe its task.",
+      "limits": "Custom rule providers remain unmapped. Preserve unresolved findings and failed repairs; do not report an instance healthy simply because a provider could not run."
+    }
+  },
+  "operations": {
+    "Events.Unsubscribe": "This historical current-catalog method accepts RegistrationRequest, not SubscriptionRef. Use UnsubscribeSubscription for a handle returned by Subscribe, or RegisterSubscription when both identities are needed. Never reinterpret one handle as the other.",
+    "Events.UnsubscribeSubscription": "Accepts the actual SubscriptionRef returned by Subscribe. This additive operation resolves the historical mismatch between Subscribe and Unsubscribe.",
+    "Events.RegisterSubscription": "Returns EventSubscriptionRegistration, carrying the subscription and registration identities explicitly. Retain the correct member for each cleanup API.",
+    "Minecraft.Java.PrepareManagedInstall": "Use an offer returned by ListManagedDistributions. The managed offer describes the installer’s multi-file manifest; it is not interchangeable with the older JavaDistribution model.",
+    "Tasks.Retry": "The recorded Desktop Host does not map this operation. Display no automatic retry affordance based solely on its presence in the SDK.",
+    "Resources.ReadSubscription": "The current runtime consumes up to 256 queued items. Repeat an uncertain read with the same idempotency key to retrieve the corresponding batch; a new key is a new consumption request.",
+    "UI.RegisterPage": "The page asset must be opened from the verified package and owned by the current load. The descriptor links an NXML asset to its model schema and declared actions; it does not transfer rendering ownership.",
+    "Files.OpenPackageFile": "Path is a normalized relative payload path, such as page.nxml. It must identify an admitted package asset. The returned FileRef can be passed to UI registration; it does not grant access to the surrounding installation directory.",
+    "Accounts.ReadPublic": "Only public metadata is returned. Account tokens and credentials are not made available by this method or by a successful read permission check.",
+    "Catalog.RegisterProvider": "The current mapped custom provider family is read-only. It supports Search, ReadProject, ListVersions, ReadVersion, ReadChangelog, ResolveFiles and ResolveDependencies. See the provider guide for descriptor and callback requirements.",
+    "Themes.Preview": "Returns a registration for the temporary preview. Retain it for Revert; the preview itself does not mean the theme is durably selected.",
+    "Storage.Migrate": "The current migration boundary accepts at most 256 entries and invokes an owned read-only migration action. Read the resulting operation to obtain the new namespace; do not reuse an obsolete namespace revision.",
+    "Actions.Invoke": "The Host can request user confirmation before dispatch. A declined or cancelled prompt must not run the handler. The OperationRef is for observing the action result, not proof of callback success.",
+    "Workflows.Resume": "Recovery requires the saved run revision and unchanged workflow definition/input. An unknown effect cannot be converted to a known failed step and automatically replayed.",
+    "State.CompareExchangeOwned": "Use the revision from the latest authoritative snapshot. On conflict, re-read and reconcile; do not increment or synthesize a revision token.",
+    "Storage.Write": "The recorded storage owner requires the existing entry’s exact revision for an update. An absent ExpectedRevision creates only a missing key; it does not mean unconditional overwrite.",
+    "Storage.CompareExchange": "Read the entry first and supply its exact revision. For a missing key, use an absent revision. A competing create/update fails with STALE_REVISION; both Write and CompareExchange enforce this rule in the recorded owner."
+  }
+}

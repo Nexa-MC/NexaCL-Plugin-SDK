@@ -66,7 +66,7 @@ NX_EXPORT("nexa_resume") nx_u64 nexa_resume(nx_u32 address, nx_u32 size)
     if (nx_is_string(nx_field(message, "kind"), "reply")) {
         if (!nx_reply_success(message)) {
             next_registration = 0; awaiting_start = 0;
-            nx_complete(&reply, 0);
+            nx_handler_error(&reply, nx_reply_error(message));
         } else if (awaiting_start) {
             nx_OperationRef operation;
             nx_require(nx_Workflows_Start_result(message, &operation));

@@ -1,0 +1,16 @@
+# SchemaValidationRequest
+
+[Model index](../models.md) · [API index](../index.md).
+
+This is the exact wire model. Non-nullable fields are required; field types do not imply undocumented defaults. Domain ownership, bounds and phase checks still apply.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Schema` | [`SchemaRef`](../models/schemaref.md) | Exact schema identity, version and fingerprint used to validate Value. |
+| `Value` | `AbiValue` | Payload interpreted using the accompanying or declared schema; Null is not a substitute for an error. |
+
+## Used directly by
+
+- [Contracts.ValidateSchema](../contracts.md#validateschema)
+
+For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

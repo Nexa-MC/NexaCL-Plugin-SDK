@@ -1,0 +1,17 @@
+# ServerList
+
+[Model index](../models.md) · [API index](../index.md).
+
+This is the exact wire model. Non-nullable fields are required; field types do not imply undocumented defaults. Domain ownership, bounds and phase checks still apply.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Servers` | [`ServerRecord[]`](../models/serverrecord.md) | Structured ServerRecord value; follow its linked field contract. A bounded collection; do not assume an unbounded result or unspecified ordering. |
+| `Revision` | `Revision` | Opaque version token issued by the owner. Do not increment it or substitute another object’s revision. |
+
+## Used directly by
+
+- [Minecraft.Servers.ListSaved](../minecraft-servers.md#listsaved)
+- [Minecraft.Servers.SaveList](../minecraft-servers.md#savelist)
+
+For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

@@ -1,6 +1,6 @@
 # NexaCL 插件 SDK
 
-[English](README.md) · [详细文档](docs/index.md) · [模板仓库](https://github.com/Nexa-MC/NexaCL-Plugin-Template)
+[English](README.md) · [详细文档](https://docs.pcln.top/plugin-sdk/) · [模板仓库](https://github.com/Nexa-MC/NexaCL-Plugin-Template)
 
 这是面向插件开发者、衍生启动器开发者和贡献者的独立公开 SDK 仓库，直接替代
 原 `PCL-N-Plugin-SDK`，保留原有 Git 历史。新版使用 Bootstrap V1 和 ABI 100，

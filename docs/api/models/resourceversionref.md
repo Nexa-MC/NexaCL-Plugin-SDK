@@ -1,0 +1,19 @@
+# ResourceVersionRef
+
+[Model index](../models.md) · [API index](../index.md).
+
+This is the exact wire model. Non-nullable fields are required; field types do not imply undocumented defaults. Domain ownership, bounds and phase checks still apply.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Resource` | [`ResourceRef`](../models/resourceref.md) | Structured ResourceRef value; follow its linked field contract. |
+| `VersionId` | `string` | Domain value named by this field; additional accepted values and bounds are determined by the operation and Host policy. |
+
+## Used directly by
+
+- [Catalog.ReadVersion](../catalog.md#readversion)
+- [Catalog.ReadChangelog](../catalog.md#readchangelog)
+- [Catalog.ResolveFiles](../catalog.md#resolvefiles)
+- [Catalog.ResolveDependencies](../catalog.md#resolvedependencies)
+
+For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

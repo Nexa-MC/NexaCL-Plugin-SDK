@@ -1,18 +1,32 @@
 # Host implementation snapshot
 
+Use this page to distinguish a declared SDK operation from an implemented launcher
+route. The recorded development Host maps **297/346** ABI 100 operations.
+Source revision: `195083d163f6569e8e6e9d4389a285e5e7749921`.
+
 NexaCL development main integration; no new launcher Alpha is implied.
 
-This snapshot maps **297/346** ABI 100 operations.
-A mapping remains subject to permission, phase, ownership, platform and business
-constraints. Source revision: `195083d163f6569e8e6e9d4389a285e5e7749921`. SDK wrappers deliberately
-cover the full proposal so other compatible Hosts can implement their own mappings.
+## What the count means
 
-Always negotiate required/optional capabilities and handle unavailable operations.
-Consult the launcher's integration document for partial behaviors such as custom
-catalog installation, optional installer files and resource budgets. The table is
-not a claim that all provider families or production Market delivery are complete.
+A mapping still requires permission, legal phase, ownership, supported platform and
+business preconditions. It does not promise complete provider families or every
+option in a request. The SDK deliberately describes the complete catalog so
+compatible Hosts can implement more routes. Older released Alphas can map fewer.
 
-## Unmapped methods
+The current custom catalog provider supports seven read methods. Custom catalog
+installation and favorites are not implied. Managed Java offers use the additive
+multi-file distribution path; the older distribution routes below remain absent.
+Production Market delivery is a separate unfinished integration boundary.
+
+## Before requiring a capability
+
+Check the actual Host's negotiated capabilities, then handle per-call unavailability.
+Make a nonessential feature optional and explain why its UI is unavailable. Do not
+replace a failed operation with a successful empty result or a private implementation
+that bypasses Host ownership. Source mappings are recorded in
+`contracts/host-support.json`; update them only from implementation evidence.
+
+## Unmapped operations
 
 - `Minecraft.Instances.PrepareClone`
 - `Minecraft.Instances.CommitClone`
@@ -64,7 +78,4 @@ not a claim that all provider families or production Market delivery are complet
 - `Tasks.Retry`
 - `Minecraft.Diagnostics.RegisterRuleProvider`
 
-## 简体中文
-
-以上为开发分支接入快照，不代表所有已发布 Alpha。存在路由仍需满足权限、生命周期、归属、
-平台和业务条件。未实现项逐条列出；生产 Market 接入与部分业务语义另有边界。
+[API reference](api/index.md) · [Migration](migration.md)

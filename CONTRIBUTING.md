@@ -18,3 +18,15 @@ cleanup behavior. Test invalid input, revocation and retirement where relevant.
 
 The primary documentation language is English. Keep README and contributor entry
 points available in Simplified Chinese. Link detailed references from docs/index.md.
+
+## Documentation changes
+
+Follow [the editorial standard](docs/documentation.md). Update source examples before
+explaining a behavior; `python eng/sync_doc_examples.py` copies the complete tutorial
+examples and `--verify` rejects drift. Edit `eng/reference-notes.json` for reviewed
+API behavior, then run `python eng/generate_docs.py`. Keep primary Chinese guides in
+`docs/zh-CN`; generated English technical fallbacks are labelled and synchronized.
+
+Run `python eng/verify_docs.py` and compile changed Wasm examples. Publish source
+changes before synchronizing the website, so provenance links resolve to real files.
+The public documentation entry is https://docs.pcln.top/en/plugin-sdk/.

@@ -1,26 +1,55 @@
-# SDK documentation
+# NexaCL plugin development
 
-Read the quickstart first, then choose capabilities from the reference. Package
-versions do not select an ABI implicitly and a generated wrapper does not grant
-Host authority.
+Build a plugin that runs in PluginSidecar and adds capabilities to NexaCL through
+an explicit Host contract. Start with a small working plugin, then add only the
+permissions and capabilities its feature needs.
 
-| Topic | Guide |
-| --- | --- |
-| First plugin and build requirements | [Quickstart](quickstart.md) |
-| Loading, stages, negotiation, retirement | [Loading contract](loading-contract.md) |
-| C/Wasm encoding and continuation calls | [Wasm SDK](wasm-sdk.md) |
-| Permission and resource ownership | [Permissions](permissions.md) |
-| Host operations, storage, events and workflows | [Runtime behavior](runtime-services.md) |
-| Read provider envelopes and schemas | [Business providers](business-providers.md) |
-| Every capability method | [API reference](api/index.md) |
-| Every DTO and enumeration | [Models](api/models.md) |
-| Available launcher mappings | [Host support](host-support.md) |
-| Package layout and releases | [Packaging](packaging.md) |
-| Failures and troubleshooting | [Errors](errors.md) |
-| Legacy SDK and ABI migration | [Migration](migration.md) |
-| Ownership and maintenance | [Architecture](architecture.md) |
+This guide covers **SDK 0.2.0-alpha.10, Bootstrap V1 and ABI 100**. Those numbers
+identify different contracts. The SDK includes 346 operations; the recorded Host
+maps 297 of them. Consult [Host support](host-support.md) before choosing a feature.
+A mapping in source does not establish support in an older installed Alpha.
 
-## 简体中文
+## Learn by building
 
-建议依次阅读入门、加载契约、权限、所需能力的 API 文档，再构建模板项目。
-ABI 方法编号只属于 SDK 调度表，不是宿主二进制通信操作码。旧 PCL 插件不能通过换包名自动迁移。
+Follow the chapters in order. Each chapter identifies its source files, explains
+what changes, and gives an observable result before introducing another concept.
+
+1. [Build and load your first plugin](quickstart.md).
+2. [Add a page and a confirmed action](tutorials/page-and-action.md).
+3. [Introduce state and persistent storage](tutorials/state-and-storage.md).
+4. [Run and observe background work](tutorials/workflows.md).
+5. [Test, package and publish](tutorials/test-and-release.md).
+
+The first two chapters use the same executable project. The storage and workflow
+chapters each use a separate complete SDK example, so their behavior can be tested
+without adding unrelated UI code.
+
+## Understand the system
+
+Read [architecture](architecture.md) for ownership, [loading](loading-contract.md)
+for callback order, and [permissions](permissions.md) for authority. The
+[asynchronous call guide](guides/asynchronous-calls.md) explains why a returned
+operation is not a completed effect. [Runtime services](runtime-services.md)
+provides the detailed event, workflow and recovery behavior.
+
+## Complete a task
+
+- [List instances and use pagination](how-to/read-instances.md).
+- [Prepare and execute a change](how-to/mutations.md).
+- [Handle files, package assets and blobs](how-to/files.md).
+- [Register a catalog provider](business-providers.md).
+- [Support offline use](guides/offline.md).
+- [Diagnose a failed load or call](errors.md).
+- [Upgrade from the old SDK](migration.md).
+
+## Look up a contract
+
+The [API reference](api/index.md) covers every operation, including unmapped
+operations, with exact permission, phase, idempotency and model links. Use the
+[model reference](api/models.md) for fields and enum spelling, the
+[package reference](packaging.md) for the manifest, and the [Wasm reference](wasm-sdk.md)
+for memory, continuations and codecs.
+
+[Online documentation](https://docs.pcln.top/en/plugin-sdk/) ·
+[Template](https://github.com/Nexa-MC/NexaCL-Plugin-Template) ·
+[Documentation conventions](documentation.md)

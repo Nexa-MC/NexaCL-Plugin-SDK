@@ -1,0 +1,22 @@
+# BlobRef
+
+[Model index](../models.md) · [API index](../index.md).
+
+This is the exact wire model. Non-nullable fields are required; field types do not imply undocumented defaults. Domain ownership, bounds and phase checks still apply.
+
+| Field | Type | Meaning |
+| --- | --- | --- |
+| `Token` | `Guid` | Opaque Host-issued handle token. Keep it with its owner and resource type. |
+| `LoadInstanceId` | `Guid` | Identity of the admitted load that owns this handle; it is not portable to a replacement load. |
+| `Size` | `long` | Domain value named by this field; additional accepted values and bounds are determined by the operation and Host policy. |
+| `Sha256` | `string` | Domain value named by this field; additional accepted values and bounds are determined by the operation and Host policy. |
+
+## Used directly by
+
+- [Accounts.PreviewSkin](../accounts.md#previewskin)
+- [Themes.ReadResource](../themes.md#readresource)
+- [Themes.ReleaseResource](../themes.md#releaseresource)
+- [Files.Read](../files.md#read)
+- [Network.OpenResponseStream](../network.md#openresponsestream)
+
+For nested uses, follow the model links from the owning request or result. A successful decode establishes shape, not permission or business success.

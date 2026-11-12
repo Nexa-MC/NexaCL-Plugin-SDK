@@ -1,6 +1,6 @@
 # Nexa ABI 100 C/Wasm SDK
 
-This package contains all 342 v0.2 operations and the 22 preserved preview slots,
+This package contains all 346 current operations and the 22 preserved preview slots,
 with typed model views, builders, arrays, optionals, enum codecs and result readers.
 It also includes the generic guest continuation and callback API. The Host remains
 authoritative for capability availability, permissions, scope and lifecycle.
@@ -22,3 +22,7 @@ records archive file digests for reproducibility; it is not a Market signature.
 
 SDK completeness does not imply every Host business route is installed.
 Unsupported operations return a structured failure. Apache-2.0.
+
+Start with the [developer tutorial](https://docs.pcln.top/en/plugin-sdk/quickstart).
+Use the matching SDK source checkout for the five complete example packages,
+including the state/storage tutorial added after the first alpha.10 archive.

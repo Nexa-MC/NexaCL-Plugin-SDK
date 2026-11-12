@@ -2,8 +2,7 @@
 
 The production code profile is `nexa-wasm-1`: one WebAssembly module with no
 imports. All effects go through negotiated public Host capabilities. The managed
-SDK is the contract/adapter SDK; ordinary CLR plugin DLLs are trusted development
-only.
+SDK is the contract/adapter SDK; ordinary CLR plugin DLLs are not an installable production Desktop profile.
 
 ## Build the C example
 
@@ -136,12 +135,10 @@ the embedding Host still owns service/event scheduling and target authorization.
 ## Verification and distribution
 
 `eng/build_wasm_sample.py` builds the example, every generated binding, a callback
-fixture and malformed-codec fixture. Set the four `NEXA_WASM_*` variables used in
-CI to enable those checks. The suite exercises all 368 operations for success and
+fixture and malformed-codec fixture. PluginSidecar integration CI loads these fixtures and exercises all 368 operations for success and
 failure, 300 model/collection shapes, typed callbacks, Unicode/NUL/exact 64-bit
-values and malformed data rejection. Fixture Host replies prove SDK contract
-behavior, not the availability of real launcher features. CI repeats these tests
-inside a NativeAOT executable on Windows, Linux and macOS.
+values and malformed data rejection. Standalone SDK CI compiles the fixtures and runs its own contract tests. Fixture Host replies prove SDK contract
+behavior, not the availability of real launcher features. PluginSidecar CI repeats runtime conformance inside NativeAOT executables on Windows, Linux and macOS.
 
 `eng/package_sdk.py` creates a reproducible standalone header/schema/example ZIP
 with file digests. It is a developer SDK artifact, not a signed plugin package.
@@ -163,3 +160,17 @@ explicit test/development input, not Market grants. Both managed and NativeAOT
 suites load the real package, wait for the activation run, manually trigger the
 schedule and verify the compiled cleanup after business callbacks are stopped.
 The standalone C/Wasm SDK archive includes both example sources.
+
+## State and storage example
+
+`samples/WasmStateStorage/plugin.c` opens a private namespace during Initialize,
+restores a TextResult after activation, initializes only a genuinely missing entry,
+and projects the stored value into State with compare-and-exchange. It copies
+borrowed namespace/value bytes into owned buffers before yielding. Build `state.zip`
+from the current SDK source checkout; this tutorial example was added after the
+original alpha.10 bundle and is not present in that immutable older archive.
+
+The current C source examples preserve a failed Host reply in the callback failure envelope
+using `nx_handler_error`. Despite the helper name, this success/error envelope is
+also accepted for lifecycle completion. The Host retains authoritative identity and
+correlation; plugin-supplied fields do not override them.

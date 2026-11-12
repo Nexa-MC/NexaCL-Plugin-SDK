@@ -1,6 +1,6 @@
 # NexaCL Plugin SDK
 
-[简体中文](README.zh-CN.md) · [Documentation](docs/index.md) · [Template repository](https://github.com/Nexa-MC/NexaCL-Plugin-Template)
+[简体中文](README.zh-CN.md) · [Documentation](https://docs.pcln.top/en/plugin-sdk/) · [Template repository](https://github.com/Nexa-MC/NexaCL-Plugin-Template)
 
 The independent, public SDK for NexaCL plugin authors, derived launcher developers
 and contributors. This repository replaces `PCL-N-Plugin-SDK`; its Git history is

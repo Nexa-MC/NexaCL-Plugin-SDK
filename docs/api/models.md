@@ -1,2266 +1,391 @@
-# ABI 100 models and enumerations
+# Models, containers and enumerations
 
-Generated from the contract catalog. IDs/revisions are opaque. Optional values use `?`;
-arrays use `[]`. `Page<T>` carries Items, NextCursor and Revision. `Snapshot<T>` carries
-Value, Revision, SchemaVersion and ObservedAt. Codecs reject malformed or oversized values.
+This reference records the exact fields used by generated ABI 100 codecs. A field
+without `?` is required by its model; nullable values must be encoded as the model
+expects. Empty strings, empty arrays, Null and a failed reply have different meanings.
+No unspecified default, numeric bound or filesystem authority should be inferred
+from a C# type. Operation/domain policy can impose additional constraints.
 
-## RegistrationState
+## Containers
+
+| Type | Fields | Interpretation |
+| --- | --- | --- |
+| `Page<T>` | Items, NextCursor, Revision | Bounded result sequence; reuse a cursor only for the same query and owner |
+| `Snapshot<T>` | Value, Revision, SchemaVersion, ObservedAt | Value plus exact revision, schema version and observation time |
+| `AbiReply<T>` | Success, Value, Error | Read Value only after Success; failure is not an empty successful result |
+
+QualifiedId, EntityId, Revision, FileRef and related handles are not interchangeable.
+Schemas include transitive model/enum fingerprints. Codecs reject malformed or oversized
+values; passing codec validation does not establish business authorization.
+
+## Enumerations
+
+Enum spelling is part of the wire contract. The presence of a member does not mean
+every operation or provider family accepts it. See the operation's behavior notes.
+
+### RegistrationState
 
 `Staged`, `Active`, `Retired`
 
-## OperationState
+### OperationState
 
 `Pending`, `Running`, `CancellationRequested`, `Completed`, `Failed`, `Cancelled`, `OutcomeUnknown`
 
-## ConfirmationRequirement
+### ConfirmationRequirement
 
 `None`, `UserConfirmation`
 
-## CapabilityAvailability
+### CapabilityAvailability
 
 `Supported`, `Unavailable`, `Denied`, `Unsupported`
 
-## IdempotencyMode
+### IdempotencyMode
 
 `ReadOnly`, `RequiredKey`, `OutcomeMayBeUnknown`
 
-## SelectionPolicy
+### SelectionPolicy
 
 `UserSelection`, `ObjectOwnership`, `ExplicitRequest`, `ContractPriority`
 
-## MergePolicy
+### MergePolicy
 
 `Add`, `Merge`, `Replace`, `Mask`
 
-## OrderingPolicy
+### OrderingPolicy
 
 `ExplicitConstraints`, `UserSelection`, `RejectAmbiguity`
 
-## ActivationPolicy
+### ActivationPolicy
 
 `GroupCommit`
 
-## OwnershipPolicy
+### OwnershipPolicy
 
 `OwnerOnly`, `AuditedOverlay`
 
-## PredicateOutcome
+### PredicateOutcome
 
 `True`, `False`, `Unknown`, `Error`
 
-## WorkflowNodeKind
+### WorkflowNodeKind
 
 `Sequence`, `If`, `Switch`, `ForEach`, `Parallel`, `Action`, `Subflow`, `Delay`, `WaitEvent`, `Retry`, `Try`, `Finally`, `Compensate`, `AskUser`, `Checkpoint`, `Return`, `Fail`
 
-## ConcurrencyPolicy
+### ConcurrencyPolicy
 
 `Parallel`, `Queue`, `RejectDuplicate`, `ReplacePending`
 
-## ScheduleTrigger
+### ScheduleTrigger
 
 `Interval`, `AtTime`, `Event`
 
-## MissedSchedulePolicy
+### MissedSchedulePolicy
 
 `Skip`, `Coalesce`, `ReplayBounded`
 
-## DeliveryGuarantee
+### DeliveryGuarantee
 
 `BestEffortAtMostOnce`, `AtLeastOnce`
 
-## UIContributionMode
+### UIContributionMode
 
 `Append`, `Prepend`, `Wrap`, `Hide`, `Replace`
 
-## DrawCommandKind
+### DrawCommandKind
 
 `Line`, `Rectangle`, `Ellipse`, `Path`, `Text`, `Image`, `Clip`, `Transform`
 
-## InputEventKind
+### InputEventKind
 
 `Pointer`, `Key`, `Text`, `Focus`
 
-## ProviderFailurePolicy
+### ProviderFailurePolicy
 
 `Unavailable`, `RetryBounded`, `FailOperation`
 
-## DiagnosticSeverity
+### DiagnosticSeverity
 
 `Trace`, `Info`, `Warning`, `Error`
 
-## LaunchArgumentScope
+### LaunchArgumentScope
 
 `Jvm`, `Game`
 
-## SignInState
+### SignInState
 
 `Pending`, `Challenge`, `Completed`, `Failed`, `Cancelled`
 
-## FilePickKind
+### FilePickKind
 
 `File`, `Directory`, `SaveFile`
 
-## ExtensionMode
+### ExtensionMode
 
 `Advisory`, `Required`
 
-## DeletionPolicy
+### DeletionPolicy
 
 `FreezeReferences`, `RejectWhileReferenced`, `FailSubsequentCalls`
 
-## ParallelCompletion
+### ParallelCompletion
 
 `All`, `AnySuccess`
 
-## SubscriptionLifetime
+### SubscriptionLifetime
 
 `Transient`, `Resumable`
 
-## ReentryPolicy
+### ReentryPolicy
 
 `Reject`, `Queue`, `AllowBounded`
 
-## Empty
-
-| Field | Type |
-| --- | --- |
-
-## TextResult
-
-| Field | Type |
-| --- | --- |
-| `Text` | `string` |
-
-## BooleanResult
-
-| Field | Type |
-| --- | --- |
-| `Value` | `bool` |
-
-## PageRequest
-
-| Field | Type |
-| --- | --- |
-| `Cursor` | `string?` |
-| `Limit` | `long` |
-
-## EntityRequest
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-
-## QualifiedRequest
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-
-## RegistrationRequest
-
-| Field | Type |
-| --- | --- |
-| `Registration` | `RegistrationRef` |
-
-## WatchRequest
-
-| Field | Type |
-| --- | --- |
-| `Target` | `EntityId` |
-| `Cursor` | `string?` |
-| `Schema` | `SchemaRef` |
-
-## SubscriptionRef
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-| `Cursor` | `string?` |
-| `ResyncRequired` | `bool` |
-
-## FileRef
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-| `Scope` | `string` |
-
-## RootRef
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-
-## BlobRef
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-| `Size` | `long` |
-| `Sha256` | `string` |
-
-## CredentialRef
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-| `Provider` | `QualifiedId` |
-
-## LaunchGrant
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-| `Account` | `EntityId` |
-
-## SchemaRef
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Version` | `ulong` |
-| `Digest` | `string` |
-
-## Reference
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Required` | `bool` |
-
-## NamedValue
-
-| Field | Type |
-| --- | --- |
-| `Name` | `string` |
-| `Value` | `AbiValue` |
-
-## LocalizedText
-
-| Field | Type |
-| --- | --- |
-| `MessageKey` | `string` |
-| `Arguments` | `NamedValue[]` |
-
-## RegistrationRef
-
-| Field | Type |
-| --- | --- |
-| `Handle` | `ulong` |
-| `Owner` | `string` |
-| `LoadInstanceId` | `Guid` |
-| `DefinitionId` | `QualifiedId` |
-| `State` | `RegistrationState` |
-
-## ValidationIssue
-
-| Field | Type |
-| --- | --- |
-| `Code` | `string` |
-| `Message` | `LocalizedText` |
-| `Target` | `string` |
-| `Fatal` | `bool` |
-
-## ValidationReport
-
-| Field | Type |
-| --- | --- |
-| `Valid` | `bool` |
-| `Issues` | `ValidationIssue[]` |
-
-## MutationPlan
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Revision` | `Revision` |
-| `InputsHash` | `string` |
-| `Summary` | `LocalizedText` |
-| `Confirmation` | `ConfirmationRequirement` |
-| `Constraints` | `NamedValue[]` |
-
-## PlanRequest
-
-| Field | Type |
-| --- | --- |
-| `Plan` | `EntityId` |
-| `ExpectedRevision` | `Revision` |
-| `ConfirmationToken` | `string?` |
-
-## OperationRef
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `State` | `OperationState` |
-
-## OperationRequest
-
-| Field | Type |
-| --- | --- |
-| `Operation` | `EntityId` |
-
-## OperationRecord
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `State` | `OperationState` |
-| `Progress` | `double` |
-| `Stage` | `string` |
-| `ResultSchema` | `SchemaRef` |
-| `Result` | `AbiValue` |
-| `Failure` | `OperationFailure?` |
-| `Revision` | `Revision` |
-
-## OperationFailure
-
-| Field | Type |
-| --- | --- |
-| `Code` | `string` |
-| `Message` | `LocalizedText` |
-| `CorrelationId` | `Guid` |
-| `Retryable` | `bool` |
-| `Details` | `NamedValue[]` |
-
-## RetentionPolicy
-
-| Field | Type |
-| --- | --- |
-| `KeepCount` | `long` |
-| `KeepDays` | `long` |
-| `MaximumBytes` | `long` |
-
-## ScopedTarget
-
-| Field | Type |
-| --- | --- |
-| `Kind` | `QualifiedId` |
-| `Entity` | `EntityId?` |
-| `Scope` | `string` |
-
-## CapabilityDescription
-
-| Field | Type |
-| --- | --- |
-| `Id` | `string` |
-| `Version` | `ulong` |
-| `Availability` | `CapabilityAvailability` |
-| `Scopes` | `string[]` |
-| `Quotas` | `NamedValue[]` |
-
-## PublicContract
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Version` | `ulong` |
-| `Schema` | `SchemaRef` |
-| `Methods` | `ServiceMethod[]` |
-
-## ServiceMethod
-
-| Field | Type |
-| --- | --- |
-| `Id` | `ulong` |
-| `Name` | `string` |
-| `Input` | `SchemaRef` |
-| `Output` | `SchemaRef` |
-| `Cancellable` | `bool` |
-| `Idempotency` | `IdempotencyMode` |
-| `NativeExecution` | `bool` |
-
-## ContractQuery
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Version` | `ulong` |
-
-## ProviderKindDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Contract` | `PublicContract` |
-| `Selection` | `SelectionPolicy` |
-
-## ExtensionPointDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Input` | `SchemaRef` |
-| `Output` | `SchemaRef` |
-| `Mode` | `ExtensionMode` |
-| `DeadlineMilliseconds` | `long` |
-| `MergePolicy` | `string` |
-| `Ordering` | `OrderingPolicy` |
-| `Reentry` | `ReentryPolicy` |
-| `AllowedFields` | `string[]` |
-| `FailurePolicy` | `ProviderFailurePolicy` |
-
-## ConsumerDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Contract` | `QualifiedId` |
-| `Version` | `ulong` |
-| `Handler` | `ulong` |
-
-## SchemaValidationRequest
-
-| Field | Type |
-| --- | --- |
-| `Schema` | `SchemaRef` |
-| `Value` | `AbiValue` |
-
-## CompatibilityRequest
-
-| Field | Type |
-| --- | --- |
-| `Contract` | `QualifiedId` |
-| `Version` | `ulong` |
-| `SchemaDigest` | `string` |
-
-## RegistryDescriptor
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `EntryIdentity` | `string` |
-| `ReferenceTypes` | `QualifiedId[]` |
-| `MergePolicy` | `MergePolicy` |
-| `OrderingPolicy` | `OrderingPolicy` |
-| `Activation` | `ActivationPolicy` |
-| `Ownership` | `OwnershipPolicy` |
-| `SupportedOperations` | `string[]` |
-| `ValidationRules` | `QualifiedId[]` |
-| `Consumer` | `QualifiedId` |
-| `Deletion` | `DeletionPolicy` |
-| `MergeContract` | `QualifiedId` |
-
-## Definition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Registry` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `Body` | `AbiValue` |
-| `References` | `Reference[]` |
-
-## DefinitionBatch
-
-| Field | Type |
-| --- | --- |
-| `Definitions` | `Definition[]` |
-
-## DefinitionQuery
-
-| Field | Type |
-| --- | --- |
-| `Registry` | `QualifiedId` |
-| `Id` | `QualifiedId` |
-
-## DefinitionSearch
-
-| Field | Type |
-| --- | --- |
-| `Registry` | `QualifiedId` |
-| `Tags` | `QualifiedId[]` |
-| `Page` | `PageRequest` |
-
-## DefinitionUpdate
-
-| Field | Type |
-| --- | --- |
-| `Definition` | `Definition` |
-| `ExpectedRevision` | `Revision` |
-
-## DefinitionRemove
-
-| Field | Type |
-| --- | --- |
-| `Registry` | `QualifiedId` |
-| `Id` | `QualifiedId` |
-| `ExpectedRevision` | `Revision` |
-
-## TagDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Registry` | `QualifiedId` |
-| `Add` | `QualifiedId[]` |
-| `Remove` | `QualifiedId[]` |
-| `Include` | `QualifiedId[]` |
-
-## TagResolution
-
-| Field | Type |
-| --- | --- |
-| `Members` | `QualifiedId[]` |
-| `Revision` | `Revision` |
-
-## OverlayDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Target` | `QualifiedId` |
-| `Mode` | `MergePolicy` |
-| `Schema` | `SchemaRef` |
-| `Patch` | `AbiValue` |
-| `Before` | `QualifiedId[]` |
-| `After` | `QualifiedId[]` |
-
-## ResolutionReport
-
-| Field | Type |
-| --- | --- |
-| `Target` | `QualifiedId` |
-| `Active` | `bool` |
-| `Contributions` | `QualifiedId[]` |
-| `Issues` | `ValidationIssue[]` |
-| `Revision` | `Revision` |
-
-## PredicateDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Input` | `SchemaRef` |
-| `Handler` | `ulong?` |
-| `Expression` | `AbiValue` |
-
-## PredicateRequest
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Inputs` | `AbiValue` |
-| `Consistency` | `Revision` |
-
-## PredicateResult
-
-| Field | Type |
-| --- | --- |
-| `Outcome` | `PredicateOutcome` |
-| `InputRevision` | `Revision` |
-| `Issues` | `ValidationIssue[]` |
-
-## ActionDescriptor
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Input` | `SchemaRef` |
-| `Output` | `SchemaRef` |
-| `RequiredCapabilities` | `string[]` |
-| `Scopes` | `string[]` |
-| `Idempotency` | `IdempotencyMode` |
-| `Cancellable` | `bool` |
-| `SupportsPreview` | `bool` |
-| `Confirmation` | `ConfirmationRequirement` |
-| `Compensation` | `QualifiedId?` |
-| `Title` | `LocalizedText` |
-| `Handler` | `ulong?` |
-
-## ActionRequest
-
-| Field | Type |
-| --- | --- |
-| `Action` | `QualifiedId` |
-| `Target` | `ScopedTarget` |
-| `Inputs` | `AbiValue` |
-| `ExpectedRevision` | `Revision?` |
-| `IdempotencyKey` | `string` |
-
-## WorkflowDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Input` | `SchemaRef` |
-| `Output` | `SchemaRef` |
-| `Nodes` | `WorkflowNode[]` |
-| `DefinitionDigest` | `string` |
-| `Persistent` | `bool` |
-| `Concurrency` | `ConcurrencyPolicy` |
-| `MaximumDepth` | `long` |
-| `MaximumWork` | `long` |
-
-## WorkflowNode
-
-| Field | Type |
-| --- | --- |
-| `Id` | `string` |
-| `Kind` | `WorkflowNodeKind` |
-| `Target` | `QualifiedId?` |
-| `Inputs` | `AbiValue` |
-| `Children` | `WorkflowNode[]` |
-| `MaximumConcurrency` | `long` |
-| `MaximumAttempts` | `long` |
-| `BackoffMilliseconds` | `long` |
-| `Completion` | `ParallelCompletion` |
-| `RetryableErrors` | `string[]` |
-| `InputSchema` | `SchemaRef` |
-| `OutputSchema` | `SchemaRef` |
-
-## WorkflowRequest
-
-| Field | Type |
-| --- | --- |
-| `Workflow` | `QualifiedId` |
-| `Inputs` | `AbiValue` |
-| `DefinitionDigest` | `string` |
-
-## WorkflowRunRequest
-
-| Field | Type |
-| --- | --- |
-| `Run` | `EntityId` |
-| `ExpectedRevision` | `Revision` |
-| `DefinitionDigest` | `string` |
-
-## WorkflowStepRequest
-
-| Field | Type |
-| --- | --- |
-| `Run` | `EntityId` |
-| `StepId` | `string` |
-| `ExpectedRevision` | `Revision` |
-| `IdempotencyKey` | `string` |
-
-## WorkflowTrace
-
-| Field | Type |
-| --- | --- |
-| `Run` | `EntityId` |
-| `DefinitionDigest` | `string` |
-| `Steps` | `WorkflowStep[]` |
-
-## WorkflowStep
-
-| Field | Type |
-| --- | --- |
-| `Id` | `string` |
-| `State` | `OperationState` |
-| `SideEffects` | `LocalizedText[]` |
-| `Failure` | `OperationFailure?` |
-
-## ScheduleDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Workflow` | `QualifiedId` |
-| `Trigger` | `ScheduleTrigger` |
-| `TimeZone` | `string` |
-| `At` | `DateTimeOffset?` |
-| `IntervalMilliseconds` | `long?` |
-| `Event` | `QualifiedId?` |
-| `Missed` | `MissedSchedulePolicy` |
-| `ReplayLimit` | `long` |
-| `DebounceMilliseconds` | `long` |
-
-## ScheduleState
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Enabled` | `bool` |
-| `NextRun` | `DateTimeOffset?` |
-| `Revision` | `Revision` |
-
-## EventDescriptor
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `OrderingPartition` | `string` |
-| `Delivery` | `DeliveryGuarantee` |
-| `Durable` | `bool` |
-| `QueueLimit` | `long` |
-
-## EventSubscribeRequest
-
-| Field | Type |
-| --- | --- |
-| `Event` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `Cursor` | `string?` |
-| `Handler` | `ulong` |
-| `IgnoreSelf` | `bool` |
-| `Deduplicate` | `bool` |
-| `Scope` | `ScopedTarget` |
-| `Lifetime` | `SubscriptionLifetime` |
-| `Reentry` | `ReentryPolicy` |
-| `QueueLimit` | `long` |
-
-## EventEnvelope
-
-| Field | Type |
-| --- | --- |
-| `EventId` | `Guid` |
-| `Event` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `Entity` | `EntityId?` |
-| `Revision` | `Revision` |
-| `OccurredAt` | `DateTimeOffset` |
-| `CorrelationId` | `Guid` |
-| `CausationId` | `Guid?` |
-| `Origin` | `string` |
-| `Scope` | `ScopedTarget` |
-| `Payload` | `AbiValue` |
-
-## StateDescriptor
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `Scope` | `ScopedTarget` |
-
-## StateReadRequest
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Scope` | `ScopedTarget` |
-
-## StateSnapshot
-
-| Field | Type |
-| --- | --- |
-| `Value` | `AbiValue` |
-| `Schema` | `SchemaRef` |
-| `Revision` | `Revision` |
-| `ObservedAt` | `DateTimeOffset` |
-| `Cursor` | `string?` |
-
-## StateUpdate
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Scope` | `ScopedTarget` |
-| `Value` | `AbiValue` |
-| `ExpectedRevision` | `Revision` |
-
-## UIPage
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `EntryFile` | `FileRef` |
-| `Schema` | `SchemaRef` |
-| `Localizations` | `QualifiedId[]` |
-
-## UIComponent
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `EntryFile` | `FileRef` |
-| `Parameters` | `SchemaRef` |
-
-## UIContribution
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `View` | `QualifiedId` |
-| `SemanticNode` | `string` |
-| `Mode` | `UIContributionMode` |
-| `Component` | `QualifiedId` |
-| `Before` | `QualifiedId[]` |
-| `After` | `QualifiedId[]` |
-
-## UIViewReplacement
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `View` | `QualifiedId` |
-| `ViewContract` | `SchemaRef` |
-| `Page` | `QualifiedId` |
-
-## UIViewContract
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `Replaceable` | `bool` |
-| `RequiredState` | `QualifiedId[]` |
-| `RequiredCommands` | `QualifiedId[]` |
-| `PublicNodes` | `string[]` |
-| `HostControl` | `bool` |
-
-## UINavigation
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Page` | `QualifiedId` |
-| `Title` | `LocalizedText` |
-| `Icon` | `QualifiedId?` |
-
-## UICommand
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Action` | `QualifiedId` |
-| `Title` | `LocalizedText` |
-
-## UIShortcut
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Command` | `QualifiedId` |
-| `Gesture` | `string` |
-| `Scope` | `QualifiedId` |
-
-## UIDialog
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Page` | `QualifiedId` |
-| `Model` | `AbiValue` |
-
-## UIDialogRef
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `ViewScope` | `Guid` |
-
-## UINavigateRequest
-
-| Field | Type |
-| --- | --- |
-| `Page` | `QualifiedId` |
-| `Arguments` | `AbiValue` |
-
-## UINotification
-
-| Field | Type |
-| --- | --- |
-| `Title` | `LocalizedText` |
-| `Body` | `LocalizedText` |
-| `Action` | `QualifiedId?` |
-
-## UIModelUpdate
-
-| Field | Type |
-| --- | --- |
-| `View` | `EntityId` |
-| `Schema` | `SchemaRef` |
-| `Value` | `AbiValue` |
-| `ExpectedRevision` | `Revision?` |
-
-## UIViewWatch
-
-| Field | Type |
-| --- | --- |
-| `View` | `EntityId` |
-| `ViewScope` | `Guid` |
-| `Cursor` | `string?` |
-
-## DrawingSurfaceRequest
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Width` | `double` |
-| `Height` | `double` |
-| `ViewScope` | `Guid` |
-
-## DrawingSurfaceRef
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `ViewScope` | `Guid` |
-| `Revision` | `Revision` |
-
-## DrawCommand
-
-| Field | Type |
-| --- | --- |
-| `Kind` | `DrawCommandKind` |
-| `Coordinates` | `double[]` |
-| `Color` | `string` |
-| `Text` | `string?` |
-| `Image` | `BlobRef?` |
-
-## DrawSubmission
-
-| Field | Type |
-| --- | --- |
-| `Surface` | `DrawingSurfaceRef` |
-| `Commands` | `DrawCommand[]` |
-| `ExpectedRevision` | `Revision` |
-
-## InputSubscription
-
-| Field | Type |
-| --- | --- |
-| `Surface` | `DrawingSurfaceRef` |
-| `Events` | `InputEventKind[]` |
-| `Handler` | `ulong` |
-
-## ProviderDescriptor
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Kind` | `QualifiedId` |
-| `ContractVersion` | `ulong` |
-| `SchemaHash` | `string` |
-| `DisplayName` | `LocalizedText` |
-| `Capabilities` | `string[]` |
-| `SupportedScopes` | `string[]` |
-| `Selection` | `SelectionPolicy` |
-| `Concurrency` | `ConcurrencyPolicy` |
-| `DeadlineMilliseconds` | `long` |
-| `FailurePolicy` | `ProviderFailurePolicy` |
-| `Configuration` | `SchemaRef` |
-| `Handler` | `ulong` |
-
-## ServiceDefinition
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Contract` | `PublicContract` |
-| `Handler` | `ulong` |
-| `Probe` | `QualifiedId?` |
-
-## ServiceLookup
-
-| Field | Type |
-| --- | --- |
-| `Provider` | `string` |
-| `Service` | `QualifiedId` |
-| `MinimumVersion` | `ulong` |
-| `MaximumVersion` | `ulong` |
-| `Required` | `bool` |
-
-## ServiceBinding
-
-| Field | Type |
-| --- | --- |
-| `Handle` | `ulong` |
-| `Provider` | `string` |
-| `ProviderLoadInstance` | `Guid` |
-| `Contract` | `QualifiedId` |
-| `Version` | `ulong` |
-
-## ServiceCall
-
-| Field | Type |
-| --- | --- |
-| `Binding` | `ServiceBinding` |
-| `Method` | `ulong` |
-| `Input` | `AbiValue` |
-| `CallChain` | `Guid[]` |
-| `Delegation` | `ScopedTarget?` |
-
-## ServiceProbe
-
-| Field | Type |
-| --- | --- |
-| `Binding` | `ServiceBinding` |
-| `Probe` | `QualifiedId` |
-| `Input` | `AbiValue` |
-
-## LoadReport
-
-| Field | Type |
-| --- | --- |
-| `Plugin` | `string` |
-| `LoadInstance` | `Guid` |
-| `State` | `string` |
-| `Findings` | `ValidationIssue[]` |
-| `DependencyChain` | `string[]` |
-
-## DiagnosticReport
-
-| Field | Type |
-| --- | --- |
-| `Code` | `string` |
-| `Message` | `LocalizedText` |
-| `Severity` | `DiagnosticSeverity` |
-| `CorrelationId` | `Guid` |
-| `OperationId` | `Guid?` |
-
-## DiagnosticSpan
-
-| Field | Type |
-| --- | --- |
-| `Name` | `string` |
-| `CorrelationId` | `Guid` |
-| `Parent` | `Guid?` |
-| `Attributes` | `NamedValue[]` |
-
-## SpanRef
-
-| Field | Type |
-| --- | --- |
-| `Id` | `Guid` |
-
-## CleanupRequest
-
-| Field | Type |
-| --- | --- |
-| `Callback` | `ulong` |
-
-## InstanceSummary
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Name` | `string` |
-| `GameVersion` | `string` |
-| `Loader` | `QualifiedId?` |
-| `Root` | `RootRef` |
-| `Revision` | `Revision` |
-
-## InstanceDetails
-
-| Field | Type |
-| --- | --- |
-| `Summary` | `InstanceSummary` |
-| `Directory` | `FileRef` |
-| `Running` | `bool` |
-| `Tags` | `QualifiedId[]` |
-
-## InstanceListRequest
-
-| Field | Type |
-| --- | --- |
-| `Root` | `RootRef?` |
-| `Page` | `PageRequest` |
-
-## RootRequest
-
-| Field | Type |
-| --- | --- |
-| `Root` | `RootRef` |
-
-## RootRegistration
-
-| Field | Type |
-| --- | --- |
-| `Root` | `RootRef` |
-| `DisplayName` | `string` |
-
-## InstanceCreateRequest
-
-| Field | Type |
-| --- | --- |
-| `Template` | `QualifiedId` |
-| `Name` | `string` |
-| `Root` | `RootRef` |
-| `GameVersion` | `string` |
-| `Loader` | `QualifiedId?` |
-
-## InstanceCloneRequest
-
-| Field | Type |
-| --- | --- |
-| `Source` | `EntityId` |
-| `Name` | `string` |
-| `Destination` | `RootRef` |
-| `ExpectedRevision` | `Revision` |
-
-## InstanceRenameRequest
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Name` | `string` |
-| `ExpectedRevision` | `Revision` |
-
-## InstanceDeleteRequest
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `ExpectedRevision` | `Revision` |
-| `RetainUserData` | `bool` |
-
-## EffectiveSetting
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Value` | `AbiValue` |
-| `Source` | `string` |
-| `Revision` | `Revision` |
-
-## GameVersion
-
-| Field | Type |
-| --- | --- |
-| `Id` | `string` |
-| `Kind` | `string` |
-| `ReleasedAt` | `DateTimeOffset` |
-
-## LoaderVersionRequest
-
-| Field | Type |
-| --- | --- |
-| `Loader` | `QualifiedId` |
-| `GameVersion` | `string` |
-| `Page` | `PageRequest` |
-
-## LoaderVersion
-
-| Field | Type |
-| --- | --- |
-| `Loader` | `QualifiedId` |
-| `Version` | `string` |
-| `GameVersion` | `string` |
-| `Stable` | `bool` |
-
-## InstallerInspection
-
-| Field | Type |
-| --- | --- |
-| `File` | `FileRef` |
-| `Loader` | `QualifiedId?` |
-| `Version` | `string?` |
-| `Issues` | `ValidationIssue[]` |
-
-## InstallDraft
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `GameVersion` | `string` |
-| `Loaders` | `LoaderVersion[]` |
-| `OptionalFiles` | `ResourceVersionRef[]` |
-| `Revision` | `Revision` |
-
-## InstallDraftUpdate
-
-| Field | Type |
-| --- | --- |
-| `Draft` | `InstallDraft` |
-| `ExpectedRevision` | `Revision` |
-
-## InstallPlan
-
-| Field | Type |
-| --- | --- |
-| `Plan` | `MutationPlan` |
-| `Instance` | `EntityId` |
-| `Steps` | `InstallStep[]` |
-
-## InstallStep
-
-| Field | Type |
-| --- | --- |
-| `Action` | `QualifiedId` |
-| `Inputs` | `AbiValue` |
-| `Effects` | `LocalizedText[]` |
-| `Reversible` | `bool` |
-
-## RecoveryRecord
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Operation` | `EntityId` |
-| `Summary` | `LocalizedText` |
-| `Revision` | `Revision` |
-
-## InstallTemplate
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `GameVersion` | `string` |
-| `Loaders` | `QualifiedId[]` |
-| `Content` | `ResourceVersionRef[]` |
-| `Workflow` | `QualifiedId` |
-
-## JavaRuntime
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Version` | `string` |
-| `Architecture` | `string` |
-| `Vendor` | `string` |
-| `File` | `FileRef` |
-| `Managed` | `bool` |
-
-## JavaRequirements
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `MinimumMajor` | `long` |
-| `MaximumMajor` | `long?` |
-| `Architecture` | `string` |
-
-## JavaSelection
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId?` |
-| `Runtime` | `EntityId?` |
-| `VersionLocal` | `bool` |
-| `ExpectedRevision` | `Revision?` |
-
-## JavaDistribution
-
-| Field | Type |
-| --- | --- |
-| `Provider` | `QualifiedId` |
-| `Version` | `string` |
-| `Architecture` | `string` |
-| `OperatingSystem` | `string` |
-| `Download` | `DownloadPlan` |
-
-## JavaInstallRequest
-
-| Field | Type |
-| --- | --- |
-| `Distribution` | `JavaDistribution` |
-| `Target` | `RootRef` |
-
-## LaunchProfile
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Name` | `string` |
-| `MemoryMiB` | `long` |
-| `Java` | `EntityId?` |
-| `Width` | `long` |
-| `Height` | `long` |
-| `Arguments` | `LaunchArgument[]` |
-| `Environment` | `NamedValue[]` |
-| `Revision` | `Revision` |
-
-## LaunchArgument
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Value` | `string` |
-| `Scope` | `LaunchArgumentScope` |
-
-## LaunchProfileWrite
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Profile` | `LaunchProfile` |
-| `ExpectedRevision` | `Revision` |
-
-## LaunchProfileSelection
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Profile` | `EntityId` |
-| `ExpectedRevision` | `Revision` |
-
-## LaunchIntent
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Grant` | `LaunchGrant` |
-| `Profile` | `EntityId` |
-| `Target` | `LaunchTarget?` |
-
-## LaunchTarget
-
-| Field | Type |
-| --- | --- |
-| `Server` | `EntityId?` |
-| `World` | `EntityId?` |
-
-## LaunchPlan
-
-| Field | Type |
-| --- | --- |
-| `Plan` | `MutationPlan` |
-| `Instance` | `EntityId` |
-| `Profile` | `LaunchProfile` |
-| `ProviderVersions` | `NamedValue[]` |
-| `Suppressed` | `ValidationIssue[]` |
-
-## LaunchAttempt
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `State` | `OperationState` |
-| `Session` | `EntityId?` |
-| `Issues` | `ValidationIssue[]` |
-| `Revision` | `Revision` |
-
-## LaunchContributionRegistration
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Fields` | `string[]` |
-| `Handler` | `ulong` |
-| `Required` | `bool` |
-
-## LaunchContributionReport
-
-| Field | Type |
-| --- | --- |
-| `Attempt` | `EntityId` |
-| `Accepted` | `QualifiedId[]` |
-| `Suppressed` | `ValidationIssue[]` |
-
-## GameSession
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `StartedAt` | `DateTimeOffset` |
-| `Running` | `bool` |
-
-## LogRangeRequest
-
-| Field | Type |
-| --- | --- |
-| `Session` | `EntityId` |
-| `Cursor` | `string?` |
-| `Limit` | `long` |
-
-## LogChunk
-
-| Field | Type |
-| --- | --- |
-| `Session` | `EntityId` |
-| `Lines` | `string[]` |
-| `NextCursor` | `string?` |
-| `Gap` | `bool` |
-
-## SessionMetrics
-
-| Field | Type |
-| --- | --- |
-| `Session` | `EntityId` |
-| `WorkingSetBytes` | `long` |
-| `CpuPercent` | `double` |
-| `ObservedAt` | `DateTimeOffset` |
-
-## ContentItem
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `Kind` | `QualifiedId` |
-| `Name` | `string` |
-| `Version` | `ResourceVersionRef?` |
-| `Enabled` | `bool` |
-| `Revision` | `Revision` |
-
-## ContentQuery
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Kind` | `QualifiedId?` |
-| `Page` | `PageRequest` |
-
-## ContentChangeRequest
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Items` | `EntityId[]` |
-| `Versions` | `ResourceVersionRef[]` |
-| `ExpectedRevision` | `Revision` |
-
-## ContentDependencyGraph
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Nodes` | `ContentItem[]` |
-| `Edges` | `ContentDependency[]` |
-| `Revision` | `Revision` |
-
-## ContentDependency
-
-| Field | Type |
-| --- | --- |
-| `From` | `EntityId` |
-| `To` | `EntityId` |
-| `Required` | `bool` |
-| `Conflict` | `bool` |
-
-## ContentPlan
-
-| Field | Type |
-| --- | --- |
-| `Plan` | `MutationPlan` |
-| `Changes` | `ContentItem[]` |
-| `Issues` | `ValidationIssue[]` |
-
-## ContentTransaction
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `State` | `OperationState` |
-| `Plan` | `EntityId` |
-| `Revision` | `Revision` |
-
-## IntegrityReport
-
-| Field | Type |
-| --- | --- |
-| `Target` | `EntityId` |
-| `Valid` | `bool` |
-| `Issues` | `ValidationIssue[]` |
-| `Revision` | `Revision` |
-
-## ContentTransfer
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `File` | `FileRef` |
-| `Format` | `QualifiedId` |
-| `Selection` | `EntityId[]` |
-
-## WorldSummary
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `Name` | `string` |
-| `Running` | `bool` |
-| `Revision` | `Revision` |
-
-## WorldMetadata
-
-| Field | Type |
-| --- | --- |
-| `World` | `EntityId` |
-| `Format` | `QualifiedId` |
-| `Fields` | `NamedValue[]` |
-
-## WorldCopyRequest
-
-| Field | Type |
-| --- | --- |
-| `World` | `EntityId` |
-| `Destination` | `EntityId` |
-| `Name` | `string` |
-| `ExpectedRevision` | `Revision` |
-
-## WorldRenameRequest
-
-| Field | Type |
-| --- | --- |
-| `World` | `EntityId` |
-| `Name` | `string` |
-| `ExpectedRevision` | `Revision` |
-
-## DataPackSelection
-
-| Field | Type |
-| --- | --- |
-| `World` | `EntityId` |
-| `Packs` | `ResourceVersionRef[]` |
-| `EnabledOrder` | `QualifiedId[]` |
-| `ExpectedRevision` | `Revision` |
-
-## ServerRecord
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Name` | `string` |
-| `Address` | `string` |
-| `Port` | `long` |
-
-## ServerList
-
-| Field | Type |
-| --- | --- |
-| `Servers` | `ServerRecord[]` |
-| `Revision` | `Revision` |
-
-## ServerStatus
-
-| Field | Type |
-| --- | --- |
-| `Server` | `EntityId` |
-| `Reachable` | `bool` |
-| `Description` | `string` |
-| `PlayersOnline` | `long` |
-| `PlayersMaximum` | `long` |
-| `Protocol` | `string` |
-
-## ServerJoinRequest
-
-| Field | Type |
-| --- | --- |
-| `Server` | `EntityId` |
-| `Intent` | `LaunchIntent` |
-
-## ResourceRef
-
-| Field | Type |
-| --- | --- |
-| `Provider` | `QualifiedId` |
-| `ProjectId` | `string` |
-
-## ResourceVersionRef
-
-| Field | Type |
-| --- | --- |
-| `Resource` | `ResourceRef` |
-| `VersionId` | `string` |
-
-## CatalogSearch
-
-| Field | Type |
-| --- | --- |
-| `Providers` | `QualifiedId[]` |
-| `Query` | `string` |
-| `Kind` | `QualifiedId?` |
-| `GameVersion` | `string?` |
-| `Loader` | `QualifiedId?` |
-| `Page` | `PageRequest` |
-
-## CatalogProject
-
-| Field | Type |
-| --- | --- |
-| `Resource` | `ResourceRef` |
-| `Name` | `string` |
-| `Summary` | `string` |
-| `Kind` | `QualifiedId` |
-| `Categories` | `QualifiedId[]` |
-
-## CatalogVersionQuery
-
-| Field | Type |
-| --- | --- |
-| `Resource` | `ResourceRef` |
-| `GameVersion` | `string?` |
-| `Page` | `PageRequest` |
-
-## CatalogVersion
-
-| Field | Type |
-| --- | --- |
-| `Version` | `ResourceVersionRef` |
-| `Name` | `string` |
-| `GameVersions` | `string[]` |
-| `Loaders` | `QualifiedId[]` |
-| `Files` | `CatalogFile[]` |
-
-## CatalogFile
-
-| Field | Type |
-| --- | --- |
-| `Name` | `string` |
-| `Source` | `UriRef` |
-| `Size` | `long` |
-| `Sha256` | `string` |
-
-## CatalogDependency
-
-| Field | Type |
-| --- | --- |
-| `Version` | `ResourceVersionRef` |
-| `Required` | `bool` |
-| `Conflict` | `bool` |
-
-## FavoriteChange
-
-| Field | Type |
-| --- | --- |
-| `Resource` | `ResourceRef` |
-| `Favorite` | `bool` |
-| `ExpectedRevision` | `Revision?` |
-
-## CatalogInstallRequest
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Versions` | `ResourceVersionRef[]` |
-| `ExpectedRevision` | `Revision` |
-
-## ResourceCollection
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Resources` | `ResourceRef[]` |
-| `Tags` | `QualifiedId[]` |
-
-## AccountPublic
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Provider` | `QualifiedId` |
-| `DisplayName` | `string` |
-| `Avatar` | `UriRef?` |
-| `Revision` | `Revision` |
-
-## SignInRequest
-
-| Field | Type |
-| --- | --- |
-| `Provider` | `QualifiedId` |
-| `Scope` | `string` |
-
-## SignInChallenge
-
-| Field | Type |
-| --- | --- |
-| `Flow` | `EntityId` |
-| `State` | `SignInState` |
-| `Prompt` | `LocalizedText` |
-| `VerificationUri` | `UriRef?` |
-| `UserCode` | `string?` |
-
-## SignInContinue
-
-| Field | Type |
-| --- | --- |
-| `Flow` | `EntityId` |
-| `Response` | `AbiValue` |
-| `Schema` | `SchemaRef` |
-
-## LaunchEligibility
-
-| Field | Type |
-| --- | --- |
-| `Account` | `EntityId` |
-| `Allowed` | `bool` |
-| `Reasons` | `ValidationIssue[]` |
-
-## GrantRequest
-
-| Field | Type |
-| --- | --- |
-| `Account` | `EntityId` |
-| `Instance` | `EntityId` |
-
-## Wardrobe
-
-| Field | Type |
-| --- | --- |
-| `Account` | `EntityId` |
-| `Skin` | `UriRef?` |
-| `Capes` | `Cape[]` |
-| `SupportsUpload` | `bool` |
-
-## Cape
-
-| Field | Type |
-| --- | --- |
-| `Id` | `string` |
-| `Title` | `string` |
-| `Image` | `UriRef?` |
-
-## SkinRequest
-
-| Field | Type |
-| --- | --- |
-| `Account` | `EntityId` |
-| `Image` | `BlobRef` |
-| `Model` | `string` |
-
-## CapeSelection
-
-| Field | Type |
-| --- | --- |
-| `Account` | `EntityId` |
-| `CapeId` | `string?` |
-
-## SettingSchema
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `ValueSchema` | `SchemaRef` |
-| `Default` | `AbiValue` |
-| `Scopes` | `string[]` |
-
-## SettingQuery
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Target` | `ScopedTarget` |
-
-## SettingChange
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Target` | `ScopedTarget` |
-| `Value` | `AbiValue` |
-| `ExpectedRevision` | `Revision` |
-
-## SettingMigration
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Target` | `ScopedTarget` |
-| `FromVersion` | `ulong` |
-| `ToVersion` | `ulong` |
-| `Handler` | `ulong` |
-
-## SettingsProfile
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Name` | `string` |
-| `Values` | `EffectiveSetting[]` |
-| `Revision` | `Revision` |
-
-## SettingsOverlay
-
-| Field | Type |
-| --- | --- |
-| `Target` | `ScopedTarget` |
-| `Values` | `EffectiveSetting[]` |
-
-## ThemeSummary
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Name` | `string` |
-| `Version` | `string` |
-| `Active` | `bool` |
-
-## ThemePreparation
-
-| Field | Type |
-| --- | --- |
-| `Theme` | `EntityId` |
-| `Plan` | `MutationPlan` |
-| `Issues` | `ValidationIssue[]` |
-
-## ThemeOptions
-
-| Field | Type |
-| --- | --- |
-| `Theme` | `EntityId` |
-| `Values` | `NamedValue[]` |
-| `Revision` | `Revision` |
-
-## ThemeOptionChange
-
-| Field | Type |
-| --- | --- |
-| `Options` | `ThemeOptions` |
-| `ExpectedRevision` | `Revision` |
-
-## ThemeTransfer
-
-| Field | Type |
-| --- | --- |
-| `Theme` | `EntityId` |
-| `File` | `FileRef` |
-
-## ThemeResource
-
-| Field | Type |
-| --- | --- |
-| `Theme` | `EntityId` |
-| `Name` | `string` |
-| `Data` | `BlobRef` |
-
-## BackupSummary
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Instance` | `EntityId` |
-| `CreatedAt` | `DateTimeOffset` |
-| `Size` | `long` |
-| `Revision` | `Revision` |
-
-## BackupStatistics
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Count` | `long` |
-| `Bytes` | `long` |
-
-## BackupCapture
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Target` | `FileRef?` |
-| `Include` | `QualifiedId[]` |
-| `Exclude` | `QualifiedId[]` |
-
-## BackupRestore
-
-| Field | Type |
-| --- | --- |
-| `Backup` | `EntityId` |
-| `Destination` | `EntityId` |
-| `ExpectedRevision` | `Revision` |
-
-## BackupTransfer
-
-| Field | Type |
-| --- | --- |
-| `Backup` | `EntityId?` |
-| `File` | `FileRef` |
-
-## BackupPrune
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Retention` | `RetentionPolicy` |
-| `ExpectedRevision` | `Revision` |
-
-## BackupRetention
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Policy` | `RetentionPolicy` |
-| `ExpectedRevision` | `Revision` |
-
-## DownloadPlan
-
-| Field | Type |
-| --- | --- |
-| `Sources` | `DownloadSource[]` |
-| `Target` | `FileRef` |
-| `Size` | `long?` |
-| `Sha256` | `string?` |
-
-## DownloadSource
-
-| Field | Type |
-| --- | --- |
-| `Uri` | `UriRef` |
-| `Provider` | `QualifiedId?` |
-| `Credential` | `CredentialRef?` |
-
-## DownloadState
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `State` | `OperationState` |
-| `BytesReceived` | `long` |
-| `TotalBytes` | `long?` |
-| `Failures` | `OperationFailure[]` |
-| `Revision` | `Revision` |
-
-## TaskCreate
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Title` | `LocalizedText` |
-| `Operation` | `EntityId` |
-| `Cancellable` | `bool` |
-
-## TaskProgress
-
-| Field | Type |
-| --- | --- |
-| `Task` | `EntityId` |
-| `Stage` | `string` |
-| `Progress` | `double` |
-| `ExpectedRevision` | `Revision` |
-
-## TaskCompletion
-
-| Field | Type |
-| --- | --- |
-| `Task` | `EntityId` |
-| `Result` | `AbiValue` |
-| `Schema` | `SchemaRef` |
-| `ExpectedRevision` | `Revision` |
-
-## TaskFailure
-
-| Field | Type |
-| --- | --- |
-| `Task` | `EntityId` |
-| `Error` | `OperationFailure` |
-| `ExpectedRevision` | `Revision` |
-
-## NamespaceRequest
-
-| Field | Type |
-| --- | --- |
-| `Namespace` | `QualifiedId` |
-| `SchemaVersion` | `ulong` |
-
-## StorageNamespace
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `LoadInstanceId` | `Guid` |
-| `Namespace` | `QualifiedId` |
-| `Revision` | `Revision` |
-
-## StorageKey
-
-| Field | Type |
-| --- | --- |
-| `Namespace` | `StorageNamespace` |
-| `Key` | `string` |
-
-## StorageValue
-
-| Field | Type |
-| --- | --- |
-| `Value` | `AbiValue` |
-| `Schema` | `SchemaRef` |
-| `Revision` | `Revision` |
-
-## StorageWrite
-
-| Field | Type |
-| --- | --- |
-| `Namespace` | `StorageNamespace` |
-| `Key` | `string` |
-| `Value` | `AbiValue` |
-| `Schema` | `SchemaRef` |
-| `ExpectedRevision` | `Revision?` |
-
-## StorageQuery
-
-| Field | Type |
-| --- | --- |
-| `Namespace` | `StorageNamespace` |
-| `Prefix` | `string` |
-| `Page` | `PageRequest` |
-
-## StorageTransaction
-
-| Field | Type |
-| --- | --- |
-| `Token` | `Guid` |
-| `Namespace` | `StorageNamespace` |
-| `Revision` | `Revision` |
-
-## StorageCommit
-
-| Field | Type |
-| --- | --- |
-| `Transaction` | `StorageTransaction` |
-| `Writes` | `StorageWrite[]` |
-
-## StorageMigration
-
-| Field | Type |
-| --- | --- |
-| `Namespace` | `StorageNamespace` |
-| `FromVersion` | `ulong` |
-| `ToVersion` | `ulong` |
-| `Action` | `QualifiedId` |
-
-## FilePick
-
-| Field | Type |
-| --- | --- |
-| `Title` | `LocalizedText` |
-| `Kind` | `FilePickKind` |
-| `Extensions` | `string[]` |
-
-## FileQuery
-
-| Field | Type |
-| --- | --- |
-| `Directory` | `FileRef` |
-| `Page` | `PageRequest` |
-
-## FileStat
-
-| Field | Type |
-| --- | --- |
-| `File` | `FileRef` |
-| `Name` | `string` |
-| `IsDirectory` | `bool` |
-| `Size` | `long` |
-| `ModifiedAt` | `DateTimeOffset` |
-| `Revision` | `Revision` |
-
-## FileRead
-
-| Field | Type |
-| --- | --- |
-| `File` | `FileRef` |
-| `Offset` | `long` |
-| `Length` | `long` |
-
-## FileWrite
-
-| Field | Type |
-| --- | --- |
-| `File` | `FileRef` |
-| `Data` | `BlobRef` |
-| `ExpectedRevision` | `Revision` |
-
-## FileMove
-
-| Field | Type |
-| --- | --- |
-| `File` | `FileRef` |
-| `Destination` | `FileRef` |
-| `ExpectedRevision` | `Revision` |
-
-## FileDelete
-
-| Field | Type |
-| --- | --- |
-| `File` | `FileRef` |
-| `ExpectedRevision` | `Revision` |
-| `Recursive` | `bool` |
-
-## NetworkRequest
-
-| Field | Type |
-| --- | --- |
-| `Uri` | `UriRef` |
-| `Method` | `string` |
-| `Headers` | `NamedValue[]` |
-| `Body` | `BlobRef?` |
-| `Credential` | `CredentialRef?` |
-
-## NetworkResponse
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `StatusCode` | `long` |
-| `Headers` | `NamedValue[]` |
-| `Body` | `BlobRef?` |
-
-## NetworkConnectionRequest
-
-| Field | Type |
-| --- | --- |
-| `Protocol` | `QualifiedId` |
-| `Address` | `string` |
-| `Port` | `long` |
-| `Scope` | `string` |
-
-## NetworkConnection
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Protocol` | `QualifiedId` |
-| `Scope` | `string` |
-| `LoadInstanceId` | `Guid` |
-
-## NetworkSend
-
-| Field | Type |
-| --- | --- |
-| `Connection` | `NetworkConnection` |
-| `Data` | `BlobRef` |
-| `Destination` | `string?` |
-
-## NetworkReceive
-
-| Field | Type |
-| --- | --- |
-| `Connection` | `NetworkConnection` |
-| `MaximumBytes` | `long` |
-
-## NetworkPacket
-
-| Field | Type |
-| --- | --- |
-| `Data` | `BlobRef` |
-| `Source` | `string?` |
-| `EndOfStream` | `bool` |
-
-## PlatformDescription
-
-| Field | Type |
-| --- | --- |
-| `Capabilities` | `CapabilityDescription[]` |
-
-## ClipboardContent
-
-| Field | Type |
-| --- | --- |
-| `Text` | `string?` |
-| `Image` | `BlobRef?` |
-
-## PowerState
-
-| Field | Type |
-| --- | --- |
-| `OnBattery` | `bool` |
-| `ChargePercent` | `double?` |
-| `Saving` | `bool` |
-
-## DisplayInfo
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Width` | `long` |
-| `Height` | `long` |
-| `Scale` | `double` |
-
-## ArchitectureInfo
-
-| Field | Type |
-| --- | --- |
-| `OperatingSystem` | `string` |
-| `Architecture` | `string` |
-
-## DiagnosticAnalysis
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Reports` | `DiagnosticReport[]` |
-| `Issues` | `ValidationIssue[]` |
-
-## RepairRequest
-
-| Field | Type |
-| --- | --- |
-| `Instance` | `EntityId` |
-| `Findings` | `QualifiedId[]` |
-| `ExpectedRevision` | `Revision` |
-
-## DeclarativeContentPack
-
-| Field | Type |
-| --- | --- |
-| `Id` | `QualifiedId` |
-| `Schema` | `SchemaRef` |
-| `Definitions` | `Definition[]` |
-
-## StorageEntry
-
-| Field | Type |
-| --- | --- |
-| `Key` | `string` |
-| `Value` | `StorageValue` |
-
-## SubscriptionRead
-
-| Field | Type |
-| --- | --- |
-| `Subscription` | `SubscriptionRef` |
-| `Limit` | `long` |
-
-## SubscriptionBatch
-
-| Field | Type |
-| --- | --- |
-| `Items` | `AbiValue[]` |
-| `ResyncRequired` | `bool` |
-
-## PackageFileRequest
-
-| Field | Type |
-| --- | --- |
-| `Path` | `string` |
-
-## EventSubscriptionRegistration
-
-| Field | Type |
-| --- | --- |
-| `Registration` | `RegistrationRef` |
-| `Subscription` | `SubscriptionRef` |
-
-## ManagedJavaOffer
-
-| Field | Type |
-| --- | --- |
-| `Id` | `EntityId` |
-| `Provider` | `QualifiedId` |
-| `Version` | `string` |
-| `Platform` | `string` |
-| `Files` | `long` |
-| `Bytes` | `long` |
-| `Licenses` | `UriRef[]` |
-| `ExpiresAt` | `DateTimeOffset` |
-| `Revision` | `Revision` |
-
-## ManagedJavaInstallRequest
-
-| Field | Type |
-| --- | --- |
-| `Offer` | `EntityId` |
-| `ExpectedRevision` | `Revision` |
-
-## StorageMigrationInput
-
-| Field | Type |
-| --- | --- |
-| `Namespace` | `QualifiedId` |
-| `FromVersion` | `ulong` |
-| `ToVersion` | `ulong` |
-| `Entries` | `StorageEntry[]` |
-
-## StorageMigrationOutput
-
-| Field | Type |
-| --- | --- |
-| `Entries` | `StorageEntry[]` |
-
-## BusinessProviderCall
-
-| Field | Type |
-| --- | --- |
-| `Provider` | `QualifiedId` |
-| `Kind` | `QualifiedId` |
-| `Method` | `string` |
-| `InputSchema` | `SchemaRef` |
-| `OutputSchema` | `SchemaRef` |
-| `Inputs` | `AbiValue` |
+## Model index
+
+| Model | Fields |
+| --- | --- |
+| [Empty](models/empty.md) | 0 |
+| [TextResult](models/textresult.md) | 1 |
+| [BooleanResult](models/booleanresult.md) | 1 |
+| [PageRequest](models/pagerequest.md) | 2 |
+| [EntityRequest](models/entityrequest.md) | 1 |
+| [QualifiedRequest](models/qualifiedrequest.md) | 1 |
+| [RegistrationRequest](models/registrationrequest.md) | 1 |
+| [WatchRequest](models/watchrequest.md) | 3 |
+| [SubscriptionRef](models/subscriptionref.md) | 4 |
+| [FileRef](models/fileref.md) | 3 |
+| [RootRef](models/rootref.md) | 2 |
+| [BlobRef](models/blobref.md) | 4 |
+| [CredentialRef](models/credentialref.md) | 3 |
+| [LaunchGrant](models/launchgrant.md) | 3 |
+| [SchemaRef](models/schemaref.md) | 3 |
+| [Reference](models/reference.md) | 2 |
+| [NamedValue](models/namedvalue.md) | 2 |
+| [LocalizedText](models/localizedtext.md) | 2 |
+| [RegistrationRef](models/registrationref.md) | 5 |
+| [ValidationIssue](models/validationissue.md) | 4 |
+| [ValidationReport](models/validationreport.md) | 2 |
+| [MutationPlan](models/mutationplan.md) | 6 |
+| [PlanRequest](models/planrequest.md) | 3 |
+| [OperationRef](models/operationref.md) | 2 |
+| [OperationRequest](models/operationrequest.md) | 1 |
+| [OperationRecord](models/operationrecord.md) | 8 |
+| [OperationFailure](models/operationfailure.md) | 5 |
+| [RetentionPolicy](models/retentionpolicy.md) | 3 |
+| [ScopedTarget](models/scopedtarget.md) | 3 |
+| [CapabilityDescription](models/capabilitydescription.md) | 5 |
+| [PublicContract](models/publiccontract.md) | 4 |
+| [ServiceMethod](models/servicemethod.md) | 7 |
+| [ContractQuery](models/contractquery.md) | 2 |
+| [ProviderKindDefinition](models/providerkinddefinition.md) | 3 |
+| [ExtensionPointDefinition](models/extensionpointdefinition.md) | 10 |
+| [ConsumerDefinition](models/consumerdefinition.md) | 4 |
+| [SchemaValidationRequest](models/schemavalidationrequest.md) | 2 |
+| [CompatibilityRequest](models/compatibilityrequest.md) | 3 |
+| [RegistryDescriptor](models/registrydescriptor.md) | 13 |
+| [Definition](models/definition.md) | 5 |
+| [DefinitionBatch](models/definitionbatch.md) | 1 |
+| [DefinitionQuery](models/definitionquery.md) | 2 |
+| [DefinitionSearch](models/definitionsearch.md) | 3 |
+| [DefinitionUpdate](models/definitionupdate.md) | 2 |
+| [DefinitionRemove](models/definitionremove.md) | 3 |
+| [TagDefinition](models/tagdefinition.md) | 5 |
+| [TagResolution](models/tagresolution.md) | 2 |
+| [OverlayDefinition](models/overlaydefinition.md) | 7 |
+| [ResolutionReport](models/resolutionreport.md) | 5 |
+| [PredicateDefinition](models/predicatedefinition.md) | 4 |
+| [PredicateRequest](models/predicaterequest.md) | 3 |
+| [PredicateResult](models/predicateresult.md) | 3 |
+| [ActionDescriptor](models/actiondescriptor.md) | 12 |
+| [ActionRequest](models/actionrequest.md) | 5 |
+| [WorkflowDefinition](models/workflowdefinition.md) | 9 |
+| [WorkflowNode](models/workflownode.md) | 12 |
+| [WorkflowRequest](models/workflowrequest.md) | 3 |
+| [WorkflowRunRequest](models/workflowrunrequest.md) | 3 |
+| [WorkflowStepRequest](models/workflowsteprequest.md) | 4 |
+| [WorkflowTrace](models/workflowtrace.md) | 3 |
+| [WorkflowStep](models/workflowstep.md) | 4 |
+| [ScheduleDefinition](models/scheduledefinition.md) | 10 |
+| [ScheduleState](models/schedulestate.md) | 4 |
+| [EventDescriptor](models/eventdescriptor.md) | 6 |
+| [EventSubscribeRequest](models/eventsubscriberequest.md) | 10 |
+| [EventEnvelope](models/eventenvelope.md) | 11 |
+| [StateDescriptor](models/statedescriptor.md) | 3 |
+| [StateReadRequest](models/statereadrequest.md) | 2 |
+| [StateSnapshot](models/statesnapshot.md) | 5 |
+| [StateUpdate](models/stateupdate.md) | 4 |
+| [UIPage](models/uipage.md) | 4 |
+| [UIComponent](models/uicomponent.md) | 3 |
+| [UIContribution](models/uicontribution.md) | 7 |
+| [UIViewReplacement](models/uiviewreplacement.md) | 4 |
+| [UIViewContract](models/uiviewcontract.md) | 7 |
+| [UINavigation](models/uinavigation.md) | 4 |
+| [UICommand](models/uicommand.md) | 3 |
+| [UIShortcut](models/uishortcut.md) | 4 |
+| [UIDialog](models/uidialog.md) | 3 |
+| [UIDialogRef](models/uidialogref.md) | 2 |
+| [UINavigateRequest](models/uinavigaterequest.md) | 2 |
+| [UINotification](models/uinotification.md) | 3 |
+| [UIModelUpdate](models/uimodelupdate.md) | 4 |
+| [UIViewWatch](models/uiviewwatch.md) | 3 |
+| [DrawingSurfaceRequest](models/drawingsurfacerequest.md) | 4 |
+| [DrawingSurfaceRef](models/drawingsurfaceref.md) | 3 |
+| [DrawCommand](models/drawcommand.md) | 5 |
+| [DrawSubmission](models/drawsubmission.md) | 3 |
+| [InputSubscription](models/inputsubscription.md) | 3 |
+| [ProviderDescriptor](models/providerdescriptor.md) | 13 |
+| [ServiceDefinition](models/servicedefinition.md) | 4 |
+| [ServiceLookup](models/servicelookup.md) | 5 |
+| [ServiceBinding](models/servicebinding.md) | 5 |
+| [ServiceCall](models/servicecall.md) | 5 |
+| [ServiceProbe](models/serviceprobe.md) | 3 |
+| [LoadReport](models/loadreport.md) | 5 |
+| [DiagnosticReport](models/diagnosticreport.md) | 5 |
+| [DiagnosticSpan](models/diagnosticspan.md) | 4 |
+| [SpanRef](models/spanref.md) | 1 |
+| [CleanupRequest](models/cleanuprequest.md) | 1 |
+| [InstanceSummary](models/instancesummary.md) | 6 |
+| [InstanceDetails](models/instancedetails.md) | 4 |
+| [InstanceListRequest](models/instancelistrequest.md) | 2 |
+| [RootRequest](models/rootrequest.md) | 1 |
+| [RootRegistration](models/rootregistration.md) | 2 |
+| [InstanceCreateRequest](models/instancecreaterequest.md) | 5 |
+| [InstanceCloneRequest](models/instanceclonerequest.md) | 4 |
+| [InstanceRenameRequest](models/instancerenamerequest.md) | 3 |
+| [InstanceDeleteRequest](models/instancedeleterequest.md) | 3 |
+| [EffectiveSetting](models/effectivesetting.md) | 4 |
+| [GameVersion](models/gameversion.md) | 3 |
+| [LoaderVersionRequest](models/loaderversionrequest.md) | 3 |
+| [LoaderVersion](models/loaderversion.md) | 4 |
+| [InstallerInspection](models/installerinspection.md) | 4 |
+| [InstallDraft](models/installdraft.md) | 6 |
+| [InstallDraftUpdate](models/installdraftupdate.md) | 2 |
+| [InstallPlan](models/installplan.md) | 3 |
+| [InstallStep](models/installstep.md) | 4 |
+| [RecoveryRecord](models/recoveryrecord.md) | 4 |
+| [InstallTemplate](models/installtemplate.md) | 5 |
+| [JavaRuntime](models/javaruntime.md) | 6 |
+| [JavaRequirements](models/javarequirements.md) | 4 |
+| [JavaSelection](models/javaselection.md) | 4 |
+| [JavaDistribution](models/javadistribution.md) | 5 |
+| [JavaInstallRequest](models/javainstallrequest.md) | 2 |
+| [LaunchProfile](models/launchprofile.md) | 9 |
+| [LaunchArgument](models/launchargument.md) | 3 |
+| [LaunchProfileWrite](models/launchprofilewrite.md) | 3 |
+| [LaunchProfileSelection](models/launchprofileselection.md) | 3 |
+| [LaunchIntent](models/launchintent.md) | 4 |
+| [LaunchTarget](models/launchtarget.md) | 2 |
+| [LaunchPlan](models/launchplan.md) | 5 |
+| [LaunchAttempt](models/launchattempt.md) | 6 |
+| [LaunchContributionRegistration](models/launchcontributionregistration.md) | 4 |
+| [LaunchContributionReport](models/launchcontributionreport.md) | 3 |
+| [GameSession](models/gamesession.md) | 4 |
+| [LogRangeRequest](models/lograngerequest.md) | 3 |
+| [LogChunk](models/logchunk.md) | 4 |
+| [SessionMetrics](models/sessionmetrics.md) | 4 |
+| [ContentItem](models/contentitem.md) | 7 |
+| [ContentQuery](models/contentquery.md) | 3 |
+| [ContentChangeRequest](models/contentchangerequest.md) | 4 |
+| [ContentDependencyGraph](models/contentdependencygraph.md) | 4 |
+| [ContentDependency](models/contentdependency.md) | 4 |
+| [ContentPlan](models/contentplan.md) | 3 |
+| [ContentTransaction](models/contenttransaction.md) | 5 |
+| [IntegrityReport](models/integrityreport.md) | 4 |
+| [ContentTransfer](models/contenttransfer.md) | 4 |
+| [WorldSummary](models/worldsummary.md) | 5 |
+| [WorldMetadata](models/worldmetadata.md) | 3 |
+| [WorldCopyRequest](models/worldcopyrequest.md) | 4 |
+| [WorldRenameRequest](models/worldrenamerequest.md) | 3 |
+| [DataPackSelection](models/datapackselection.md) | 4 |
+| [ServerRecord](models/serverrecord.md) | 4 |
+| [ServerList](models/serverlist.md) | 2 |
+| [ServerStatus](models/serverstatus.md) | 6 |
+| [ServerJoinRequest](models/serverjoinrequest.md) | 2 |
+| [ResourceRef](models/resourceref.md) | 2 |
+| [ResourceVersionRef](models/resourceversionref.md) | 2 |
+| [CatalogSearch](models/catalogsearch.md) | 6 |
+| [CatalogProject](models/catalogproject.md) | 5 |
+| [CatalogVersionQuery](models/catalogversionquery.md) | 3 |
+| [CatalogVersion](models/catalogversion.md) | 5 |
+| [CatalogFile](models/catalogfile.md) | 4 |
+| [CatalogDependency](models/catalogdependency.md) | 3 |
+| [FavoriteChange](models/favoritechange.md) | 3 |
+| [CatalogInstallRequest](models/cataloginstallrequest.md) | 3 |
+| [ResourceCollection](models/resourcecollection.md) | 3 |
+| [AccountPublic](models/accountpublic.md) | 5 |
+| [SignInRequest](models/signinrequest.md) | 2 |
+| [SignInChallenge](models/signinchallenge.md) | 5 |
+| [SignInContinue](models/signincontinue.md) | 3 |
+| [LaunchEligibility](models/launcheligibility.md) | 3 |
+| [GrantRequest](models/grantrequest.md) | 2 |
+| [Wardrobe](models/wardrobe.md) | 4 |
+| [Cape](models/cape.md) | 3 |
+| [SkinRequest](models/skinrequest.md) | 3 |
+| [CapeSelection](models/capeselection.md) | 2 |
+| [SettingSchema](models/settingschema.md) | 4 |
+| [SettingQuery](models/settingquery.md) | 2 |
+| [SettingChange](models/settingchange.md) | 4 |
+| [SettingMigration](models/settingmigration.md) | 5 |
+| [SettingsProfile](models/settingsprofile.md) | 4 |
+| [SettingsOverlay](models/settingsoverlay.md) | 2 |
+| [ThemeSummary](models/themesummary.md) | 4 |
+| [ThemePreparation](models/themepreparation.md) | 3 |
+| [ThemeOptions](models/themeoptions.md) | 3 |
+| [ThemeOptionChange](models/themeoptionchange.md) | 2 |
+| [ThemeTransfer](models/themetransfer.md) | 2 |
+| [ThemeResource](models/themeresource.md) | 3 |
+| [BackupSummary](models/backupsummary.md) | 5 |
+| [BackupStatistics](models/backupstatistics.md) | 3 |
+| [BackupCapture](models/backupcapture.md) | 4 |
+| [BackupRestore](models/backuprestore.md) | 3 |
+| [BackupTransfer](models/backuptransfer.md) | 2 |
+| [BackupPrune](models/backupprune.md) | 3 |
+| [BackupRetention](models/backupretention.md) | 3 |
+| [DownloadPlan](models/downloadplan.md) | 4 |
+| [DownloadSource](models/downloadsource.md) | 3 |
+| [DownloadState](models/downloadstate.md) | 6 |
+| [TaskCreate](models/taskcreate.md) | 4 |
+| [TaskProgress](models/taskprogress.md) | 4 |
+| [TaskCompletion](models/taskcompletion.md) | 4 |
+| [TaskFailure](models/taskfailure.md) | 3 |
+| [NamespaceRequest](models/namespacerequest.md) | 2 |
+| [StorageNamespace](models/storagenamespace.md) | 4 |
+| [StorageKey](models/storagekey.md) | 2 |
+| [StorageValue](models/storagevalue.md) | 3 |
+| [StorageWrite](models/storagewrite.md) | 5 |
+| [StorageQuery](models/storagequery.md) | 3 |
+| [StorageTransaction](models/storagetransaction.md) | 3 |
+| [StorageCommit](models/storagecommit.md) | 2 |
+| [StorageMigration](models/storagemigration.md) | 4 |
+| [FilePick](models/filepick.md) | 3 |
+| [FileQuery](models/filequery.md) | 2 |
+| [FileStat](models/filestat.md) | 6 |
+| [FileRead](models/fileread.md) | 3 |
+| [FileWrite](models/filewrite.md) | 3 |
+| [FileMove](models/filemove.md) | 3 |
+| [FileDelete](models/filedelete.md) | 3 |
+| [NetworkRequest](models/networkrequest.md) | 5 |
+| [NetworkResponse](models/networkresponse.md) | 4 |
+| [NetworkConnectionRequest](models/networkconnectionrequest.md) | 4 |
+| [NetworkConnection](models/networkconnection.md) | 4 |
+| [NetworkSend](models/networksend.md) | 3 |
+| [NetworkReceive](models/networkreceive.md) | 2 |
+| [NetworkPacket](models/networkpacket.md) | 3 |
+| [PlatformDescription](models/platformdescription.md) | 1 |
+| [ClipboardContent](models/clipboardcontent.md) | 2 |
+| [PowerState](models/powerstate.md) | 3 |
+| [DisplayInfo](models/displayinfo.md) | 4 |
+| [ArchitectureInfo](models/architectureinfo.md) | 2 |
+| [DiagnosticAnalysis](models/diagnosticanalysis.md) | 3 |
+| [RepairRequest](models/repairrequest.md) | 3 |
+| [DeclarativeContentPack](models/declarativecontentpack.md) | 3 |
+| [StorageEntry](models/storageentry.md) | 2 |
+| [SubscriptionRead](models/subscriptionread.md) | 2 |
+| [SubscriptionBatch](models/subscriptionbatch.md) | 2 |
+| [PackageFileRequest](models/packagefilerequest.md) | 1 |
+| [EventSubscriptionRegistration](models/eventsubscriptionregistration.md) | 2 |
+| [ManagedJavaOffer](models/managedjavaoffer.md) | 9 |
+| [ManagedJavaInstallRequest](models/managedjavainstallrequest.md) | 2 |
+| [StorageMigrationInput](models/storagemigrationinput.md) | 4 |
+| [StorageMigrationOutput](models/storagemigrationoutput.md) | 1 |
+| [BusinessProviderCall](models/businessprovidercall.md) | 6 |
 
