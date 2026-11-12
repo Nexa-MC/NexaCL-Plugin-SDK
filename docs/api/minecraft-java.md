@@ -345,7 +345,7 @@ and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone gu
 | Idempotency | ReadOnly |
 | Host status | Mapped in recorded snapshot |
 
-Prepare a ZIP installation in a registered root’s runtime/plugin-<sha256> directory. Require Java major 8–99, matching host OS/architecture, an archive of 1–512 MiB, 1–8 HTTPS sources and a SHA-256 digest. Download.Target is replaced with a temporary Host-owned file grant. The review includes source, digest and the fact that Java will execute for probing. The owner rejects unsafe entries, caps extraction at 8,192 entries and 2 GiB total, probes exactly one bin/java executable, checks version/architecture and registers it with registry CAS. An unsuccessful registry CAS can leave a verified directory for explicit registration.
+Prepare a ZIP installation in a registered root’s `runtime/plugin-<sha256>` directory. Require Java major 8–99, matching host OS/architecture, an archive of 1–512 MiB, 1–8 HTTPS sources and a SHA-256 digest. Download.Target is replaced with a temporary Host-owned file grant. The review includes source, digest and the fact that Java will execute for probing. The owner rejects unsafe entries, caps extraction at 8,192 entries and 2 GiB total, probes exactly one bin/java executable, checks version/architecture and registers it with registry CAS. An unsuccessful registry CAS can leave a verified directory for explicit registration.
 
 **Request fields**
 
