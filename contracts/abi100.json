@@ -4358,8 +4358,7 @@
             "Initialize"
           ],
           "permission": "nexa.contracts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "DefineProviderKind",
@@ -4371,8 +4370,7 @@
             "Initialize"
           ],
           "permission": "nexa.contracts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "DefineExtensionPoint",
@@ -4384,8 +4382,7 @@
             "Initialize"
           ],
           "permission": "nexa.contracts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Describe",
@@ -4401,8 +4398,7 @@
             "Active"
           ],
           "permission": "nexa.contracts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "List",
@@ -4418,8 +4414,7 @@
             "Active"
           ],
           "permission": "nexa.contracts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ValidateSchema",
@@ -4435,8 +4430,7 @@
             "Active"
           ],
           "permission": "nexa.contracts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RegisterConsumer",
@@ -4448,8 +4442,7 @@
             "Initialize"
           ],
           "permission": "nexa.contracts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "WatchAvailability",
@@ -4465,8 +4458,7 @@
             "Active"
           ],
           "permission": "nexa.contracts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "CheckCompatibility",
@@ -4482,8 +4474,7 @@
             "Active"
           ],
           "permission": "nexa.contracts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -4506,8 +4497,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "DescribeRegistry",
@@ -4523,8 +4513,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "DefineRegistry",
@@ -4536,8 +4525,7 @@
             "Initialize"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Register",
@@ -4549,8 +4537,7 @@
             "Initialize"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterBatch",
@@ -4562,8 +4549,7 @@
             "Initialize"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Get",
@@ -4579,8 +4565,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Query",
@@ -4596,8 +4581,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -4613,8 +4597,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "UpdateOwned",
@@ -4626,8 +4609,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RemoveOwned",
@@ -4639,8 +4621,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterTag",
@@ -4652,8 +4633,7 @@
             "Initialize"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ResolveTag",
@@ -4669,8 +4649,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PreviewOverlay",
@@ -4686,8 +4665,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RegisterOverlay",
@@ -4699,8 +4677,7 @@
             "Initialize"
           ],
           "permission": "nexa.definitions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ExplainResolution",
@@ -4716,8 +4693,7 @@
             "Active"
           ],
           "permission": "nexa.definitions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -4736,8 +4712,7 @@
             "Initialize"
           ],
           "permission": "nexa.predicates.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Evaluate",
@@ -4753,8 +4728,7 @@
             "Active"
           ],
           "permission": "nexa.predicates.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Describe",
@@ -4770,8 +4744,7 @@
             "Active"
           ],
           "permission": "nexa.predicates.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -4790,8 +4763,7 @@
             "Initialize"
           ],
           "permission": "nexa.actions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Describe",
@@ -4807,8 +4779,7 @@
             "Active"
           ],
           "permission": "nexa.actions.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Invoke",
@@ -4820,8 +4791,7 @@
             "Active"
           ],
           "permission": "nexa.actions.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -4844,8 +4814,7 @@
             "Active"
           ],
           "permission": "nexa.commands.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Describe",
@@ -4861,8 +4830,7 @@
             "Active"
           ],
           "permission": "nexa.commands.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Execute",
@@ -4874,8 +4842,7 @@
             "Active"
           ],
           "permission": "nexa.commands.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -4894,8 +4861,7 @@
             "Initialize"
           ],
           "permission": "nexa.workflows.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Validate",
@@ -4911,8 +4877,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Preview",
@@ -4928,8 +4893,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Start",
@@ -4941,8 +4905,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Read",
@@ -4958,8 +4921,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -4975,8 +4937,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Cancel",
@@ -4988,8 +4949,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListRuns",
@@ -5005,8 +4965,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Resume",
@@ -5018,8 +4977,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RetryStep",
@@ -5031,8 +4989,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ExplainPlan",
@@ -5048,8 +5005,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadRunTrace",
@@ -5065,8 +5021,7 @@
             "Active"
           ],
           "permission": "nexa.workflows.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -5085,8 +5040,7 @@
             "Initialize"
           ],
           "permission": "nexa.schedules.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "List",
@@ -5102,8 +5056,7 @@
             "Active"
           ],
           "permission": "nexa.schedules.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Enable",
@@ -5115,8 +5068,7 @@
             "Active"
           ],
           "permission": "nexa.schedules.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Disable",
@@ -5128,8 +5080,7 @@
             "Active"
           ],
           "permission": "nexa.schedules.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "TriggerNow",
@@ -5141,8 +5092,7 @@
             "Active"
           ],
           "permission": "nexa.schedules.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadNextRun",
@@ -5158,8 +5108,7 @@
             "Active"
           ],
           "permission": "nexa.schedules.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -5182,8 +5131,7 @@
             "Active"
           ],
           "permission": "nexa.events.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Subscribe",
@@ -5195,8 +5143,7 @@
             "Initialize"
           ],
           "permission": "nexa.events.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Define",
@@ -5208,8 +5155,7 @@
             "Initialize"
           ],
           "permission": "nexa.events.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Publish",
@@ -5221,8 +5167,7 @@
             "Active"
           ],
           "permission": "nexa.events.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Unsubscribe",
@@ -5235,8 +5180,7 @@
             "Stop"
           ],
           "permission": "nexa.events.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "UnsubscribeSubscription",
@@ -5249,8 +5193,7 @@
             "Stop"
           ],
           "permission": "nexa.events.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterSubscription",
@@ -5262,8 +5205,7 @@
             "Initialize"
           ],
           "permission": "nexa.events.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -5286,8 +5228,7 @@
             "Active"
           ],
           "permission": "nexa.state.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -5303,8 +5244,7 @@
             "Active"
           ],
           "permission": "nexa.state.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -5320,8 +5260,7 @@
             "Active"
           ],
           "permission": "nexa.state.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "DefineOwned",
@@ -5333,8 +5272,7 @@
             "Initialize"
           ],
           "permission": "nexa.state.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "UpdateOwned",
@@ -5346,8 +5284,7 @@
             "Active"
           ],
           "permission": "nexa.state.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "CompareExchangeOwned",
@@ -5359,8 +5296,7 @@
             "Active"
           ],
           "permission": "nexa.state.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -5379,8 +5315,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterComponent",
@@ -5392,8 +5327,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterContribution",
@@ -5405,8 +5339,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterViewReplacement",
@@ -5418,8 +5351,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterNavigation",
@@ -5431,8 +5363,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterCommand",
@@ -5444,8 +5375,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterShortcut",
@@ -5457,8 +5387,7 @@
             "Initialize"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ShowDialog",
@@ -5470,8 +5399,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "CloseDialog",
@@ -5483,8 +5411,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Navigate",
@@ -5496,8 +5423,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Notify",
@@ -5509,8 +5435,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PublishModel",
@@ -5522,8 +5447,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "UpdateModel",
@@ -5535,8 +5459,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "WatchViewLifecycle",
@@ -5552,8 +5475,7 @@
             "Active"
           ],
           "permission": "nexa.ui.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ListExtensionTargets",
@@ -5569,8 +5491,7 @@
             "Active"
           ],
           "permission": "nexa.ui.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "DescribeViewContract",
@@ -5586,8 +5507,7 @@
             "Active"
           ],
           "permission": "nexa.ui.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "CreateDrawingSurface",
@@ -5599,8 +5519,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SubmitDrawCommands",
@@ -5612,8 +5531,7 @@
             "Active"
           ],
           "permission": "nexa.ui.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SubscribeInput",
@@ -5629,8 +5547,7 @@
             "Active"
           ],
           "permission": "nexa.ui.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -5649,8 +5566,7 @@
             "Initialize"
           ],
           "permission": "nexa.interplugin.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "DescribeService",
@@ -5665,8 +5581,7 @@
             "Active"
           ],
           "permission": "nexa.interplugin.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "BindService",
@@ -5678,8 +5593,7 @@
             "PostInitialize"
           ],
           "permission": "nexa.interplugin.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ProbeService",
@@ -5691,8 +5605,7 @@
             "Checkup"
           ],
           "permission": "nexa.interplugin.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "CallService",
@@ -5704,8 +5617,7 @@
             "Active"
           ],
           "permission": "nexa.interplugin.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "WatchAvailability",
@@ -5721,8 +5633,7 @@
             "Active"
           ],
           "permission": "nexa.interplugin.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReleaseBinding",
@@ -5736,8 +5647,7 @@
             "Stop"
           ],
           "permission": "nexa.interplugin.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadOwnLoadReport",
@@ -5753,8 +5663,7 @@
             "Active"
           ],
           "permission": "nexa.interplugin.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -5780,8 +5689,7 @@
             "Stop"
           ],
           "permission": "nexa.diagnostics.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Report",
@@ -5800,8 +5708,7 @@
             "Stop"
           ],
           "permission": "nexa.diagnostics.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "CreateSpan",
@@ -5820,8 +5727,7 @@
             "Stop"
           ],
           "permission": "nexa.diagnostics.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadOwnReports",
@@ -5837,8 +5743,7 @@
             "Active"
           ],
           "permission": "nexa.diagnostics.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -5861,8 +5766,7 @@
             "Finalize"
           ],
           "permission": "nexa.resources.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Release",
@@ -5881,8 +5785,7 @@
             "Stop"
           ],
           "permission": "nexa.resources.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadSubscription",
@@ -5894,8 +5797,7 @@
             "Active"
           ],
           "permission": "nexa.resources.read",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReleaseSubscription",
@@ -5908,8 +5810,7 @@
             "Stop"
           ],
           "permission": "nexa.resources.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -5932,8 +5833,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -5949,8 +5849,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -5966,8 +5865,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Discover",
@@ -5979,8 +5877,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListRoots",
@@ -5996,8 +5893,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "AddRoot",
@@ -6009,8 +5905,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RemoveRoot",
@@ -6022,8 +5917,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PrepareCreate",
@@ -6039,8 +5933,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "CommitCreate",
@@ -6052,8 +5945,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Select",
@@ -6065,8 +5957,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Rename",
@@ -6078,8 +5969,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PrepareClone",
@@ -6095,8 +5985,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "CommitClone",
@@ -6108,8 +5997,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PrepareDelete",
@@ -6125,8 +6013,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "CommitDelete",
@@ -6138,8 +6025,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadIdentity",
@@ -6155,8 +6041,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadEffectiveSettings",
@@ -6172,8 +6057,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "OpenDirectory",
@@ -6185,8 +6069,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.instances.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -6209,8 +6092,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ListLoaderVersions",
@@ -6226,8 +6108,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "InspectLocalInstaller",
@@ -6243,8 +6124,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadDraft",
@@ -6260,8 +6140,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "UpdateDraft",
@@ -6273,8 +6152,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ValidateDraft",
@@ -6290,8 +6168,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ResolvePlan",
@@ -6307,8 +6184,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PreviewPlan",
@@ -6324,8 +6200,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ExecutePlan",
@@ -6337,8 +6212,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Cancel",
@@ -6350,8 +6224,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListRecoveries",
@@ -6367,8 +6240,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ResumeRecovery",
@@ -6380,8 +6252,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "DiscardRecovery",
@@ -6393,8 +6264,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterTemplate",
@@ -6406,8 +6276,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterLoaderProvider",
@@ -6419,8 +6288,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.install.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -6443,8 +6311,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Discover",
@@ -6456,8 +6323,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Inspect",
@@ -6473,8 +6339,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadRequirements",
@@ -6490,8 +6355,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ResolveSelection",
@@ -6507,8 +6371,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SelectGlobal",
@@ -6520,8 +6383,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SelectForInstance",
@@ -6533,8 +6395,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListDistributions",
@@ -6550,8 +6411,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PrepareInstall",
@@ -6567,8 +6427,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Install",
@@ -6580,8 +6439,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Remove",
@@ -6593,8 +6451,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterDistributionProvider",
@@ -6606,8 +6463,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.java.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListManagedDistributions",
@@ -6619,8 +6475,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PrepareManagedInstall",
@@ -6632,8 +6487,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.java.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -6656,8 +6510,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ListProfiles",
@@ -6673,8 +6526,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SaveProfile",
@@ -6686,8 +6538,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SelectProfile",
@@ -6699,8 +6550,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Prepare",
@@ -6716,8 +6566,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadPlan",
@@ -6733,8 +6582,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ValidatePlan",
@@ -6750,8 +6598,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Start",
@@ -6763,8 +6610,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Cancel",
@@ -6776,8 +6622,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterContribution",
@@ -6789,8 +6634,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.launch.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterPreflight",
@@ -6802,8 +6646,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.launch.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadAttempt",
@@ -6819,8 +6662,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "WatchAttempt",
@@ -6836,8 +6678,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ExplainContribution",
@@ -6853,8 +6694,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.launch.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -6877,8 +6717,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadSession",
@@ -6894,8 +6733,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "WatchSession",
@@ -6911,8 +6749,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SubscribeLog",
@@ -6928,8 +6765,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadLogRange",
@@ -6945,8 +6781,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RequestClose",
@@ -6958,8 +6793,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Stop",
@@ -6971,8 +6805,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RevealWindow",
@@ -6984,8 +6817,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadMetrics",
@@ -7001,8 +6833,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.processes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -7025,8 +6856,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Inspect",
@@ -7042,8 +6872,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -7059,8 +6888,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadDependencyGraph",
@@ -7076,8 +6904,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanInstall",
@@ -7093,8 +6920,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanEnable",
@@ -7110,8 +6936,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanDisable",
@@ -7127,8 +6952,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanRemove",
@@ -7144,8 +6968,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanUpdate",
@@ -7161,8 +6984,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Preview",
@@ -7178,8 +7000,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Execute",
@@ -7191,8 +7012,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListTransactions",
@@ -7208,8 +7028,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Rollback",
@@ -7221,8 +7040,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadIntegrity",
@@ -7238,8 +7056,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Verify",
@@ -7251,8 +7068,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListTrash",
@@ -7268,8 +7084,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RestoreTrash",
@@ -7281,8 +7096,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ClearTrash",
@@ -7294,8 +7108,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Import",
@@ -7307,8 +7120,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Export",
@@ -7320,8 +7132,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterFormatProvider",
@@ -7333,8 +7144,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.content.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -7357,8 +7167,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -7374,8 +7183,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadMetadata",
@@ -7391,8 +7199,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Copy",
@@ -7404,8 +7211,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Rename",
@@ -7417,8 +7223,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PlanDelete",
@@ -7434,8 +7239,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ListDataPacks",
@@ -7451,8 +7255,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanSetDataPack",
@@ -7468,8 +7271,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ApplyDataPackPlan",
@@ -7481,8 +7283,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Backup",
@@ -7494,8 +7295,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PreviewRestore",
@@ -7511,8 +7311,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Restore",
@@ -7524,8 +7323,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadHealth",
@@ -7541,8 +7339,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.worlds.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -7565,8 +7362,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.servers.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SaveList",
@@ -7578,8 +7374,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.servers.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadStatus",
@@ -7595,8 +7390,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.servers.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "DiscoverLan",
@@ -7612,8 +7406,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.servers.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Join",
@@ -7625,8 +7418,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.servers.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -7649,8 +7441,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "DescribeProvider",
@@ -7666,8 +7457,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RegisterProvider",
@@ -7679,8 +7469,7 @@
             "Initialize"
           ],
           "permission": "nexa.catalog.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Search",
@@ -7696,8 +7485,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadProject",
@@ -7713,8 +7501,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ListVersions",
@@ -7730,8 +7517,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadVersion",
@@ -7747,8 +7533,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadChangelog",
@@ -7764,8 +7549,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ResolveFiles",
@@ -7781,8 +7565,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ResolveDependencies",
@@ -7798,8 +7581,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ListFavorites",
@@ -7815,8 +7597,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SetFavorite",
@@ -7828,8 +7609,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PlanInstall",
@@ -7845,8 +7625,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PlanUpdate",
@@ -7862,8 +7641,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ExecutePlan",
@@ -7875,8 +7653,7 @@
             "Active"
           ],
           "permission": "nexa.catalog.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterCollection",
@@ -7888,8 +7665,7 @@
             "Initialize"
           ],
           "permission": "nexa.catalog.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterTranslationProvider",
@@ -7901,8 +7677,7 @@
             "Initialize"
           ],
           "permission": "nexa.catalog.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -7925,8 +7700,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadPublic",
@@ -7942,8 +7716,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -7959,8 +7732,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Select",
@@ -7972,8 +7744,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "BeginSignIn",
@@ -7985,8 +7756,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ContinueSignIn",
@@ -7998,8 +7768,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "CancelSignIn",
@@ -8011,8 +7780,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Refresh",
@@ -8024,8 +7792,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SignOut",
@@ -8037,8 +7804,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Remove",
@@ -8050,8 +7816,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadLaunchEligibility",
@@ -8067,8 +7832,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RequestLaunchGrant",
@@ -8080,8 +7844,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadWardrobe",
@@ -8097,8 +7860,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PreviewSkin",
@@ -8114,8 +7876,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "UploadSkin",
@@ -8127,8 +7888,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SetCape",
@@ -8140,8 +7900,7 @@
             "Active"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterProvider",
@@ -8153,8 +7912,7 @@
             "Initialize"
           ],
           "permission": "nexa.accounts.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -8173,8 +7931,7 @@
             "Initialize"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterPage",
@@ -8186,8 +7943,7 @@
             "Initialize"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Get",
@@ -8203,8 +7959,7 @@
             "Active"
           ],
           "permission": "nexa.settings.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "GetEffective",
@@ -8220,8 +7975,7 @@
             "Active"
           ],
           "permission": "nexa.settings.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -8237,8 +7991,7 @@
             "Active"
           ],
           "permission": "nexa.settings.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PreviewChange",
@@ -8254,8 +8007,7 @@
             "Active"
           ],
           "permission": "nexa.settings.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Apply",
@@ -8267,8 +8019,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Reset",
@@ -8280,8 +8031,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Migrate",
@@ -8293,8 +8043,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListProfiles",
@@ -8310,8 +8059,7 @@
             "Active"
           ],
           "permission": "nexa.settings.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SaveProfile",
@@ -8323,8 +8071,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "SelectProfile",
@@ -8336,8 +8083,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "BeginTemporaryOverlay",
@@ -8349,8 +8095,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "EndTemporaryOverlay",
@@ -8362,8 +8107,7 @@
             "Active"
           ],
           "permission": "nexa.settings.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -8386,8 +8130,7 @@
             "Active"
           ],
           "permission": "nexa.themes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -8403,8 +8146,7 @@
             "Active"
           ],
           "permission": "nexa.themes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Prepare",
@@ -8420,8 +8162,7 @@
             "Active"
           ],
           "permission": "nexa.themes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Preview",
@@ -8433,8 +8174,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Commit",
@@ -8446,8 +8186,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Revert",
@@ -8459,8 +8198,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadOptions",
@@ -8476,8 +8214,7 @@
             "Active"
           ],
           "permission": "nexa.themes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SaveOptions",
@@ -8489,8 +8226,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ResetOptions",
@@ -8502,8 +8238,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ImportOptions",
@@ -8515,8 +8250,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ExportOptions",
@@ -8528,8 +8262,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "MigrateOptions",
@@ -8541,8 +8274,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ListResources",
@@ -8558,8 +8290,7 @@
             "Active"
           ],
           "permission": "nexa.themes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReadResource",
@@ -8575,8 +8306,7 @@
             "Active"
           ],
           "permission": "nexa.themes.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ReleaseResource",
@@ -8588,8 +8318,7 @@
             "Active"
           ],
           "permission": "nexa.themes.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -8612,8 +8341,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -8629,8 +8357,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Statistics",
@@ -8646,8 +8373,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PrepareCapture",
@@ -8663,8 +8389,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Capture",
@@ -8676,8 +8401,7 @@
             "Active"
           ],
           "permission": "nexa.backups.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PreviewRestore",
@@ -8693,8 +8417,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Restore",
@@ -8706,8 +8429,7 @@
             "Active"
           ],
           "permission": "nexa.backups.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "VerifyOffline",
@@ -8723,8 +8445,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Export",
@@ -8736,8 +8457,7 @@
             "Active"
           ],
           "permission": "nexa.backups.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Import",
@@ -8749,8 +8469,7 @@
             "Active"
           ],
           "permission": "nexa.backups.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PreviewPrune",
@@ -8766,8 +8485,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Prune",
@@ -8779,8 +8497,7 @@
             "Active"
           ],
           "permission": "nexa.backups.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadRetention",
@@ -8796,8 +8513,7 @@
             "Active"
           ],
           "permission": "nexa.backups.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "SetRetention",
@@ -8809,8 +8525,7 @@
             "Active"
           ],
           "permission": "nexa.backups.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -8833,8 +8548,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Start",
@@ -8846,8 +8560,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Read",
@@ -8863,8 +8576,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -8880,8 +8592,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Pause",
@@ -8893,8 +8604,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Resume",
@@ -8906,8 +8616,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Cancel",
@@ -8919,8 +8628,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Verify",
@@ -8936,8 +8644,7 @@
             "Active"
           ],
           "permission": "nexa.downloads.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RegisterSourceResolver",
@@ -8949,8 +8656,7 @@
             "Initialize"
           ],
           "permission": "nexa.downloads.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RegisterTransferProvider",
@@ -8962,8 +8668,7 @@
             "Initialize"
           ],
           "permission": "nexa.downloads.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -8982,8 +8687,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Report",
@@ -8995,8 +8699,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Complete",
@@ -9008,8 +8711,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Fail",
@@ -9021,8 +8723,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "List",
@@ -9038,8 +8739,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -9055,8 +8755,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Watch",
@@ -9072,8 +8771,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Cancel",
@@ -9085,8 +8783,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Retry",
@@ -9098,8 +8795,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Dismiss",
@@ -9111,8 +8807,7 @@
             "Active"
           ],
           "permission": "nexa.tasks.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -9135,8 +8830,7 @@
             "Active"
           ],
           "permission": "nexa.storage.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -9152,8 +8846,7 @@
             "Active"
           ],
           "permission": "nexa.storage.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Write",
@@ -9165,8 +8858,7 @@
             "Active"
           ],
           "permission": "nexa.storage.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "CompareExchange",
@@ -9178,8 +8870,7 @@
             "Active"
           ],
           "permission": "nexa.storage.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Query",
@@ -9195,8 +8886,7 @@
             "Active"
           ],
           "permission": "nexa.storage.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "BeginTransaction",
@@ -9208,8 +8898,7 @@
             "Active"
           ],
           "permission": "nexa.storage.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Commit",
@@ -9221,8 +8910,7 @@
             "Active"
           ],
           "permission": "nexa.storage.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Migrate",
@@ -9234,8 +8922,7 @@
             "Active"
           ],
           "permission": "nexa.storage.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -9254,8 +8941,7 @@
             "Active"
           ],
           "permission": "nexa.files.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "List",
@@ -9271,8 +8957,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Stat",
@@ -9288,8 +8973,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Read",
@@ -9305,8 +8989,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "WriteAtomic",
@@ -9318,8 +9001,7 @@
             "Active"
           ],
           "permission": "nexa.files.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Watch",
@@ -9335,8 +9017,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "PrepareMove",
@@ -9352,8 +9033,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Move",
@@ -9365,8 +9045,7 @@
             "Active"
           ],
           "permission": "nexa.files.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PrepareDelete",
@@ -9382,8 +9061,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "Delete",
@@ -9395,8 +9073,7 @@
             "Active"
           ],
           "permission": "nexa.files.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "OpenPackageFile",
@@ -9412,8 +9089,7 @@
             "Active"
           ],
           "permission": "nexa.files.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -9432,8 +9108,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "OutcomeMayBeUnknown",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "OutcomeMayBeUnknown"
         },
         {
           "name": "OpenResponseStream",
@@ -9445,8 +9120,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "OutcomeMayBeUnknown",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "OutcomeMayBeUnknown"
         },
         {
           "name": "Cancel",
@@ -9458,8 +9132,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "OpenConnection",
@@ -9471,8 +9144,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Listen",
@@ -9484,8 +9156,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Send",
@@ -9497,8 +9168,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "OutcomeMayBeUnknown",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "OutcomeMayBeUnknown"
         },
         {
           "name": "Receive",
@@ -9510,8 +9180,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "OutcomeMayBeUnknown",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "OutcomeMayBeUnknown"
         },
         {
           "name": "Close",
@@ -9523,8 +9192,7 @@
             "Active"
           ],
           "permission": "nexa.network.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     },
@@ -9547,8 +9215,7 @@
             "Active"
           ],
           "permission": "nexa.platform.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "OpenUri",
@@ -9560,8 +9227,7 @@
             "Active"
           ],
           "permission": "nexa.platform.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "RevealFile",
@@ -9573,8 +9239,7 @@
             "Active"
           ],
           "permission": "nexa.platform.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "Notify",
@@ -9586,8 +9251,7 @@
             "Active"
           ],
           "permission": "nexa.platform.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "ReadClipboard",
@@ -9603,8 +9267,7 @@
             "Active"
           ],
           "permission": "nexa.platform.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "WriteClipboard",
@@ -9616,8 +9279,7 @@
             "Active"
           ],
           "permission": "nexa.platform.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PickFile",
@@ -9629,8 +9291,7 @@
             "Active"
           ],
           "permission": "nexa.platform.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "QueryPower",
@@ -9646,8 +9307,7 @@
             "Active"
           ],
           "permission": "nexa.platform.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "QueryDisplay",
@@ -9663,8 +9323,7 @@
             "Active"
           ],
           "permission": "nexa.platform.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "QueryArchitecture",
@@ -9680,8 +9339,7 @@
             "Active"
           ],
           "permission": "nexa.platform.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         }
       ]
     },
@@ -9704,8 +9362,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.diagnostics.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "RegisterRuleProvider",
@@ -9717,8 +9374,7 @@
             "Initialize"
           ],
           "permission": "nexa.minecraft.diagnostics.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         },
         {
           "name": "PreviewRepair",
@@ -9734,8 +9390,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.diagnostics.read",
-          "idempotency": "ReadOnly",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "ReadOnly"
         },
         {
           "name": "ExecuteRepair",
@@ -9747,8 +9402,7 @@
             "Active"
           ],
           "permission": "nexa.minecraft.diagnostics.write",
-          "idempotency": "RequiredKey",
-          "hostBinding": "HostMappingPending"
+          "idempotency": "RequiredKey"
         }
       ]
     }

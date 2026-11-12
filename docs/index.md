@@ -4,7 +4,7 @@ Build a plugin that runs in PluginSidecar and adds capabilities to NexaCL throug
 an explicit Host contract. Start with a small working plugin, then add only the
 permissions and capabilities its feature needs.
 
-This guide covers **SDK 0.2.0-alpha.10, Bootstrap V1 and ABI 100**. Those numbers
+This guide covers **SDK 0.2.0-alpha.11, Bootstrap V1 and ABI 100**. Those numbers
 identify different contracts. The SDK includes 346 operations; the recorded Host
 maps 297 of them. Consult [Host support](host-support.md) before choosing a feature.
 A mapping in source does not establish support in an older installed Alpha.

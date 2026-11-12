@@ -73,6 +73,28 @@ static inline void nx_uri(nx_text text) {
     for(i=1;i<text.size && text.data[i]!=':';i++) { c=text.data[i]; nx_require((c>='a'&&c<='z')||(c>='A'&&c<='Z')||(c>='0'&&c<='9')||c=='+'||c=='-'||c=='.'); }
     nx_require(i<text.size);
 }
+/* Both strings have already passed nx_utf8. Compare in .NET UTF-16 ordinal
+ * order: BMP below D800, supplementary scalars, then BMP E000..FFFF. */
+static inline nx_u32 nx_ordinal_scalar(nx_text text, nx_u32 *offset)
+{
+    nx_require(*offset < text.size);
+    nx_u32 c=text.data[(*offset)++], extra=0;
+    if(c>=240) { c&=7; extra=3; }
+    else if(c>=224) { c&=15; extra=2; }
+    else if(c>=192) { c&=31; extra=1; }
+    nx_require(extra<=text.size-*offset);
+    for(nx_u32 i=0;i<extra;i++) c=(c<<6)|(text.data[(*offset)++]&63);
+    return c>=0xe000 && c<=0xffff ? c+0x102000 : c;
+}
+static inline int nx_ordinal_less(nx_text left, nx_text right)
+{
+    nx_u32 a=0,b=0;
+    while(a<left.size && b<right.size) {
+        nx_u32 x=nx_ordinal_scalar(left,&a), y=nx_ordinal_scalar(right,&b);
+        if(x!=y) return x<y;
+    }
+    return a==left.size && b<right.size;
+}
 static inline void nx_scan(nx_reader *r, nx_u32 depth, int check)
 {
     nx_require(depth <= 32 && ++r->nodes <= 16384);
@@ -85,17 +107,15 @@ static inline void nx_scan(nx_reader *r, nx_u32 depth, int check)
     case 5: case 6: { nx_u32 n = nx_read_word(r), start=r->offset; nx_advance(r, n); if(check && tag==5) nx_utf8(r->data+start,n); return; }
     case 7: case 8: {
         nx_u32 n = nx_read_word(r); nx_require(n <= 16384 - r->nodes);
-        nx_u32 fields_start=r->offset;
+        nx_text previous={0,0};
         for (nx_u32 i = 0; i < n; i++) {
             if (tag == 8) {
-                nx_u32 length = nx_read_word(r), start=r->offset; nx_advance(r, length);
+                nx_u32 length=nx_read_word(r), start=r->offset; nx_advance(r,length);
                 if(check) {
-                    nx_utf8(r->data+start,length); nx_reader prior={r->data,r->size,fields_start,0};
-                    for(nx_u32 j=0;j<i;j++) {
-                        nx_u32 previous=nx_read_word(&prior), offset=prior.offset; nx_advance(&prior,previous);
-                        int equal=length==previous; if(equal) for(nx_u32 k=0;k<length;k++) if(r->data[start+k]!=r->data[offset+k]) { equal=0; break; }
-                        nx_require(!equal); nx_scan(&prior,depth+1,0);
-                    }
+                    nx_text current={r->data+start,length};
+                    nx_utf8(current.data,current.size);
+                    if(i) nx_require(nx_ordinal_less(previous,current));
+                    previous=current;
                 }
             }
             nx_scan(r, depth + 1,check);
@@ -168,6 +188,7 @@ static inline nx_u64 nx_as_unsigned(nx_value v) { return nx_bits(v, 3); }
 static inline nx_i64 nx_as_signed(nx_value v) { union { nx_u64 u; nx_i64 i; } n; n.u = nx_bits(v, 2); return n.i; }
 static inline nx_f64 nx_as_float(nx_value v) { union { nx_u64 u; nx_f64 f; } n; n.u = nx_bits(v, 4); nx_require(((n.u >> 52) & 2047) != 2047); return n.f; }
 static inline int nx_as_boolean(nx_value v) { nx_require(v.size == 2 && v.data[0] == 1 && v.data[1] <= 1); return v.data[1]; }
+static inline int nx_is_missing(nx_value v) { return v.data == 0 && v.size == 0; }
 static inline int nx_is_null(nx_value v) { return v.size == 1 && v.data[0] == 0; }
 static inline nx_text nx_as_text(nx_value v) {
     nx_reader r = {v.data, v.size, 0, 0}; nx_require(nx_take(&r) == 5); nx_u32 size = nx_read_word(&r), start = r.offset;
@@ -220,5 +241,7 @@ static inline nx_u64 nx_handler_id(nx_value invocation) { nx_require(nx_is_strin
 static inline nx_value nx_handler_input(nx_value invocation) { (void)nx_handler_id(invocation); return nx_field(invocation,"input"); }
 static inline void nx_handler_success(nx_writer *w,nx_value value) { nx_start(w); nx_map(w,2); nx_key(w,"kind"); nx_string(w,"complete"); nx_key(w,"value"); nx_map(w,2); nx_key(w,"success"); nx_boolean(w,1); nx_key(w,"value"); nx_raw(w,value); }
 static inline void nx_handler_error(nx_writer *w,nx_value error) { nx_start(w); nx_map(w,2); nx_key(w,"kind"); nx_string(w,"complete"); nx_key(w,"value"); nx_map(w,2); nx_key(w,"error"); nx_raw(w,error); nx_key(w,"success"); nx_boolean(w,0); }
+/* Lifecycle and handler failures share the same completion envelope. */
+static inline void nx_complete_error(nx_writer *w,nx_value error) { nx_handler_error(w,error); }
 static inline int nx_has_experiment(nx_value invocation,const char *id) { return nx_context_contains(invocation,"experiments",id); }
 #endif

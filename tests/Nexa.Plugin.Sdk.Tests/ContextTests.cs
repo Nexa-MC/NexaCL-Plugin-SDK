@@ -8,6 +8,10 @@ internal static class ContextTests
     {
         var host = new ContextPort();
         var options = new InvocationOptions(Guid.NewGuid(), TimeSpan.FromSeconds(8), default);
+        var negotiator = new BootstrapPort(host);
+        Guid experimentId = Guid.NewGuid();
+        var experiment = await ((IAbiNegotiatorV1)negotiator).GetExperimentABI(experimentId, options);
+        Check(experiment.Success && experiment.Value.Value == 37 && negotiator.LastExperiment == experimentId && ReferenceEquals(negotiator.LastOptions, options));
         using var runtime = host.AsAbi100();
         Error(await runtime.Events.Publish(new(1), new AbiValue.Null(), options), AbiErrors.CONTEXT_NOT_READY);
         Error(runtime.GetExperiment<Feature>(host.Experiment), AbiErrors.CONTEXT_NOT_READY);
@@ -116,7 +120,10 @@ internal static class ContextTests
     private sealed class BootstrapPort(ContextPort host) : IAbiNegotiatorV1, IDiagnosticsV1, IResourcesV1, ICallbacksV1
     {
         public ValueTask<AbiReply<ABIContext>> GetABIContext(uint version, InvocationOptions options) => ValueTask.FromResult(AbiReply<ABIContext>.Ok(host));
-        public ValueTask<AbiReply<ExperimentRef>> GetExpermentABI(Guid id, InvocationOptions options) => throw new NotSupportedException();
+        internal Guid LastExperiment;
+        internal InvocationOptions? LastOptions;
+        public ValueTask<AbiReply<ExperimentRef>> GetExpermentABI(Guid id, InvocationOptions options)
+        { LastExperiment = id; LastOptions = options; return ValueTask.FromResult(AbiReply<ExperimentRef>.Ok(new(37))); }
         public ValueTask<AbiReply<ABIContext>> MakeABIContext(ABIContext draft, ImmutableArray<ExperimentRef> experiments, MakeOptions options, CancellationToken cancellation)
         { Check(ReferenceEquals(draft, host)); host.Ready = true; return ValueTask.FromResult(AbiReply<ABIContext>.Ok(host)); }
         public ValueTask<AbiReply<Unit>> ReportDiagnostic(Finding finding, InvocationOptions options) => ValueTask.FromResult(AbiReply<Unit>.Ok(new()));

@@ -78,7 +78,7 @@ context+='    }\n}\n'
 catalog=header+'namespace Nexa.Plugin.Sdk.Abi100;\n\npublic sealed record AbiOperationDescriptor(string Group, string ContractId, uint MethodId, string Name, string Input, string Output, string Kind, ImmutableArray<string> Phases, string Permission, string Idempotency, string HostBinding);\n\npublic static class Abi100Catalog\n{\n    // SDK-local dispatch slots, not NexaCL transport opcodes.\n    public static ImmutableArray<AbiOperationDescriptor> Operations { get; } =\n    [\n'
 for g in spec['groups']:
     for op in g['operations']:
-        vals=[json.dumps(x) for x in [g['name'],g['contractId']]]+[str(op['methodId'])]+[json.dumps(op[k]) for k in ['name','input','output','kind']]+['['+', '.join(json.dumps(p) for p in op['phases'])+']']+[json.dumps(op[k]) for k in ['permission','idempotency','hostBinding']]
+        vals=[json.dumps(x) for x in [g['name'],g['contractId']]]+[str(op['methodId'])]+[json.dumps(op[k]) for k in ['name','input','output','kind']]+['['+', '.join(json.dumps(p) for p in op['phases'])+']']+[json.dumps(op[k]) for k in ['permission','idempotency']]+[json.dumps('HostDefined')]
         catalog+='        new('+', '.join(vals)+'),\n'
 catalog+='    ];\n}\n'
 

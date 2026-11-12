@@ -25,6 +25,9 @@ Make a nonessential feature optional and explain why its UI is unavailable. Do n
 replace a failed operation with a successful empty result or a private implementation
 that bypasses Host ownership. Source mappings are recorded in
 `contracts/host-support.json`; update them only from implementation evidence.
+The ABI catalog contains no per-Host status. The retained C/C# descriptor field
+`HostBinding` has the neutral value `HostDefined` for compatibility; it is not
+a runtime support flag.
 
 ## Unmapped operations
 
@@ -79,3 +82,22 @@ that bypasses Host ownership. Source mappings are recorded in
 - `Minecraft.Diagnostics.RegisterRuleProvider`
 
 [API reference](api/index.md) · [Migration](migration.md)
+
+## Gaps by capability group
+
+| Group | Mapped | Missing | Unmapped operations |
+| --- | --- | --- | --- |
+| Minecraft.Instances | 14 | 4 | `PrepareClone`, `CommitClone`, `PrepareDelete`, `CommitDelete` |
+| Minecraft.Install | 10 | 5 | `ListRecoveries`, `ResumeRecovery`, `DiscardRecovery`, `RegisterTemplate`, `RegisterLoaderProvider` |
+| Minecraft.Java | 11 | 3 | `ListDistributions`, `PrepareInstall`, `RegisterDistributionProvider` |
+| Minecraft.Launch | 11 | 3 | `RegisterContribution`, `RegisterPreflight`, `ExplainContribution` |
+| Minecraft.Content | 19 | 2 | `ClearTrash`, `RegisterFormatProvider` |
+| Minecraft.Worlds | 10 | 3 | `PlanDelete`, `PreviewRestore`, `Restore` |
+| Catalog | 15 | 2 | `RegisterCollection`, `RegisterTranslationProvider` |
+| Accounts | 15 | 2 | `SignOut`, `RegisterProvider` |
+| Settings | 11 | 3 | `RegisterSchema`, `RegisterPage`, `Migrate` |
+| Themes | 11 | 4 | `MigrateOptions`, `ListResources`, `ReadResource`, `ReleaseResource` |
+| Backups | 0 | 14 | `List`, `Read`, `Statistics`, `PrepareCapture`, `Capture`, `PreviewRestore`, `Restore`, `VerifyOffline`, `Export`, `Import`, `PreviewPrune`, `Prune`, `ReadRetention`, `SetRetention` |
+| Downloads | 8 | 2 | `RegisterSourceResolver`, `RegisterTransferProvider` |
+| Tasks | 9 | 1 | `Retry` |
+| Minecraft.Diagnostics | 3 | 1 | `RegisterRuleProvider` |

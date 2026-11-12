@@ -104,7 +104,7 @@ def generate(spec, schema_fingerprints):
     import json
     for group in spec['groups']:
         for operation in group['operations']:
-            strings=[group['name'],operation['name'],group['contractId'],operation['input'],operation['output'],operation.get('kind','Legacy'),operation.get('permission',''),operation.get('idempotency','Unspecified'),operation.get('hostBinding','HostMappingPending')]
+            strings=[group['name'],operation['name'],group['contractId'],operation['input'],operation['output'],operation.get('kind','Legacy'),operation.get('permission',''),operation.get('idempotency','Unspecified'),'HostDefined']
             phases=operation.get('phases',[])
             out.append('    {'+', '.join(json.dumps(s) for s in strings)+f', {operation["methodId"]}, {len(phases)}, '+'{'+(', '.join(json.dumps(p) for p in phases) if phases else '0')+'}},')
     out.extend(['};','static inline nx_u32 nx_operation_count(void) { return (nx_u32)(sizeof nx_operation_catalog / sizeof nx_operation_catalog[0]); }','static inline const nx_operation_descriptor *nx_operation_at(nx_u32 index) { nx_require(index<nx_operation_count()); return &nx_operation_catalog[index]; }'])

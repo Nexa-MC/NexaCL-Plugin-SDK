@@ -17,7 +17,7 @@ NX_EXPORT("nexa_resume") nx_u64 nexa_resume(nx_u32 address, nx_u32 size)
         nx_require(nx_is_string(nx_field(message, "kind"), "reply"));
         awaiting_registration = 0;
         if (nx_reply_success(message)) nx_complete(&reply, 1);
-        else nx_handler_error(&reply, nx_reply_error(message));
+        else nx_complete_error(&reply, nx_reply_error(message));
     } else if (nx_is_string(nx_field(message, "phase"), "Initialize")) {
         nx_writer args = {argument, 0, sizeof argument};
         nx_SchemaRef schema = nx_SchemaRef_write(&args, nx_literal("example.wasm:message"), 1, nx_literal("example-string-v1"));

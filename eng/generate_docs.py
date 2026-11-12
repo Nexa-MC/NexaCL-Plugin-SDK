@@ -13,6 +13,11 @@ spec = json.loads((root / 'contracts/abi100.json').read_text(encoding="utf-8"))
 support = json.loads((root / 'contracts/host-support.json').read_text(encoding="utf-8"))
 notes = json.loads((root / 'eng/reference-notes.json').read_text(encoding="utf-8"))
 implemented = {tuple(value) for value in support['implemented']}
+catalog = {(group['name'], op['name']) for group in spec['groups'] for op in group['operations']}
+if len(implemented) != len(support['implemented']) or not implemented <= catalog:
+    raise SystemExit('Host support contains duplicate or unknown operation names.')
+if any('hostBinding' in op for group in spec['groups'] for op in group['operations']):
+    raise SystemExit('Per-Host status belongs only in host-support.json, not the ABI catalog.')
 files = {}
 
 def slug(name):
@@ -259,7 +264,7 @@ Check the actual Host's negotiated capabilities, then handle per-call unavailabi
 Make a nonessential feature optional and explain why its UI is unavailable. Do not
 replace a failed operation with a successful empty result or a private implementation
 that bypasses Host ownership. Source mappings are recorded in
-`contracts/host-support.json`; update them only from implementation evidence.
+`contracts/host-support.json`; update them only from implementation evidence.\nThe ABI catalog contains no per-Host status. The retained C/C# descriptor field\n`HostBinding` has the neutral value `HostDefined` for compatibility; it is not\na runtime support flag.
 
 ## Unmapped operations
 
@@ -303,6 +308,14 @@ for name, fields in legacy['models'].items():
     legacy_body += '\nFields follow the retained facade contract. A raw integer handle remains owner-scoped; a string schema ID must match its digest. Do not substitute a current DTO merely because it contains similar fields.\n\n'
 files['docs/api/legacy.md'] = legacy_body
 files['docs/api/index.md'] += '\nFor existing Nexa preview integrations, see [the 22 retained bindings](legacy.md). These are separate from the retired PCL injection SDK.\n'
+summary = '\n## Gaps by capability group\n\n| Group | Mapped | Missing | Unmapped operations |\n| --- | --- | --- | --- |\n'
+for group in spec['groups']:
+    missing=[op['name'] for op in group['operations'] if (group['name'],op['name']) not in implemented]
+    if missing:
+        summary+=f"| {group['name']} | {len(group['operations'])-len(missing)} | {len(missing)} | "+', '.join(f'`{name}`' for name in missing)+' |\n'
+files['docs/host-support.md'] += summary
+files['docs/api/resources.md'] += '\n## Why numbering starts at 2\n\nSlot 1 is occupied by the retained Bootstrap-era `RegisterCleanup` in `contracts/abi100-legacy.json`. It is included in the 22 legacy operations, not a twenty-third burned slot. The current typed cleanup operation has ID 2 and must not be renumbered. The additional reserved slot is Events/3; it remains unavailable.\n'
+files['docs/api/legacy.md'] += '\n## Reserved versus occupied IDs\n\nResources/1 is the retained cleanup operation listed above. Events/3 is reserved and excluded from the 22 callable legacy operations. A gap is not authority to assign a new operation: published IDs must retain their meaning.\n'
 # Keep untranslated technical references explicit, synchronized, and locally linkable.
 for name, body in list(files.items()):
     relative = name.removeprefix('docs/')

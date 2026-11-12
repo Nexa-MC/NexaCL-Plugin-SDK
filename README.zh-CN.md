@@ -26,7 +26,7 @@ dotnet run --project tests/Nexa.Plugin.Sdk.Tests -c Release --no-build
 开启开发者模式后，通过插件管理页选择并审阅安装。参见[入门流程](docs/quickstart.md)、
 [打包和分发](docs/packaging.md)、[宿主接入状态](docs/host-support.md)。
 
-SDK 版本为 **0.2.0-alpha.10**，通过本仓库 GitHub Releases 提供固定版本开发包。
+SDK 版本为 **0.2.0-alpha.11**，通过本仓库 GitHub Releases 提供固定版本开发包。
 解压后将 `packages/` 添加为本地 NuGet 源，同时保留 nuget.org；这不代表已发布到 NuGet.org。
 alpha.9 到本次拆仓保持 ABI 100 契约兼容；旧 PCL SDK 不具备二进制兼容性。
 

@@ -17,13 +17,14 @@ internal static class SurfaceTests
         { CorrelationId = Guid.NewGuid(), CausationId = Guid.NewGuid(), ExpectedRevision = "opaque:r7", IdempotencyKey = "save-123" };
         var descriptors = Abi100Catalog.Operations;
         Check(descriptors.Length == 346 && descriptors.Select(x => (x.ContractId, x.MethodId)).Distinct().Count() == 346);
-        Check(descriptors.All(x => x.HostBinding == "HostMappingPending" && x.Phases.Length > 0));
+        Check(descriptors.All(x => x.HostBinding == "HostDefined" && x.Phases.Length > 0));
         foreach (var group in spec.GetProperty("groups").EnumerateArray())
         {
             object wrapper = api;
             foreach (var path in group.GetProperty("name").GetString()!.Split('.')) wrapper = wrapper.GetType().GetProperty(path)!.GetValue(wrapper)!;
             foreach (var operation in group.GetProperty("operations").EnumerateArray())
             {
+                Check(!operation.TryGetProperty("hostBinding", out _));
                 string input = operation.GetProperty("input").GetString()!, output = operation.GetProperty("output").GetString()!;
                 var inputType = typeof(QualifiedId).Assembly.GetType("Nexa.Plugin.Sdk.Abi100.Data." + input)!;
                 var request = inputType.GetMethod("Read")!.Invoke(null, [Fixture(input), 0]);

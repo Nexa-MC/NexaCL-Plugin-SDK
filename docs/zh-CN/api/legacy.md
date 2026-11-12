@@ -241,3 +241,7 @@ Fields follow the retained facade contract. A raw integer handle remains owner-s
 
 Fields follow the retained facade contract. A raw integer handle remains owner-scoped; a string schema ID must match its digest. Do not substitute a current DTO merely because it contains similar fields.
 
+
+## Reserved versus occupied IDs
+
+Resources/1 is the retained cleanup operation listed above. Events/3 is reserved and excluded from the 22 callable legacy operations. A gap is not authority to assign a new operation: published IDs must retain their meaning.

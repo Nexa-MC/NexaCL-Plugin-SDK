@@ -175,3 +175,7 @@ The next resume receives the reply. Check `nx_reply_success` before
 `nx_Resources_ReleaseSubscription_result`. See the [complete continuation example](../tutorials/page-and-action.md)
 and [Wasm ownership rules](../wasm-sdk.md). This fragment is not a standalone guest.
 
+
+## Why numbering starts at 2
+
+Slot 1 is occupied by the retained Bootstrap-era `RegisterCleanup` in `contracts/abi100-legacy.json`. It is included in the 22 legacy operations, not a twenty-third burned slot. The current typed cleanup operation has ID 2 and must not be renumbered. The additional reserved slot is Events/3; it remains unavailable.

@@ -18,6 +18,11 @@ jobs:
       - run: dotnet build NexaCL-Plugin-SDK.slnx -c Release
       - run: dotnet run --project tests/Nexa.Plugin.Sdk.Tests -c Release --no-build
       - run: python3 eng/build_wasm_sample.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install wasmtime==39.0.0
+      - run: python3 eng/verify_guest_scan.py
       - run: dotnet publish tests/Nexa.Plugin.Sdk.AotSmoke -c Release -r linux-x64 -p:PublishAot=true -o artifacts/aot
       - run: artifacts/aot/Nexa.Plugin.Sdk.AotSmoke
       - run: dotnet pack src/Nexa.Plugin.Bootstrap.V1 -c Release -o artifacts/packages

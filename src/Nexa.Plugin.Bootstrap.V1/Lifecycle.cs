@@ -4,6 +4,7 @@ namespace Nexa.Plugin.Bootstrap.V1;
 public interface IAbiNegotiatorV1
 {
     ValueTask<AbiReply<ABIContext>> GetABIContext(uint version, InvocationOptions options);
+    [Obsolete("Use GetExperimentABI. This historical spelling is retained for Bootstrap V1 compatibility.")]
     ValueTask<AbiReply<ExperimentRef>> GetExpermentABI(Guid expId, InvocationOptions options);
     ValueTask<AbiReply<ABIContext>> MakeABIContext(ABIContext draft, ImmutableArray<ExperimentRef> experiments, MakeOptions options, CancellationToken cancellation);
 }

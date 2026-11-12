@@ -1,6 +1,6 @@
 # Business provider callbacks
 
-The alpha.9 contract, retained by standalone SDK `0.2.0-alpha.10`, adds `BusinessProviderCall` without changing existing
+The alpha.9 contract, retained by standalone SDK `0.2.0-alpha.11`, adds `BusinessProviderCall` without changing existing
 operation IDs, `ProviderDescriptor`, or model fingerprints. A Host must explicitly
 implement each provider family. Registering a descriptor does not create a generic
 permission to intercept arbitrary launcher operations.
