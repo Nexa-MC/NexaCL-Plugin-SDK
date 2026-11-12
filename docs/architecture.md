@@ -33,7 +33,7 @@ per-call permission, phase, ownership and revision checks.
 
 ## Separate the version axes
 
-`0.2.0-alpha.11` is the authoring package version, `1` is Bootstrap V1, and `100` is
+`0.2.0-alpha.12` is the authoring package version, `1` is Bootstrap V1, and `100` is
 the stable ABI selected for this SDK. Capability minimum versions in the manifest
 are another contract field; do not replace every `1` with `100`.
 

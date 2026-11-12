@@ -242,7 +242,7 @@ files['docs/host-support.md']=f'''# Host implementation snapshot
 
 Use this page to distinguish a declared SDK operation from an implemented launcher
 route. The recorded development Host maps **{len(implemented)}/{sum(len(g['operations']) for g in spec['groups'])}** ABI 100 operations.
-Source revision: `{support['hostCommit']}`.
+**{len(remaining)} operations remain unmapped.**\nSource revision: `{support['hostCommit']}`.
 
 {support['description']}
 
@@ -313,7 +313,7 @@ for group in spec['groups']:
     missing=[op['name'] for op in group['operations'] if (group['name'],op['name']) not in implemented]
     if missing:
         summary+=f"| {group['name']} | {len(group['operations'])-len(missing)} | {len(missing)} | "+', '.join(f'`{name}`' for name in missing)+' |\n'
-files['docs/host-support.md'] += summary
+files['docs/host-support.md'] = files['docs/host-support.md'].replace('## Unmapped operations', summary.lstrip() + '\n## Unmapped operations')
 files['docs/api/resources.md'] += '\n## Why numbering starts at 2\n\nSlot 1 is occupied by the retained Bootstrap-era `RegisterCleanup` in `contracts/abi100-legacy.json`. It is included in the 22 legacy operations, not a twenty-third burned slot. The current typed cleanup operation has ID 2 and must not be renumbered. The additional reserved slot is Events/3; it remains unavailable.\n'
 files['docs/api/legacy.md'] += '\n## Reserved versus occupied IDs\n\nResources/1 is the retained cleanup operation listed above. Events/3 is reserved and excluded from the 22 callable legacy operations. A gap is not authority to assign a new operation: published IDs must retain their meaning.\n'
 # Keep untranslated technical references explicit, synchronized, and locally linkable.

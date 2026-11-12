@@ -1,6 +1,6 @@
 {
   "description": "NexaCL development main integration; no new launcher Alpha is implied.",
-  "hostCommit": "195083d163f6569e8e6e9d4389a285e5e7749921",
+  "hostCommit": "c1a285287462eb8e0d9ab6c411bf042e61214edc",
   "implemented": [
     [
       "Accounts",
@@ -73,6 +73,50 @@
     [
       "Actions",
       "Register"
+    ],
+    [
+      "Backups",
+      "Capture"
+    ],
+    [
+      "Backups",
+      "Export"
+    ],
+    [
+      "Backups",
+      "List"
+    ],
+    [
+      "Backups",
+      "PrepareCapture"
+    ],
+    [
+      "Backups",
+      "PreviewPrune"
+    ],
+    [
+      "Backups",
+      "Prune"
+    ],
+    [
+      "Backups",
+      "Read"
+    ],
+    [
+      "Backups",
+      "ReadRetention"
+    ],
+    [
+      "Backups",
+      "SetRetention"
+    ],
+    [
+      "Backups",
+      "Statistics"
+    ],
+    [
+      "Backups",
+      "VerifyOffline"
     ],
     [
       "Catalog",

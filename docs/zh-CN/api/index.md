@@ -46,7 +46,7 @@ paths. See [models](models.md), [errors](../errors.md), and [Host support](../ho
 | [Accounts](accounts.md) | `nexa.accounts/100` | 15 / 17 |
 | [Settings](settings.md) | `nexa.settings/100` | 11 / 14 |
 | [Themes](themes.md) | `nexa.themes/100` | 11 / 15 |
-| [Backups](backups.md) | `nexa.backups/100` | 0 / 14 |
+| [Backups](backups.md) | `nexa.backups/100` | 11 / 14 |
 | [Downloads](downloads.md) | `nexa.downloads/100` | 8 / 10 |
 | [Tasks](tasks.md) | `nexa.tasks/100` | 9 / 10 |
 | [Storage](storage.md) | `nexa.storage/100` | 8 / 8 |

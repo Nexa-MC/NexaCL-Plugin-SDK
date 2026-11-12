@@ -39,7 +39,7 @@ See [the walkthrough](docs/quickstart.md), [packaging](docs/packaging.md) and
 
 ## Distribution and compatibility
 
-SDK version: **0.2.0-alpha.11**. Download immutable bundles from
+SDK version: **0.2.0-alpha.12**. Download immutable bundles from
 [GitHub Releases](https://github.com/Nexa-MC/NexaCL-Plugin-SDK/releases).
 The bundle contains two NuGet packages and the C/Wasm SDK. Add its `packages/`
 directory as a local NuGet source alongside nuget.org. No NuGet.org publication is

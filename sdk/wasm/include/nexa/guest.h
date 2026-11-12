@@ -88,12 +88,19 @@ static inline nx_u32 nx_ordinal_scalar(nx_text text, nx_u32 *offset)
 }
 static inline int nx_ordinal_less(nx_text left, nx_text right)
 {
-    nx_u32 a=0,b=0;
-    while(a<left.size && b<right.size) {
-        nx_u32 x=nx_ordinal_scalar(left,&a), y=nx_ordinal_scalar(right,&b);
-        if(x!=y) return x<y;
+    /* Valid UTF-8 preserves scalar order. The only UTF-16 ordinal exception is
+     * BMP E000..FFFF (leading EE/EF), which sorts after supplementary scalars.
+     * At the first unequal byte both texts have the same character alignment;
+     * continuation bytes never need remapping. Avoid decoding shared prefixes. */
+    nx_u32 count=left.size<right.size?left.size:right.size;
+    for(nx_u32 i=0;i<count;i++) {
+        nx_u32 x=left.data[i], y=right.data[i];
+        if(x==y) continue;
+        if(x==0xee || x==0xef) x+=0x10;
+        if(y==0xee || y==0xef) y+=0x10;
+        return x<y;
     }
-    return a==left.size && b<right.size;
+    return left.size<right.size;
 }
 static inline void nx_scan(nx_reader *r, nx_u32 depth, int check)
 {

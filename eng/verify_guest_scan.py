@@ -6,6 +6,7 @@ Requires wasmtime==39.0.0. No timing thresholds or native signal assumptions.
 import argparse
 from pathlib import Path
 import struct
+import random
 import subprocess
 import tempfile
 import wasmtime
@@ -35,7 +36,7 @@ with tempfile.TemporaryDirectory() as temporary:
 
     def run(data, expected=None, reject=False):
         with wasmtime.Store(engine) as store:
-            store.set_fuel(32_000_000)
+            store.set_fuel(10_000_000)
             exports = wasmtime.Instance(store, module, []).exports(store)
             exports['memory'].write(store, data, exports['input'](store))
             try:
@@ -46,7 +47,7 @@ with tempfile.TemporaryDirectory() as temporary:
             assert not reject, 'Malformed value accepted'
             assert nodes == expected, (nodes, expected)
             assert exports['missing_and_null'](store) == 1
-            return 32_000_000 - store.get_fuel()
+            return 10_000_000 - store.get_fuel()
 
     # Equal, descending and non-adjacent duplicate keys must all fail.
     for keys in [(b'a', b'a'), (b'b', b'a'), (b'a', b'b', b'a')]:
@@ -55,6 +56,13 @@ with tempfile.TemporaryDirectory() as temporary:
     keys = ['', '\0', 'a', 'a\0', '\ud7ff', '\U00010000', '\U0010ffff', '\ue000', '\uffff']
     run(mapping([(key.encode(), b'\0') for key in keys]), len(keys) + 1)
     run(mapping([(key.encode(), b'\0') for key in ['\ue000', '\U00010000']]), reject=True)
+    rng = random.Random(100)
+    unicode_keys = {""}
+    for _ in range(512):
+        scalars = [rng.choice([rng.randrange(0xd800), rng.randrange(0xe000, 0x110000)]) for _ in range(rng.randrange(1, 6))]
+        unicode_keys.add(''.join(map(chr, scalars)))
+    unicode_keys = sorted(unicode_keys, key=lambda key: key.encode('utf-16-be'))
+    run(mapping([(key.encode(), b'\0') for key in unicode_keys]), len(unicode_keys) + 1)
     for invalid in [b'\xed\xa0\x80', b'\xc0\x80', b'\xf4\x90\x80\x80', b'\xe2']:
         run(mapping([(invalid, b'\0')]), reject=True)
     run(mapping([(b'a', mapping([(b'b', b'\0'), (b'a', b'\0')]))]), reject=True)
