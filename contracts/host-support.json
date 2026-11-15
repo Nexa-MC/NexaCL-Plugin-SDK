@@ -1,6 +1,6 @@
 {
-  "description": "NexaCL development main integration; no new launcher Alpha is implied.",
-  "hostCommit": "3cefcbaa360e105cee949f181f90285fe118994e",
+  "description": "ABI 100 mappings are owned by the independent PluginSidecar; NexaCL exposes generic native Sidecar services only. This records development source compatibility, not a shipped launcher Alpha or enabled production Market delivery.",
+  "hostCommit": "42ad7a1a3c7279d1cbc093d765e87c98f3878fff",
   "implemented": [
     [
       "Accounts",
@@ -1434,5 +1434,7 @@
       "Workflows",
       "Watch"
     ]
-  ]
+  ],
+  "runtimeRepository": "Nexa-MC/PluginSidecar",
+  "runtimeCommit": "c455625aa99885044607c7b2fc160e41806d657a"
 }

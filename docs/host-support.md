@@ -1,11 +1,12 @@
 # Host implementation snapshot
 
 Use this page to distinguish a declared SDK operation from an implemented launcher
-route. The recorded development Host maps **358/358** ABI 100 operations.
+route. The recorded PluginSidecar runtime maps **358/358** ABI 100 operations.
 **0 operations remain unmapped.**
-Source revision: `3cefcbaa360e105cee949f181f90285fe118994e`.
+Host revision: `42ad7a1a3c7279d1cbc093d765e87c98f3878fff`.
+Runtime revision: `c455625aa99885044607c7b2fc160e41806d657a` in `Nexa-MC/PluginSidecar`.
 
-NexaCL development main integration; no new launcher Alpha is implied.
+ABI 100 mappings are owned by the independent PluginSidecar; NexaCL exposes generic native Sidecar services only. This records development source compatibility, not a shipped launcher Alpha or enabled production Market delivery.
 
 ## What the count means
 
@@ -18,7 +19,10 @@ The current custom catalog provider supports seven read methods. Custom catalog
 installation and favorites are not implied. Java providers use verified ZIP archives; managed Mojang offers use the separate
 multi-file distribution path. Provider families, supported fields and budgets are
 documented in the [business provider guide](business-providers.md).
-Production Market delivery is a separate unfinished integration boundary.
+Market acquisition, native consent, signed installation and offline recovery are
+implemented in the separate native Sidecars. Production still requires the server
+signing secret, reviewed publisher public pin, database migration and independently
+published Sidecar images. SDK Beta availability does not imply that deployment is enabled.
 
 ## Before requiring a capability
 

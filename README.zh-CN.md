@@ -26,7 +26,7 @@ dotnet run --project tests/Nexa.Plugin.Sdk.Tests -c Release --no-build
 开启开发者模式后，通过插件管理页选择并审阅安装。参见[入门流程](docs/quickstart.md)、
 [打包和分发](docs/packaging.md)、[宿主接入状态](docs/host-support.md)。
 
-SDK 版本为 **0.2.0-alpha.13**，通过本仓库 GitHub Releases 提供固定版本开发包。
+SDK 版本为 **0.2.0-beta.1**，通过本仓库 GitHub Releases 提供固定版本开发包。
 解压后将 `packages/` 添加为本地 NuGet 源，同时保留 nuget.org；这不代表已发布到 NuGet.org。
 alpha.9 到本次拆仓保持 ABI 100 契约兼容；旧 PCL SDK 不具备二进制兼容性。
 
@@ -34,3 +34,7 @@ alpha.9 到本次拆仓保持 ABI 100 契约兼容；旧 PCL SDK 不具备二进
 SDK 中存在接口不代表当前启动器已经接入；必须检查协商结果和结构化错误。
 
 [贡献指南](CONTRIBUTING.zh-CN.md) · [迁移指南](docs/migration.md) · [许可证](LICENSE)
+
+插件执行、权限、安装、离线恢复和管理界面均由独立 PluginSidecar 负责。宿主只提供通用 Sidecar 服务，不引用插件 SDK，可以在缺少插件组件时独立运行。Market 负责账户授权与密文获取；生产签名及运行时发布与 SDK 版本独立。
+
+Beta 冻结 Bootstrap V1 与 ABI 100。新增契约行为必须分配不可变的 `EXP_ID` 并显式协商；保留原有语义的实现修复和文档修改不需要虚构实验编号。

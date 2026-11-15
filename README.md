@@ -15,8 +15,11 @@ retained. New plugins use Nexa Bootstrap V1 and negotiated ABI 100, not the lega
 - `sdk/wasm/include/nexa`: freestanding C/Wasm bindings generated from the same contract.
 - Executable examples, contract tests, NativeAOT smoke and complete API reference.
 
-PluginSidecar owns execution and admission. NexaCL owns application services and
-user confirmation. Neither runtime is embedded in this authoring SDK.
+PluginSidecar owns plugin execution, permissions, installation, offline restoration
+and plugin management UI. NexaCL exposes generic Sidecar services, renders prepared
+NXML and presents native confirmation. It can run without PluginSidecar; it does not
+reference this SDK or implement plugin-specific adaptation. Neither runtime is
+embedded in this authoring SDK.
 The production executable profile is import-free `nexa-wasm-1`; the managed sample
 illustrates the Bootstrap contract and is not an ordinary Desktop-loadable DLL.
 
@@ -39,7 +42,7 @@ See [the walkthrough](docs/quickstart.md), [packaging](docs/packaging.md) and
 
 ## Distribution and compatibility
 
-SDK version: **0.2.0-alpha.13**. Download immutable bundles from
+SDK version: **0.2.0-beta.1**. Download immutable bundles from
 [GitHub Releases](https://github.com/Nexa-MC/NexaCL-Plugin-SDK/releases).
 The bundle contains two NuGet packages and the C/Wasm SDK. Add its `packages/`
 directory as a local NuGet source alongside nuget.org. No NuGet.org publication is
@@ -48,6 +51,13 @@ implied. See [migration](docs/migration.md) before replacing an old SDK referenc
 SDK availability does not mean every launcher implements every operation. Negotiate
 required and optional contracts, handle structured failures, and inspect the
 [per-operation reference](docs/api/index.md). Publisher authenticity and Market
-entitlements belong to Host distribution; checksums alone do not establish them.
+entitlements are verified by PluginSidecar using reviewed publisher keys;
+checksums alone do not establish them. Market handles account authorization and
+encrypted acquisition. Its production deployment is independent of SDK publication.
+
+Beta freezes Bootstrap V1 and ABI 100. New contract behavior must use an immutable
+`EXP_ID` schema and explicit negotiation; documentation and implementation fixes
+that preserve existing meaning do not invent experiment IDs. See
+[contract evolution](docs/guides/contract-evolution.md).
 
 [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Apache-2.0](LICENSE)

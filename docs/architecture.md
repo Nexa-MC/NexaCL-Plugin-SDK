@@ -9,8 +9,8 @@ instances, UI confirmation and filesystem grants.
 
 The plugin registers an NXML page and a typed action during initialization. After
 activation the Host renders the page. A button expresses the registered action ID;
-the Host validates the target and asks for confirmation when required. PluginSidecar
-then dispatches the callback under the admitted load identity. The plugin returns
+PluginSidecar validates the target and asks the Host to present confirmation when
+required. PluginSidecar then dispatches the callback under the admitted load identity. The plugin returns
 a typed result, and the Host records or presents that result.
 
 The action does not run in the renderer, and its NXML does not contain a second
@@ -23,9 +23,9 @@ from UI, another supported consumer or a workflow.
 | --- | --- | --- |
 | Bootstrap V1 | Negotiation, lifecycle and generic values/errors | An admitted context and callback scope |
 | ABI 100 SDK | Typed models, codecs, capability wrappers and C headers | A way to construct and decode calls |
-| PluginSidecar | Isolation, load coordination, callbacks and resource retirement | Bounded execution with explicit continuations |
-| NexaCL Host | Application services, grants, confirmation and platform policy | Public results and opaque handles |
-| Market integration | Acquisition, publisher/entitlement verification and encrypted delivery | Only the admission outcome permitted by Host policy |
+| PluginSidecar | Plugin permissions, lifecycle, SDK dispatch, installation, offline recovery and plugin UI | Bounded execution with explicit continuations |
+| NexaCL Host | Generic native services, Sidecar grants, rendering and platform policy | Results mediated by PluginSidecar |
+| Market integration | Account authorization and encrypted acquisition; PluginSidecar verifies signatures and entitlements | Only an admitted plugin load |
 
 An SDK wrapper is not a service implementation. The catalog can describe an
 operation before a Host maps it. A successful negotiation also does not waive
@@ -33,7 +33,7 @@ per-call permission, phase, ownership and revision checks.
 
 ## Separate the version axes
 
-`0.2.0-alpha.13` is the authoring package version, `1` is Bootstrap V1, and `100` is
+`0.2.0-beta.1` is the authoring package version, `1` is Bootstrap V1, and `100` is
 the stable ABI selected for this SDK. Capability minimum versions in the manifest
 are another contract field; do not replace every `1` with `100`.
 
@@ -85,3 +85,21 @@ original request shapes actionable without reinterpreting paths as authority.
 Provider callback method tables are part of the SDK reference and are exercised
 through their real host consumers. Existing models and numeric IDs are frozen;
 new capability methods do not replace or silently renumber the original catalog.
+
+## Independent native components
+
+NexaCL starts and runs without PluginSidecar. It exposes generic native services
+for all admitted Sidecars and renders prepared NXML; it has no plugin SDK reference
+or plugin-specific business adapter. PluginSidecar translates guest ABI calls into
+those services and owns every guest registration, permission and callback scope.
+Market Sidecar owns account sign-in and authenticated acquisition. A Host-owned
+peer binding routes bounded opaque messages to the selected native session; it
+does not load a plugin or interpret an entitlement.
+
+For a Market install, the backend authorizes the approved release and issues a
+signed, device-bound encrypted packet. PluginSidecar verifies it before showing
+native consent, then retains the original signed ciphertext only when the user
+chooses to remember authorization. Restart can restore that installation without
+Market, a bearer token or developer mode. Invalid signatures, another device,
+expired grants and unavailable OS key protection fail closed. Neither SDK Beta
+nor source integration means production Market signing is already configured.

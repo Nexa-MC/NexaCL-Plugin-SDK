@@ -245,8 +245,8 @@ remaining=[g['name']+'.'+o['name'] for g in spec['groups'] for o in g['operation
 files['docs/host-support.md']=f'''# Host implementation snapshot
 
 Use this page to distinguish a declared SDK operation from an implemented launcher
-route. The recorded development Host maps **{len(implemented)}/{sum(len(g['operations']) for g in spec['groups'])}** ABI 100 operations.
-**{len(remaining)} operations remain unmapped.**\nSource revision: `{support['hostCommit']}`.
+route. The recorded PluginSidecar runtime maps **{len(implemented)}/{sum(len(g['operations']) for g in spec['groups'])}** ABI 100 operations.
+**{len(remaining)} operations remain unmapped.**\nHost revision: `{support['hostCommit']}`.\nRuntime revision: `{support['runtimeCommit']}` in `{support['runtimeRepository']}`.
 
 {support['description']}
 
@@ -261,7 +261,10 @@ The current custom catalog provider supports seven read methods. Custom catalog
 installation and favorites are not implied. Java providers use verified ZIP archives; managed Mojang offers use the separate
 multi-file distribution path. Provider families, supported fields and budgets are
 documented in the [business provider guide](business-providers.md).
-Production Market delivery is a separate unfinished integration boundary.
+Market acquisition, native consent, signed installation and offline recovery are
+implemented in the separate native Sidecars. Production still requires the server
+signing secret, reviewed publisher public pin, database migration and independently
+published Sidecar images. SDK Beta availability does not imply that deployment is enabled.
 
 ## Before requiring a capability
 

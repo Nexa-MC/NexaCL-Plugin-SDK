@@ -1,6 +1,6 @@
 # Business provider callbacks
 
-The provider envelope introduced in alpha.9 and retained by SDK `0.2.0-alpha.13` defines `BusinessProviderCall` without changing existing
+The provider envelope introduced in alpha.9 and retained by SDK `0.2.0-beta.1` defines `BusinessProviderCall` without changing existing
 operation IDs, `ProviderDescriptor`, or model fingerprints. A Host must explicitly
 implement each provider family. Registering a descriptor does not create a generic
 permission to intercept arbitrary launcher operations.
